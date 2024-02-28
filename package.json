@@ -1,0 +1,20 @@
+{
+  "name": "quabos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc --build",
+    "dev": "",
+    "start": "node dist/src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^20.11.19",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5",
+    "typescript": "^5.3.3"
+  }
+}
