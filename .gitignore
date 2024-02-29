@@ -129,5 +129,11 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# Important
+# Configuaration
 settings.json
+
+# Storage
+messages.*
+logs.*
+corpus.*
+data.*

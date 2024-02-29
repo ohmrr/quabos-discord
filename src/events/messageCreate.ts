@@ -1,7 +1,36 @@
 import { createEvent } from '../interfaces/ApplicationEvents';
+import path from 'path';
+import fs from 'fs';
+
+function appendMessage(message: any) {
+	const messageJsonPath = path.join(__dirname, '..', 'messages.json');
+
+	let messages: any[] = [];
+	try {
+		const data = fs.readFileSync(messageJsonPath, 'utf8');
+		messages = JSON.parse(data);
+	} catch (err) {
+		console.error('Error reading file:', err);
+	}
+
+	messages.push(message);
+
+	try {
+		fs.writeFileSync(messageJsonPath, JSON.stringify(messages, null, 2));
+	} catch (err) {
+		console.error('Error writing file:', err);
+	}
+}
 
 const messageCreate = createEvent('messageCreate', false, (client, message) => {
-	console.log(message.content);
+	if (!message.guild || !message.channel) return;
+	if (message.author.bot) return;
+
+	try {
+		appendMessage(message.content);
+	} catch (err) {
+		console.error('Error logging new messages: ', err);
+	}
 });
 
 export default messageCreate;
