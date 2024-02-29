@@ -10,7 +10,7 @@
     "start": "node dist/index.js"
   },
   "author": "Ohmrr",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@types/node": "^20.11.19",
     "discord.js": "^14.14.1",
