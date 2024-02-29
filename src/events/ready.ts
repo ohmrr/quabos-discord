@@ -1,11 +1,7 @@
-import { ClientEvent } from '..';
+import { createEvent } from '../interfaces/ApplicationEvents';
 
-const ClientReady: ClientEvent = {
-	name: 'ClientReady',
-	once: true,
-	execute: () => {
-		console.log('READY!');
-	},
-};
+const ready = createEvent('ready', true, client => {
+	console.log(`${client.user?.tag} is ready!`);
+});
 
-export default ClientReady;
+export default ready;
