@@ -39,9 +39,9 @@ eventFiles.forEach(async file => {
 		);
 
 		if (event.once) {
-			client.once(event.name, (...params) => event.execute(client, ...params));
+			client.once(event.name, (...params) => event.execute(...params));
 		} else {
-			client.on(event.name, (...params) => event.execute(client, ...params));
+			client.on(event.name, (...params) => event.execute(...params));
 		}
 	} catch (err) {
 		console.error(`Error loading in ${eventFolderPath}/${file}: `, err);

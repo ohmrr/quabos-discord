@@ -21,6 +21,6 @@ const appendMessage = (message: string) => {
 	} catch (err) {
 		console.error(`Error writing file: ${messageJsonPath}`, err);
 	}
-}
+};
 
 export default appendMessage;
