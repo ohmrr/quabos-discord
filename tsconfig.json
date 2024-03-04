@@ -1,24 +1,24 @@
 {
-	"compilerOptions": {
-		"allowJs": true,
-		"checkJs": true,
-		"resolveJsonModule": true,
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "resolveJsonModule": true,
 
-		"strict": true,
-		"alwaysStrict": true,
-		"noImplicitAny": true,
-		"allowUnreachableCode": false,
+    "strict": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "allowUnreachableCode": false,
 
-		"skipDefaultLibCheck": true,
-		"skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
 
-		"esModuleInterop": true,
-		"module": "CommonJS",
-		"target": "ESNext",
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "target": "ESNext",
 
-		"outDir": "dist/",
-		"removeComments": true
-	},
-	"include": ["src/**/*"],
-	"exclude": ["node_modules"]
+    "outDir": "dist/",
+    "removeComments": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

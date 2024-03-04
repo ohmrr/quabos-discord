@@ -4,21 +4,20 @@ import loadEvents from './utils/loadEvents';
 import 'dotenv/config';
 
 const client = new Client({
-	intents: [
-		GatewayIntentBits.MessageContent,
-		GatewayIntentBits.GuildMessages,
-		GatewayIntentBits.Guilds,
-	],
+  intents: [
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.Guilds,
+  ],
 
-	partials: [Partials.Message, Partials.Message],
+  partials: [Partials.Message, Partials.Message],
 
-	allowedMentions: {
-		parse: ['users'],
-	},
+  allowedMentions: {
+    parse: ['users'],
+  },
 });
 
 loadEvents(client);
 loadCommands();
 
 client.login(process.env.DISCORD_TOKEN);
-
