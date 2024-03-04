@@ -4,7 +4,7 @@ import fs from 'fs';
 const appendMessage = (message: string) => {
 	if (!message.length) return;
 
-	const messageJsonPath = path.join(__dirname, '..', 'messages.json');
+	const messageJsonPath = path.join(__dirname, '..', 'data', 'messages.json');
 
 	let messages: string[] = [];
 	try {
