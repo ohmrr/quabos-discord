@@ -1,14 +1,15 @@
 import { ActivityType } from 'discord.js';
-import { createEvent } from '../interfaces/ApplicationEvents';
+import { createEvent } from '../interfaces/applicationEvent';
+import { commands } from '../utils/loadCommands';
 
-const ready = createEvent('ready', true, client => {
+const ready = createEvent('ready', true, (client) => {
 	const currentDate = new Date().toLocaleString('en-US');
 	const guildSize = client.guilds.cache.size;
 	console.log(
-		`${currentDate} | Logged in as ${client.user?.tag} in ${client.guilds.cache.size} servers.`,
+		`${currentDate} | Logged in as ${client.user.tag} in ${client.guilds.cache.size} servers.`,
 	);
 
-	client.user?.setPresence({
+	client.user.setPresence({
 		status: 'online',
 		activities: [
 			{

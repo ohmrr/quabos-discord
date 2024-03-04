@@ -1,9 +1,9 @@
-import { createEvent } from '../interfaces/ApplicationEvents';
+import { createEvent } from '../interfaces/applicationEvent';
 import appendMessage from '../utils/appendMessage';
 
-const messageCreate = createEvent('messageCreate', false, message => {
+const messageCreate = createEvent('messageCreate', false, (message) => {
 	if (!message.guild || !message.channel) return;
-	if (message.author.bot) return;
+	if (message.author.bot || message.system) return;
 
 	try {
 		appendMessage(message.content);
