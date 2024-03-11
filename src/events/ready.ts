@@ -1,6 +1,6 @@
-import { ActivityType } from 'discord.js';
 import { createEvent } from '../interfaces/applicationEvent';
-import { commands } from '../utils/loadCommands';
+import deployCommands from '../utils/deployCommands';
+import { ActivityType } from 'discord.js';
 
 const ready = createEvent('ready', true, (client) => {
   const currentDate = new Date().toLocaleString('en-US');
@@ -18,6 +18,8 @@ const ready = createEvent('ready', true, (client) => {
       },
     ],
   });
+
+  deployCommands(client);
 });
 
 export default ready;

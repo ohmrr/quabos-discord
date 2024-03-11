@@ -5,6 +5,7 @@ declare global {
       DISCORD_TOKEN: string;
       DEFAULT_PREFIX: string;
       DEV_GUILD_ID: string;
+      NODE_ENV: 'development' | 'production';
     }
   }
 }

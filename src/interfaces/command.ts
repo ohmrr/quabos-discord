@@ -1,8 +1,8 @@
-import { CommandInteraction, SlashCommandBuilder } from 'discord.js';
+import { ChatInputCommandInteraction, SlashCommandBuilder } from 'discord.js';
 
 interface Command {
   data: SlashCommandBuilder;
-  execute: (interaction: CommandInteraction) => void;
+  execute: (interaction: ChatInputCommandInteraction) => void;
 }
 
 export default Command;

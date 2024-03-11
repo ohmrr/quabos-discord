@@ -1,6 +1,6 @@
-import { Collection } from 'discord.js';
-import { readdirSync } from 'fs';
+import { Collection, Client } from 'discord.js';
 import Command from '../interfaces/command';
+import { readdirSync } from 'fs';
 import path from 'path';
 
 const commands = new Collection<string, Command>();
@@ -23,7 +23,7 @@ const loadCommandFromFile = async (filePath: string) => {
   }
 };
 
-export const loadCommands = async () => {
+export const loadCommands = async (client: Client) => {
   const commandFolderPath = path.join(__dirname, '..', 'commands');
   const commandFiles = readdirSync(commandFolderPath).filter((file) =>
     file.endsWith('.js'),
@@ -33,6 +33,6 @@ export const loadCommands = async () => {
     const commandFilePath = path.join(commandFolderPath, file);
     await loadCommandFromFile(commandFilePath);
   }
-};
 
-export { commands };
+  client.commands = commands;
+};
