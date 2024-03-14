@@ -4,7 +4,8 @@ import Command from '../interfaces/command';
 const ping: Command = {
   data: new SlashCommandBuilder()
     .setName('ping')
-    .setDescription('Shows the client ping'),
+    .setDescription('Get the client and websocket ping.')
+    .setDMPermission(false),
   execute: async (interaction) => {
     await interaction.deferReply();
 
