@@ -15,8 +15,8 @@ const deployCommands = async (client: Client) => {
       : Routes.applicationGuildCommands(client.user.id, process.env.DEV_GUILD_ID);
 
   try {
-    await rest.put(route, { body: [] });
-    console.log(`Application (/) commands successfully refreshed to ${process.env.NODE_ENV}.`);
+    // await rest.put(route, { body: [] });
+    // console.log(`Application (/) commands successfully refreshed to ${process.env.NODE_ENV}.`);
 
     await rest.put(route, { body: commandsData });
     console.log(`Application (/) commands successfully registered to ${process.env.NODE_ENV}.`);
