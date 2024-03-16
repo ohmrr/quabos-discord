@@ -6,14 +6,14 @@ const whois: Command = {
   data: new SlashCommandBuilder()
     .setName('whois')
     .setDescription('Get user information.')
-    .addUserOption((option) =>
+    .addUserOption(option =>
       option
         .setName('member')
         .setDescription('Guild member to get information about.')
         .setRequired(false),
     )
     .setDMPermission(false),
-  execute: async (interaction) => {
+  execute: async interaction => {
     if (!interaction.guild) return;
 
     const user = interaction.options.getUser('member', false) ?? interaction.user;
@@ -21,8 +21,8 @@ const whois: Command = {
     if (!guildMember) return;
 
     const memberRoles = guildMember.roles.cache
-      .filter((role) => role.name !== '@everyone')
-      .map((role) => `<@&${role.id}>`);
+      .filter(role => role.name !== '@everyone')
+      .map(role => `<@&${role.id}>`);
 
     const whoisEmbed = new EmbedBuilder({
       author: {

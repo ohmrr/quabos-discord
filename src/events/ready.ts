@@ -3,8 +3,8 @@ import deployCommands from '../utils/deployCommands';
 import { ActivityType } from 'discord.js';
 import moment from 'moment';
 
-const ready = createEvent('ready', true, (client) => {
-  const currentDate = moment(new Date()).format('ddd, MMM D, YYYY h:mm A')
+const ready = createEvent('ready', true, client => {
+  const currentDate = moment(new Date()).format('ddd, MMM D, YYYY h:mm A');
   const guildSize = client.guilds.cache.size;
   console.log(
     `${currentDate} | Logged in as ${client.user.tag} in ${client.guilds.cache.size} servers.`,

@@ -33,7 +33,7 @@ const loadEventFromFile = async (client: Client, filePath: string) => {
 
 const loadEvents = async (client: Client) => {
   const eventFolderPath = path.join(__dirname, '..', 'events');
-  const eventFiles = readdirSync(eventFolderPath).filter((file) =>
+  const eventFiles = readdirSync(eventFolderPath).filter(file =>
     file.endsWith('.js'),
   );
 

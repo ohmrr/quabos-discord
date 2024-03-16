@@ -1,6 +1,6 @@
 {
   "bracketSpacing": true,
-  "arrowParens": "always",
+  "arrowParens": "avoid",
   "endOfLine": "lf",
   "singleQuote": true,
   "semi": true,

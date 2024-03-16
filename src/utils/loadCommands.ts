@@ -25,7 +25,7 @@ const loadCommandFromFile = async (filePath: string) => {
 
 export const loadCommands = async (client: Client) => {
   const commandFolderPath = path.join(__dirname, '..', 'commands');
-  const commandFiles = readdirSync(commandFolderPath).filter((file) =>
+  const commandFiles = readdirSync(commandFolderPath).filter(file =>
     file.endsWith('.js'),
   );
 
