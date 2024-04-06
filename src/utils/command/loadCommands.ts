@@ -1,5 +1,5 @@
 import { Collection, Client } from 'discord.js';
-import Command from '../interfaces/command';
+import Command from '../../interfaces/command';
 import { readdirSync } from 'fs';
 import path from 'path';
 
@@ -24,7 +24,7 @@ const loadCommandFromFile = async (filePath: string) => {
 };
 
 export const loadCommands = async (client: Client) => {
-  const commandFolderPath = path.join(__dirname, '..', 'commands');
+  const commandFolderPath = path.join(__dirname, '..', '..', 'commands');
   const commandFiles = readdirSync(commandFolderPath).filter(file =>
     file.endsWith('.js'),
   );

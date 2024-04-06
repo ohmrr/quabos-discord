@@ -1,5 +1,6 @@
 import { SlashCommandBuilder, EmbedBuilder, ChannelType } from 'discord.js';
 import Command from '../interfaces/command';
+import { prisma } from '..';
 import moment from 'moment';
 
 const serverInfo: Command = {
@@ -7,7 +8,7 @@ const serverInfo: Command = {
     .setName('serverinfo')
     .setDescription('Get information on the current guild.')
     .setDMPermission(false),
-  execute: async (prisma, interaction) => {
+  execute: async (interaction) => {
     if (!interaction.guild) return;
 
     const { guild } = interaction;

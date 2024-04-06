@@ -19,7 +19,9 @@ const deployCommands = async (client: Client) => {
     // console.log(`Application (/) commands successfully refreshed to ${process.env.NODE_ENV}.`);
 
     await rest.put(route, { body: commandsData });
-    console.log(`Application (/) commands successfully registered to ${process.env.NODE_ENV}.`);
+    console.log(
+      `Application (/) commands successfully registered to ${process.env.NODE_ENV}.`,
+    );
   } catch (error) {
     console.error(`Error registering (/) commands: ${error}`);
   }
