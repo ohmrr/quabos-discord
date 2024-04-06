@@ -3,7 +3,7 @@ import deployCommands from '../utils/deployCommands';
 import { ActivityType } from 'discord.js';
 import moment from 'moment';
 
-const ready = createEvent('ready', true, client => {
+const ready = createEvent('ready', true, (prisma, client) => {
   const currentDate = moment(new Date()).format('ddd, MMM D, YYYY h:mm A');
   const guildSize = client.guilds.cache.size;
   console.log(

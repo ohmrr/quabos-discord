@@ -28,9 +28,9 @@ const init = async () => {
     console.error('Error connecting to the database:', error);
     process.exit(1);
   }
-
+  
+  loadEvents(prisma, client);
   loadCommands(client);
-  loadEvents(client);
 
   client.login(process.env.DISCORD_TOKEN);
 };

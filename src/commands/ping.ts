@@ -6,7 +6,7 @@ const ping: Command = {
     .setName('ping')
     .setDescription('Get the client and websocket ping.')
     .setDMPermission(false),
-  execute: async interaction => {
+  execute: async (prisma, interaction) => {
     await interaction.deferReply();
 
     const reply = await interaction.fetchReply();

@@ -7,7 +7,7 @@ const serverInfo: Command = {
     .setName('serverinfo')
     .setDescription('Get information on the current guild.')
     .setDMPermission(false),
-  execute: async interaction => {
+  execute: async (prisma, interaction) => {
     if (!interaction.guild) return;
 
     const { guild } = interaction;

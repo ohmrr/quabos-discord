@@ -1,8 +1,9 @@
 import path from 'path';
 import fs from 'fs';
+import { Message } from 'discord.js';
 
-const appendMessage = (message: string) => {
-  if (!message.length) return;
+const appendMessage = (message: Message) => {
+  if (!message.content.length) return;
 
   const messageJsonPath = path.join(__dirname, '..', 'data', 'messages.json');
 
@@ -14,7 +15,7 @@ const appendMessage = (message: string) => {
     console.error(`Error reading file: ${messageJsonPath}`, err);
   }
 
-  messages.push(message);
+  messages.push(message.content);
 
   try {
     fs.writeFileSync(messageJsonPath, JSON.stringify(messages, null, 2));

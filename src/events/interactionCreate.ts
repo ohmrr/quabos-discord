@@ -3,14 +3,14 @@ import { createEvent } from '../interfaces/applicationEvent';
 const interactionCreate = createEvent(
   'interactionCreate',
   false,
-  async interaction => {
+  async (prisma, interaction) => {
     if (!interaction.isChatInputCommand()) return;
 
     const command = interaction.client.commands.get(interaction.commandName);
     if (!command) return;
 
     try {
-      await command.execute(interaction);
+      await command.execute(prisma, interaction);
     } catch (error) {
       console.error(`Error executing command: ${error}`);
       await interaction.reply({
