@@ -8,7 +8,7 @@ const serverInfo: Command = {
     .setName('serverinfo')
     .setDescription('Get information on the current guild.')
     .setDMPermission(false),
-  execute: async (interaction) => {
+  execute: async interaction => {
     if (!interaction.guild) return;
 
     const { guild } = interaction;
@@ -17,6 +17,11 @@ const serverInfo: Command = {
       .filter(role => role.name !== '@everyone')
       .sort((a, b) => b.position - a.position)
       .map(role => `<@&${role.id}>`);
+
+    const guildRecord = await prisma.guild.findUnique({
+      where: { guildId: interaction.guild.id },
+      include: { watchChannels: { include: { messages: true } } },
+    });
 
     const serverInfoEmbed = new EmbedBuilder({
       author: {
@@ -66,6 +71,24 @@ const serverInfo: Command = {
       },
       timestamp: Date.now(),
     });
+
+    if (guildRecord) {
+      const totalMessages = guildRecord.watchChannels.reduce(
+        (acc, channel) => acc + channel.messages.length,
+        0,
+      );
+
+      serverInfoEmbed.addFields([
+        {
+          name: 'Watch Channels',
+          value: guildRecord.watchChannels
+            .map(channel => `<#${channel.channelId}>`)
+            .join(' '),
+          inline: true,
+        },
+        { name: 'Messages Collected', value: `${totalMessages}`, inline: true },
+      ]);
+    }
 
     interaction.reply({ embeds: [serverInfoEmbed] });
   },
