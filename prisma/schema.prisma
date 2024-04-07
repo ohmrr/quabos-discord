@@ -10,6 +10,7 @@ datasource db {
 model Guild {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   guildId String @unique
+  name    String
 
   watchChannels Channel[]
 }

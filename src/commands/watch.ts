@@ -24,7 +24,7 @@ const watch: Command = {
 
     if (existingGuild) {
       const isAlreadyWatched = existingGuild.watchChannels.some(
-        channel => channel.id === selectedChannel.id,
+        channel => channel.channelId === selectedChannel.id,
       );
 
       if (isAlreadyWatched) {
@@ -33,24 +33,44 @@ const watch: Command = {
         );
         return;
       }
+
+      try {
+        await prisma.guild.update({
+          where: { guildId: interaction.guild.id },
+          data: {
+            watchChannels: {
+              create: {
+                channelId: selectedChannel.id,
+              },
+            },
+          },
+        });
+      } catch (error) {
+        console.error(
+          `Error while creating guild record. Guild Name: ${interaction.guild.name} ID: ${interaction.guild.id}: ${error}`,
+        );
+        interaction.reply('An error occurred while creating the channel record.');
+      }
     }
 
-    await prisma.guild.upsert({
-      where: { guildId: interaction.guild.id },
-      update: {},
-      create: {
-        guildId: interaction.guild.id,
-        watchChannels: {
-          create: {
-            channelId: selectedChannel.id,
+    try {
+      await prisma.guild.create({
+        data: {
+          guildId: interaction.guild.id,
+          name: interaction.guild.name,
+          watchChannels: {
+            create: {
+              channelId: selectedChannel.id,
+            },
           },
         },
-      },
-    });
-
-    interaction.reply(
-      `Channel ${selectedChannel.name} is now being watched for new messages.`,
-    );
+      });
+    } catch (error) {
+      console.error(
+        `Error while creating guild record. Guild Name: ${interaction.guild.name} ID: ${interaction.guild.id}: ${error}`,
+      );
+      interaction.reply('An error occurred while creating the guild record.');
+    }
   },
 };
 

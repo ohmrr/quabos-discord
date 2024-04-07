@@ -25,16 +25,18 @@ const unwatch: Command = {
 
     if (
       !existingGuild ||
-      !existingGuild.watchChannels.some(channel => channel.id === selectedChannel.id)
+      !existingGuild.watchChannels.some(
+        channel => channel.channelId === selectedChannel.id,
+      )
     ) {
-      interaction.reply(`Channel ${selectedChannel.name} is not being watched.`);
+      interaction.reply(`Channel <#${selectedChannel.id}> is not being watched.`);
       return;
     }
 
     try {
       await prisma.channel.delete({ where: { channelId: selectedChannel.id } });
       interaction.reply(
-        `Channel ${selectedChannel.name} is no longer being watched for new messages.`,
+        `Channel <#${selectedChannel.id}> is no longer being watched for new messages.`,
       );
     } catch (error) {
       console.error('Error while deleting channel record: ', error);
