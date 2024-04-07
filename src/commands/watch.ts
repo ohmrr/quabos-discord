@@ -2,7 +2,7 @@ import { ChannelType, SlashCommandBuilder } from 'discord.js';
 import Command from '../interfaces/command';
 import { prisma } from '..';
 
-const listen: Command = {
+const watch: Command = {
   data: new SlashCommandBuilder()
     .setName('watch')
     .setDescription('Select a new channel for the model to gather messages from.')
@@ -31,26 +31,27 @@ const listen: Command = {
         interaction.reply(
           `Channel ${selectedChannel.name} is already being watched for new messages.`,
         );
+        return;
       }
+    }
 
-      await prisma.guild.upsert({
-        where: { guildId: interaction.guild.id },
-        update: {},
-        create: {
-          guildId: interaction.guild.id,
-          watchChannels: {
-            create: {
-              channelId: selectedChannel.id,
-            },
+    await prisma.guild.upsert({
+      where: { guildId: interaction.guild.id },
+      update: {},
+      create: {
+        guildId: interaction.guild.id,
+        watchChannels: {
+          create: {
+            channelId: selectedChannel.id,
           },
         },
-      });
+      },
+    });
 
-      interaction.reply(
-        `Channel ${selectedChannel.name} is now being watched for new messages.`,
-      );
-    }
+    interaction.reply(
+      `Channel ${selectedChannel.name} is now being watched for new messages.`,
+    );
   },
 };
 
-export default listen;
+export default watch;
