@@ -29,7 +29,7 @@ const watch: Command = {
 
       if (isAlreadyWatched) {
         interaction.reply(
-          `Channel ${selectedChannel.name} is already being watched for new messages.`,
+          `Channel <#${selectedChannel.id}> is already being watched for new messages.`,
         );
         return;
       }
@@ -45,6 +45,11 @@ const watch: Command = {
             },
           },
         });
+
+        interaction.reply(
+          `Channel <#${selectedChannel.id}> is now being watched for new meessages.`,
+        );
+        return;
       } catch (error) {
         console.error(
           `Error while creating guild record. Guild Name: ${interaction.guild.name} ID: ${interaction.guild.id}: ${error}`,
@@ -65,6 +70,10 @@ const watch: Command = {
           },
         },
       });
+
+      interaction.reply(
+        `Channel <#${selectedChannel.id}> is now being watched for new messages.`,
+      );
     } catch (error) {
       console.error(
         `Error while creating guild record. Guild Name: ${interaction.guild.name} ID: ${interaction.guild.id}: ${error}`,
