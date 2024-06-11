@@ -47,7 +47,7 @@ const watch: Command = {
         });
 
         interaction.reply(
-          `Channel <#${selectedChannel.id}> is now being watched for new meessages.`,
+          `Channel <#${selectedChannel.id}> is now being watched for new messages.`,
         );
         return;
       } catch (error) {
