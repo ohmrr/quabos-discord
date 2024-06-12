@@ -12,7 +12,7 @@ const ping: Command = {
     const reply = await interaction.fetchReply();
     const clientLatency = reply.createdTimestamp - interaction.createdTimestamp;
     interaction.editReply(
-      `**Client**: ${clientLatency}ms | **Websocket**: ${interaction.client.ws.ping}ms`,
+      `👽 **Client**: ${clientLatency}ms | **Websocket**: ${interaction.client.ws.ping}ms`,
     );
   },
 };

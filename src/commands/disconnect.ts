@@ -1,4 +1,4 @@
-import { GuildMember, SlashCommandBuilder } from 'discord.js';
+import { SlashCommandBuilder } from 'discord.js';
 import { getVoiceConnection } from '@discordjs/voice';
 import Command from '../interfaces/command';
 
@@ -12,11 +12,12 @@ const disconnect: Command = {
 
     const voiceConnection = getVoiceConnection(interaction.guild.id);
     if (!voiceConnection) {
-      interaction.reply('No voice connection found.');
+      interaction.reply('❌ I am not in any voice channels.');
       return;
     }
 
     voiceConnection.destroy();
+    interaction.reply('✅ Left the voice channel.');
   },
 };
 

@@ -5,7 +5,7 @@ import Command from '../interfaces/command';
 const join: Command = {
   data: new SlashCommandBuilder()
     .setName('join')
-    .setDescription('Join the specified voice channel.')
+    .setDescription('Join the voice channel.')
     .setDMPermission(false),
   execute: async interaction => {
     if (!interaction.guild || !interaction.member) return;
@@ -13,7 +13,7 @@ const join: Command = {
     const voiceChannel = guildMember.voice.channel;
 
     if (!voiceChannel) {
-      interaction.reply('You are not in a voice channel.');
+      interaction.reply('❌ You are not in a voice channel.');
       return;
     }
 
@@ -22,6 +22,8 @@ const join: Command = {
       guildId: interaction.guild.id,
       adapterCreator: interaction.guild.voiceAdapterCreator,
     });
+
+    interaction.reply(`🔉 Joined the voice channel ${voiceChannel.name}`);
   },
 };
 
