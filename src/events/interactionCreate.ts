@@ -1,4 +1,5 @@
 import { createEvent } from '../interfaces/applicationEvent';
+import emojiMap from '../utils/emojiMap';
 
 const interactionCreate = createEvent(
   'interactionCreate',
@@ -12,9 +13,9 @@ const interactionCreate = createEvent(
     try {
       await command.execute(interaction);
     } catch (error) {
-      console.error(`Error executing command: ${error}`);
+      console.error(`Error handling slash command execution: ${error}`);
       await interaction.reply({
-        content: 'There was an error while executing this command.',
+        content: `${emojiMap.error} There was an error while executing this command. Please try again later.`,
         ephemeral: true,
       });
     }

@@ -1,5 +1,6 @@
 import { ChannelType, SlashCommandBuilder } from 'discord.js';
 import Command from '../interfaces/command';
+import emojiMap from '../utils/emojiMap';
 import { prisma } from '..';
 
 const unwatch: Command = {
@@ -29,19 +30,21 @@ const unwatch: Command = {
         channel => channel.channelId === selectedChannel.id,
       )
     ) {
-      interaction.reply(`❌ Channel <#${selectedChannel.id}> is not being watched.`);
+      interaction.reply(
+        `${emojiMap.error} Channel <#${selectedChannel.id}> is not being watched.`,
+      );
       return;
     }
 
     try {
       await prisma.channel.delete({ where: { channelId: selectedChannel.id } });
       interaction.reply(
-        `✅ Channel <#${selectedChannel.id}> is no longer being watched for new messages.`,
+        `${emojiMap.success} Channel <#${selectedChannel.id}> is no longer being watched for new messages.`,
       );
     } catch (error) {
       console.error('Error while deleting channel record: ', error);
       interaction.reply(
-        '❌ An error occurred while removing the channel from the watch list.',
+        `${emojiMap.error} An error occurred while removing the channel from the watch list.`,
       );
     }
   },

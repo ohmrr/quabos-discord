@@ -1,6 +1,7 @@
 import { SlashCommandBuilder } from 'discord.js';
 import { getVoiceConnection } from '@discordjs/voice';
 import Command from '../interfaces/command';
+import emojiMap from '../utils/emojiMap';
 
 const disconnect: Command = {
   data: new SlashCommandBuilder()
@@ -12,12 +13,12 @@ const disconnect: Command = {
 
     const voiceConnection = getVoiceConnection(interaction.guild.id);
     if (!voiceConnection) {
-      interaction.reply('❌ I am not in any voice channels.');
+      interaction.reply(`${emojiMap.error} I am not in any voice channels.`);
       return;
     }
 
     voiceConnection.destroy();
-    interaction.reply('✅ Left the voice channel.');
+    interaction.reply(`${emojiMap.success} Disconnected from the voice channel.`);
   },
 };
 

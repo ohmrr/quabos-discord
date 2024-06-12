@@ -1,5 +1,6 @@
 import { GuildMember, SlashCommandBuilder } from 'discord.js';
 import { joinVoiceChannel } from '@discordjs/voice';
+import emojiMap from '../utils/emojiMap';
 import Command from '../interfaces/command';
 
 const join: Command = {
@@ -13,7 +14,7 @@ const join: Command = {
     const voiceChannel = guildMember.voice.channel;
 
     if (!voiceChannel) {
-      interaction.reply('❌ You are not in a voice channel.');
+      interaction.reply(`${emojiMap.error} You are not in a voice channel.`);
       return;
     }
 
@@ -23,7 +24,9 @@ const join: Command = {
       adapterCreator: interaction.guild.voiceAdapterCreator,
     });
 
-    interaction.reply(`🔉 Joined the voice channel ${voiceChannel.name}`);
+    interaction.reply(
+      `${emojiMap.sound} Joined the voice channel ${voiceChannel.name}`,
+    );
   },
 };
 

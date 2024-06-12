@@ -1,5 +1,6 @@
 import { ChannelType, SlashCommandBuilder } from 'discord.js';
 import Command from '../interfaces/command';
+import emojiMap from '../utils/emojiMap';
 import { prisma } from '..';
 
 const watch: Command = {
@@ -29,7 +30,7 @@ const watch: Command = {
 
       if (isAlreadyWatched) {
         interaction.reply(
-          `❌ Channel <#${selectedChannel.id}> is already being watched for new messages.`,
+          `${emojiMap.error} Channel <#${selectedChannel.id}> is already being watched for new messages.`,
         );
         return;
       }
@@ -47,14 +48,16 @@ const watch: Command = {
         });
 
         interaction.reply(
-          `✅ Channel <#${selectedChannel.id}> is now being watched for new messages.`,
+          `${emojiMap.success} Channel <#${selectedChannel.id}> is now being watched for new messages.`,
         );
         return;
       } catch (error) {
         console.error(
           `Error while creating guild record. Guild Name: ${interaction.guild.name} ID: ${interaction.guild.id}: ${error}`,
         );
-        interaction.reply('❌ An error occurred while creating the channel record.');
+        interaction.reply(
+          `${emojiMap.error} An error occurred while creating the channel record.`,
+        );
       }
     }
 
@@ -72,14 +75,14 @@ const watch: Command = {
       });
 
       interaction.reply(
-        `✅ Channel <#${selectedChannel.id}> is now being watched for new messages.`,
+        `${emojiMap.success} Channel <#${selectedChannel.id}> is now being watched for new messages.`,
       );
     } catch (error) {
       console.error(
         `Error while creating guild record. Guild Name: ${interaction.guild.name} ID: ${interaction.guild.id}: ${error}`,
       );
       interaction.reply(
-        '❌ An error occurred while creating the guild record. Please try again later.',
+        `${emojiMap.error} An error occurred while creating the guild record. Please try again later.`,
       );
     }
   },
