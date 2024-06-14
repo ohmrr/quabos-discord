@@ -21,7 +21,7 @@ const join: Command = {
     joinVoiceChannel({
       channelId: voiceChannel.id,
       guildId: interaction.guild.id,
-      selfDeaf: true,
+      selfDeaf: false,
       selfMute: false,
       adapterCreator: interaction.guild.voiceAdapterCreator,
     });
