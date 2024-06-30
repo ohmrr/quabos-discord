@@ -1,6 +1,6 @@
 import { prisma } from '../..';
 
-async function getChannelMessages(guildId: string) {
+async function getGuildMessages(guildId: string) {
   const channels = await prisma.channel.findMany({
     where: {
       guildId: guildId,
@@ -12,4 +12,8 @@ async function getChannelMessages(guildId: string) {
 
   const messages = channels.flatMap(channel => channel.messages);
   return messages;
+}
+
+async function generateResponse(guildId: string) {
+  const messages = await getGuildMessages(guildId);
 }
