@@ -1,6 +1,18 @@
+import { Message } from 'discord.js';
 import { prisma } from '../..';
 
-async function getGuildMessages(guildId: string) {
+export function isValidMessage(message: Message): boolean {
+  const startsWithCommandChar = /^[!\/?]/i;
+  if (
+    startsWithCommandChar.test(message.content) ||
+    message.content.split(' ').length < 2
+  )
+    return false;
+
+  return true;
+}
+
+export async function getGuildMessages(guildId: string) {
   const channels = await prisma.channel.findMany({
     where: {
       guildId: guildId,
@@ -14,6 +26,6 @@ async function getGuildMessages(guildId: string) {
   return messages;
 }
 
-async function generateResponse(guildId: string) {
+export async function generateResponse(guildId: string) {
   const messages = await getGuildMessages(guildId);
 }

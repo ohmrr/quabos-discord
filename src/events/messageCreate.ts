@@ -1,4 +1,5 @@
 import { createEvent } from '../interfaces/applicationEvent';
+import { isValidMessage } from '../utils/markov/markov';
 
 const messageCreate = createEvent(
   'messageCreate',
@@ -7,9 +8,7 @@ const messageCreate = createEvent(
     if (!message.guild || !message.channel) return;
     if (message.author.bot || message.system) return;
 
-    const startsWithCommandCharacter = /^[!\/?]/i;
-    if (startsWithCommandCharacter.test(message.content)) return;
-    if (message.content.split(' ').length < 2) return;
+    if (!isValidMessage(message)) return;
 
     const isWatchChannel = await prisma.channel.findUnique({
       where: { channelId: message.channelId },
