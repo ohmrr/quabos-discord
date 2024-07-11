@@ -10,6 +10,17 @@ const interactionCreate = createEvent(
     const command = interaction.client.commands.get(interaction.commandName);
     if (!command) return;
 
+    const blacklisted_ids = process.env.BLACKLISTED_IDS.split(',');
+    const isBlacklisted = blacklisted_ids.includes(interaction.user.id);
+
+    if (isBlacklisted) {
+      interaction.reply(
+        `${emojiMap.error} You are currently blacklisted. Please contact the developers for more information.`,
+      );
+
+      return;
+    }
+
     try {
       await command.execute(interaction);
     } catch (error) {
