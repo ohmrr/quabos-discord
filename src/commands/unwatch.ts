@@ -1,4 +1,4 @@
-import { ChannelType, SlashCommandBuilder } from 'discord.js';
+import { ChannelType, PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 import { prisma } from '..';
@@ -7,6 +7,7 @@ const unwatch: Command = {
   data: new SlashCommandBuilder()
     .setName('unwatch')
     .setDescription('Select a channel to stop watching for new messages.')
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
     .addChannelOption(option =>
       option
         .setName('channel')

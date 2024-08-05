@@ -1,4 +1,4 @@
-import { ChannelType, SlashCommandBuilder } from 'discord.js';
+import { ChannelType, PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 import { prisma } from '..';
@@ -7,13 +7,16 @@ const watch: Command = {
   data: new SlashCommandBuilder()
     .setName('watch')
     .setDescription('Select a new channel for the model to gather messages from.')
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
     .addChannelOption(option =>
       option
         .setName('channel')
         .setDescription('Channel to watch for messages.')
         .addChannelTypes(ChannelType.GuildText)
         .setRequired(true),
-    ),
+    )
+    .setDMPermission(false),
+
   execute: async interaction => {
     if (!interaction.guild) return;
 
