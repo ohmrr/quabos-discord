@@ -15,7 +15,7 @@ const purge: Command = {
       amount
         .setName('amount')
         .setDescription('Number of messages you want to delete.')
-        .setMaxValue(500)
+        .setMaxValue(100)
         .setMinValue(1)
         .setRequired(true),
     )
@@ -35,8 +35,11 @@ const purge: Command = {
           return;
         }
 
-        const messages = allMessages.filter(msg => msg.deletable);
-        if (!messages) {
+        const fourteenDaysMilli = 60 * 60 * 24 * 14 * 1000;
+        const currentTime = Date.now();
+
+        const messages = allMessages.filter(msg => currentTime - msg.createdTimestamp < fourteenDaysMilli);
+        if (messages.size === 0) {
           interaction.reply(
             `${emojiMap.error} Messages cannot be deleted after 14 days.`,
           );

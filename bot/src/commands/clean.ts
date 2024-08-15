@@ -15,16 +15,33 @@ const clean: Command = {
 
     if (channel instanceof TextChannel) {
       try {
-        const messages = await channel.messages.fetch({ limit: 100 });
-        const botMessages = messages.filter(message => message.author.bot);
+        if (!interaction.guild || !interaction.channel) return;
+        if (!interaction.channel.isTextBased()) return;
 
-        await channel.bulkDelete(botMessages);
-        interaction.reply(
-          `${emojiMap.success} Deleted ${botMessages.size} messages.`,
+        const currentTime = Date.now();
+        const fourteenDaysMilli = 60 * 60 * 24 * 14 * 1000;
+        const allMessages = await channel.messages.fetch({ limit: 100 });
+
+        const messages = allMessages.filter(
+          message =>
+            message.author.bot &&
+            currentTime - message.createdTimestamp < fourteenDaysMilli,
         );
-      } catch {
-        console.error('Failed to delete bot messages.');
-        interaction.reply(`${emojiMap.error} Failed to delete the messages.`);
+
+        if (messages.size === 0) {
+          interaction.reply(
+            `${emojiMap.error} Messages cannot be deleted after 14 days.`,
+          );
+          return;
+        }
+
+        channel.bulkDelete(messages);
+        interaction.reply(`${emojiMap.success} Deleted ${messages.size} messages.`);
+      } catch (error) {
+        console.error('Failed to clean channel of bot messages.');
+        interaction.reply(
+          `${emojiMap.error} Failed to clean the channel of bot messages.`,
+        );
       }
     }
   },
