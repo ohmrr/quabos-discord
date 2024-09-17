@@ -1,5 +1,5 @@
 import { createEvent } from '../interfaces/applicationEvent';
-import { isValidMessage } from '../utils/markov/markovUtils';
+import { isValidMessage, generateResponse } from '../utils/markov/markovUtils';
 
 const messageCreate = createEvent(
   'messageCreate',
@@ -23,6 +23,15 @@ const messageCreate = createEvent(
         },
       },
     });
+
+    const guildId = message.guild.id;
+    const shouldRespond = Math.random() < 0.1;
+    if (!shouldRespond) return;
+
+    const response = await generateResponse(guildId);
+    if (!response) return;
+
+    await message.channel.send(response);
   },
 );
 

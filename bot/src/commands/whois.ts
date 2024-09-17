@@ -13,7 +13,7 @@ const whois: Command = {
         .setRequired(false),
     )
     .setDMPermission(false),
-  execute: async (interaction) => {
+  execute: async interaction => {
     if (!interaction.guild) return;
 
     const user = interaction.options.getUser('member', false) ?? interaction.user;

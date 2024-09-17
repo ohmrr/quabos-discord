@@ -1,8 +1,4 @@
-import {
-  PermissionFlagsBits,
-  SlashCommandBuilder,
-  TextChannel,
-} from 'discord.js';
+import { PermissionFlagsBits, SlashCommandBuilder, TextChannel } from 'discord.js';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 
@@ -38,7 +34,9 @@ const purge: Command = {
         const fourteenDaysMilli = 60 * 60 * 24 * 14 * 1000;
         const currentTime = Date.now();
 
-        const messages = allMessages.filter(msg => currentTime - msg.createdTimestamp < fourteenDaysMilli);
+        const messages = allMessages.filter(
+          msg => currentTime - msg.createdTimestamp < fourteenDaysMilli,
+        );
         if (messages.size === 0) {
           interaction.reply(
             `${emojiMap.error} Messages cannot be deleted after 14 days.`,
