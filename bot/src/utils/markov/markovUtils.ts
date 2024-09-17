@@ -13,25 +13,50 @@ export function isValidMessage(message: Message): boolean {
   return true;
 }
 
-export async function getGuildMessages(guildId: string) {
-  const channels = await prisma.channel.findMany({
-    where: {
-      guildId: guildId,
-    },
-    include: {
-      messages: true,
-    },
+export async function saveMessage(message: Message) {
+  const isWatchChannel = await prisma.channel.findUnique({
+    where: { channelId: message.channel.id }
   });
 
-  const messages = channels
-    .flatMap(channel => channel.messages)
-    .map(message => message.content);
-  return messages;
+  if (!isWatchChannel || !isValidMessage(message)) return;
+
+  await prisma.message.create({
+    data: {
+      content: message.content,
+      messageId: message.id,
+      channel: {
+        connect: {
+          id: isWatchChannel.id
+        }
+      },
+    },
+  })
+}
+
+export async function getGuildMessages(guildId: string) {
+  try {
+    const guild = await prisma.guild.findUnique({
+      where: {
+        guildId: guildId,
+      },
+      include: { watchChannels: { include: { messages: true } } }
+    });
+
+    if (!guild) {
+      return null;
+    }
+
+    const messages = guild.watchChannels.flatMap(channel => channel.messages).map(message => message.content);
+    return messages;
+  } catch (error) {
+    console.error('Error fetching guild messages: ', error);
+    return null;
+  }
 }
 
 export async function generateResponse(guildId: string) {
   const messages = await getGuildMessages(guildId);
-  if (messages.length === 0) return null;
+  if (!messages) return;
 
   const markov = new MarkovMachine({ stateSize: 2 });
   markov.addData(messages);

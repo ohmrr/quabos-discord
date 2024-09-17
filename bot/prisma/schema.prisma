@@ -12,17 +12,17 @@ model Guild {
   guildId String @unique
   name    String
 
-  watchChannels Channel[]
+  watchChannels Channel[] @relation("GuildChannels")
 }
 
 model Channel {
   id        String @id @default(auto()) @map("_id") @db.ObjectId
   channelId String @unique
 
-  messages Message[]
+  messages Message[] @relation("ChannelMessages")
 
-  guild   Guild?  @relation(fields: [guildId], references: [id])
-  guildId String? @db.ObjectId
+  guild   Guild?  @relation("GuildChannels", fields: [guildId], references: [id])
+  guildId String?
 }
 
 model Message {
@@ -30,6 +30,6 @@ model Message {
   messageId String @unique
   content   String
 
-  channel   Channel? @relation(fields: [channelId], references: [id])
-  channelId String?  @db.ObjectId
+  channel   Channel? @relation("ChannelMessages",fields: [channelId], references: [id])
+  channelId String?
 }
