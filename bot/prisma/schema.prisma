@@ -21,7 +21,7 @@ model Channel {
 
   messages Message[] @relation("ChannelMessages")
 
-  guild   Guild?  @relation("GuildChannels", fields: [guildId], references: [id])
+  guild   Guild?  @relation("GuildChannels", fields: [guildId], references: [guildId])
   guildId String?
 }
 
@@ -30,6 +30,6 @@ model Message {
   messageId String @unique
   content   String
 
-  channel   Channel? @relation("ChannelMessages",fields: [channelId], references: [id])
+  channel   Channel? @relation("ChannelMessages", fields: [channelId], references: [channelId])
   channelId String?
 }

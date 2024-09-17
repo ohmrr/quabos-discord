@@ -1,6 +1,7 @@
 import MarkovMachine from 'markov-strings';
 import { Message } from 'discord.js';
 import { prisma } from '../..';
+import emojiMap from '../emojiMap';
 
 export function isValidMessage(message: Message): boolean {
   const startsWithCommandChar = /^[!\/?]/i;
@@ -26,11 +27,12 @@ export async function saveMessage(message: Message) {
       messageId: message.id,
       channel: {
         connect: {
-          id: isWatchChannel.id,
+          channelId: isWatchChannel.channelId
         },
       },
     },
   });
+
 }
 
 export async function getGuildMessages(guildId: string) {
@@ -60,13 +62,17 @@ export async function generateResponse(guildId: string) {
   const messages = await getGuildMessages(guildId);
   if (!messages) return;
 
-  const markov = new MarkovMachine({ stateSize: 2 });
-  markov.addData(messages);
+  try {
+    const markov = new MarkovMachine({ stateSize: 2 });
+    markov.addData(messages);
 
-  const result = markov.generate({
-    maxTries: 100,
-    filter: result => result.string.split(' ').length >= 4,
-  });
+    const result = markov.generate({
+      maxTries: 100,
+      filter: result => result.string.split(' ').length >= 4,
+    });
 
-  return result.string;
+    return result.string;
+  } catch (error) {
+    return null;
+  }
 }

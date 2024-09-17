@@ -16,7 +16,7 @@ const generate: Command = {
 
     if (!response) {
       interaction.reply(
-        `${emojiMap.error} Message cannot be generated. Quabos must gather more messages in the specified watch channel.`,
+        `${emojiMap.error} I need to gather more messages. Try setting a watch channel with /watch then check how many messages are collected with /serverinfo.`,
       );
     } else {
       interaction.reply(`${emojiMap.alien} ${response}`);
