@@ -15,7 +15,7 @@ export function isValidMessage(message: Message): boolean {
 
 export async function saveMessage(message: Message) {
   const isWatchChannel = await prisma.channel.findUnique({
-    where: { channelId: message.channel.id }
+    where: { channelId: message.channel.id },
   });
 
   if (!isWatchChannel || !isValidMessage(message)) return;
@@ -26,11 +26,11 @@ export async function saveMessage(message: Message) {
       messageId: message.id,
       channel: {
         connect: {
-          id: isWatchChannel.id
-        }
+          id: isWatchChannel.id,
+        },
       },
     },
-  })
+  });
 }
 
 export async function getGuildMessages(guildId: string) {
@@ -39,14 +39,16 @@ export async function getGuildMessages(guildId: string) {
       where: {
         guildId: guildId,
       },
-      include: { watchChannels: { include: { messages: true } } }
+      include: { watchChannels: { include: { messages: true } } },
     });
 
     if (!guild) {
       return null;
     }
 
-    const messages = guild.watchChannels.flatMap(channel => channel.messages).map(message => message.content);
+    const messages = guild.watchChannels
+      .flatMap(channel => channel.messages)
+      .map(message => message.content);
     return messages;
   } catch (error) {
     console.error('Error fetching guild messages: ', error);

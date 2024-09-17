@@ -12,13 +12,19 @@ const messageCreate = createEvent(
     await saveMessage(message);
 
     const guildId = message.guild.id;
-    const shouldRespond = Math.random() < 0.1;
+    const shouldRespond = Math.random() < 0.08;
     if (!shouldRespond) return;
 
     const response = await generateResponse(guildId);
     if (!response) return;
 
-    await message.channel.send(`${emojiMap.alien} ${response}`);
+    try {
+      await message.channel.sendTyping();
+      await new Promise(resolve => setTimeout(resolve, 5000));
+      await message.channel.send(`${emojiMap.alien} ${response}`);
+    } catch (error) {
+      console.error('Failed to send response message:', error);
+    }
   },
 );
 

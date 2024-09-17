@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from 'discord.js';
-import { generateResponse } from '../utils/markov/markovUtils'
+import { generateResponse } from '../utils/markov/markovUtils';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 
@@ -15,7 +15,9 @@ const generate: Command = {
     const response = await generateResponse(guildId);
 
     if (!response) {
-      interaction.reply(`${emojiMap.error} Message cannot be generated. Quabos must gather more messages in the specified watch channel.`);
+      interaction.reply(
+        `${emojiMap.error} Message cannot be generated. Quabos must gather more messages in the specified watch channel.`,
+      );
     } else {
       interaction.reply(`${emojiMap.alien} ${response}`);
     }
