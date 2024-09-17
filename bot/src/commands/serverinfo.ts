@@ -72,7 +72,7 @@ const serverInfo: Command = {
       timestamp: Date.now(),
     });
 
-    if (guildRecord) {
+    if (guildRecord && guildRecord.watchChannels.length > 0) {
       const totalMessages = guildRecord.watchChannels.reduce(
         (acc, channel) => acc + channel.messages.length,
         0,
