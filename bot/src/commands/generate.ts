@@ -21,3 +21,5 @@ const generate: Command = {
     }
   },
 };
+
+export default generate;
