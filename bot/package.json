@@ -19,6 +19,7 @@
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5",
     "libsodium-wrappers": "^0.7.13",
+    "markov-strings": "^3.0.1",
     "moment": "^2.30.1",
     "mongodb": "^6.5.0",
     "prisma": "^5.12.1"

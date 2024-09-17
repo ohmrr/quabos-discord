@@ -1,3 +1,4 @@
+import MarkovMachine  from 'markov-strings';
 import { Message } from 'discord.js';
 import { prisma } from '../..';
 
@@ -22,10 +23,21 @@ export async function getGuildMessages(guildId: string) {
     },
   });
 
-  const messages = channels.flatMap(channel => channel.messages);
+  const messages = channels.flatMap(channel => channel.messages).map(message => message.content);
   return messages;
 }
 
 export async function generateResponse(guildId: string) {
   const messages = await getGuildMessages(guildId);
+  if (messages.length === 0) return null;
+
+  const markov = new MarkovMachine({ stateSize: 2 });
+  markov.addData(messages);
+
+  const result = await markov.generate({
+    maxTries: 100,
+    filter: (result) => result.string.split(' ').length >= 4
+  });
+
+  return result.string;
 }
