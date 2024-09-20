@@ -1,7 +1,6 @@
 import MarkovMachine from 'markov-strings';
 import { Message } from 'discord.js';
 import { prisma } from '../..';
-import emojiMap from '../emojiMap';
 
 export function isValidMessage(message: Message): boolean {
   const startsWithCommandChar = /^[!\/?]/i;
@@ -14,6 +13,13 @@ export function isValidMessage(message: Message): boolean {
   return true;
 }
 
+export function normalizeString(content: string) {
+  return content
+    .toLowerCase()
+    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '')
+    .replace(/\s{2,}/g, ' ');
+}
+
 export async function saveMessage(message: Message) {
   const isWatchChannel = await prisma.channel.findUnique({
     where: { channelId: message.channel.id },
@@ -21,18 +27,19 @@ export async function saveMessage(message: Message) {
 
   if (!isWatchChannel || !isValidMessage(message)) return;
 
+  const content = normalizeString(message.content);
+
   await prisma.message.create({
     data: {
-      content: message.content,
+      content: content,
       messageId: message.id,
       channel: {
         connect: {
-          channelId: isWatchChannel.channelId
+          channelId: isWatchChannel.channelId,
         },
       },
     },
   });
-
 }
 
 export async function getGuildMessages(guildId: string) {
@@ -51,6 +58,7 @@ export async function getGuildMessages(guildId: string) {
     const messages = guild.watchChannels
       .flatMap(channel => channel.messages)
       .map(message => message.content);
+
     return messages;
   } catch (error) {
     console.error('Error fetching guild messages: ', error);
@@ -67,7 +75,7 @@ export async function generateResponse(guildId: string) {
     markov.addData(messages);
 
     const result = markov.generate({
-      maxTries: 100,
+      maxTries: 150,
       filter: result => result.string.split(' ').length >= 4,
     });
 
