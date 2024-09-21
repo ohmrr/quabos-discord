@@ -1,6 +1,6 @@
 import { Client, GatewayIntentBits, Partials } from 'discord.js';
-import { loadCommands } from './utils/handlers/loadCommands';
 import { PrismaClient } from '@prisma/client';
+import loadCommands from './utils/handlers/loadCommands';
 import loadEvents from './utils/handlers/loadEvents';
 import 'dotenv/config';
 
@@ -25,15 +25,14 @@ const init = async () => {
   try {
     await prisma.$connect();
     console.log('Database connected successfully!');
+
+    await loadEvents(client);
+    await loadCommands(client);
+    await client.login(process.env.DISCORD_TOKEN);
   } catch (error) {
-    console.error('Error connecting to the database:', error);
+    console.error('Error initializing client:', error);
     process.exit(1);
   }
-
-  loadEvents(client);
-  loadCommands(client);
-
-  client.login(process.env.DISCORD_TOKEN);
 };
 
 init().finally(async () => {

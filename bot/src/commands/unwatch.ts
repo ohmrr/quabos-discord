@@ -8,14 +8,14 @@ const unwatch: Command = {
     .setName('unwatch')
     .setDescription('Select a channel to stop watching for new messages.')
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
+    .setDMPermission(false)
     .addChannelOption(option =>
       option
         .setName('channel')
         .setDescription('Channel to stop watching.')
         .addChannelTypes(ChannelType.GuildText)
         .setRequired(true),
-    )
-    .setDMPermission(false),
+    ),
   usage: '/unwatch [channel]',
   execute: async interaction => {
     if (!interaction.guild) return;

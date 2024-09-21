@@ -8,14 +8,14 @@ const watch: Command = {
     .setName('watch')
     .setDescription('Select a new channel for the model to gather messages from.')
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
+    .setDMPermission(false)
     .addChannelOption(option =>
       option
         .setName('channel')
         .setDescription('Channel to watch for messages.')
         .addChannelTypes(ChannelType.GuildText)
         .setRequired(true),
-    )
-    .setDMPermission(false),
+    ),
   usage: '/watch [channel]',
   execute: async interaction => {
     if (!interaction.guild) return;

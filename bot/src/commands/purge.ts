@@ -7,6 +7,7 @@ const purge: Command = {
     .setName('purge')
     .setDescription('Delete messages in the current channel.')
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
+    .setDMPermission(false)
     .addIntegerOption(amount =>
       amount
         .setName('amount')
@@ -14,8 +15,7 @@ const purge: Command = {
         .setMaxValue(100)
         .setMinValue(1)
         .setRequired(true),
-    )
-    .setDMPermission(false),
+    ),
   usage: '/purge [count]',
   execute: async interaction => {
     if (!interaction.guild || !interaction.channel) return;
