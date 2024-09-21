@@ -23,7 +23,7 @@ const messageCreate = createEvent(
       await new Promise(resolve => setTimeout(resolve, 5000));
       await message.channel.send(`${emojiMap.alien} ${response}`);
     } catch (error) {
-      console.error('Failed to send response message:', error);
+      console.error(`Message creation error:\n\n${error}`);
     }
   },
 );

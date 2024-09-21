@@ -24,7 +24,7 @@ const interactionCreate = createEvent(
     try {
       await command.execute(interaction);
     } catch (error) {
-      console.error(`Error handling slash command execution: ${error}`);
+      console.error(`Slash command error:\n\n${error}`);
       await interaction.reply({
         content: `${emojiMap.error} There was an error while executing this command. Please try again later.`,
         ephemeral: true,

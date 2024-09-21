@@ -16,8 +16,9 @@ export function isValidMessage(message: Message): boolean {
 export function normalizeString(content: string) {
   return content
     .toLowerCase()
-    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '')
-    .replace(/\s{2,}/g, ' ');
+    .replace(/[^a-z0-9@#<>*_~\s]/g, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
 }
 
 export async function saveMessage(message: Message) {
