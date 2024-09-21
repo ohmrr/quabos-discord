@@ -5,7 +5,7 @@ import emojiMap from '../utils/emojiMap';
 const clean: Command = {
   data: new SlashCommandBuilder()
     .setName('clean')
-    .setDescription('Clean the current channel of any bot messages.')
+    .setDescription("Clean the current channel of any of Quabos's messages.")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
     .setDMPermission(false),
   usage: '/clean [count]',
@@ -25,7 +25,7 @@ const clean: Command = {
 
         const messages = allMessages.filter(
           message =>
-            message.author.bot &&
+            message.author.id === interaction.client.user.id &&
             currentTime - message.createdTimestamp < fourteenDaysMilli,
         );
 
