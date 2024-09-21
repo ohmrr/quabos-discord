@@ -8,6 +8,7 @@ const clean: Command = {
     .setDescription('Clean the current channel of any bot messages.')
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
     .setDMPermission(false),
+  usage: '/clean [count]',
   execute: async interaction => {
     if (!interaction.guild || !interaction.channel) return;
     if (!interaction.channel.isTextBased()) return;

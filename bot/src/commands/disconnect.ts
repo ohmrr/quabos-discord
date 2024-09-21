@@ -8,6 +8,7 @@ const disconnect: Command = {
     .setName('disconnect')
     .setDescription('Disconnect from the voice channel.')
     .setDMPermission(false),
+  usage: '/disconnect',
   execute: async interaction => {
     if (!interaction.guild || !interaction.member) return;
 

@@ -16,6 +16,7 @@ const purge: Command = {
         .setRequired(true),
     )
     .setDMPermission(false),
+  usage: '/purge [count]',
   execute: async interaction => {
     if (!interaction.guild || !interaction.channel) return;
     if (!interaction.channel.isTextBased()) return;

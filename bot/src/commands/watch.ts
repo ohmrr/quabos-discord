@@ -16,7 +16,7 @@ const watch: Command = {
         .setRequired(true),
     )
     .setDMPermission(false),
-
+  usage: '/watch [channel]',
   execute: async interaction => {
     if (!interaction.guild) return;
 

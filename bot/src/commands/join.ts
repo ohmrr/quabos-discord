@@ -8,6 +8,7 @@ const join: Command = {
     .setName('join')
     .setDescription('Join the voice channel.')
     .setDMPermission(false),
+  usage: '/join',
   execute: async interaction => {
     if (!interaction.guild || !interaction.member) return;
     const guildMember = interaction.member as GuildMember;

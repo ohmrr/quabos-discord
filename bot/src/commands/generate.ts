@@ -8,6 +8,7 @@ const generate: Command = {
     .setName('generate')
     .setDescription('Force a new message to be generated.')
     .setDMPermission(false),
+  usage: '/generate',
   execute: async interaction => {
     if (!interaction.guild || !interaction.member) return;
 

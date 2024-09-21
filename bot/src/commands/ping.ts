@@ -7,6 +7,7 @@ const ping: Command = {
     .setName('ping')
     .setDescription('Get the client and websocket ping.')
     .setDMPermission(false),
+  usage: '/ping',
   execute: async interaction => {
     await interaction.deferReply();
 

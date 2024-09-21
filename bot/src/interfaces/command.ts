@@ -4,6 +4,7 @@ interface Command {
   data:
     | SlashCommandBuilder
     | Omit<SlashCommandBuilder, 'addSubcommand' | 'addSubcommandGroup'>;
+  usage: string;
   execute: (interaction: ChatInputCommandInteraction) => void;
 }
 

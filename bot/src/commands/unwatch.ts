@@ -16,6 +16,7 @@ const unwatch: Command = {
         .setRequired(true),
     )
     .setDMPermission(false),
+  usage: '/unwatch [channel]',
   execute: async interaction => {
     if (!interaction.guild) return;
 
