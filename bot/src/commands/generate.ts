@@ -12,15 +12,20 @@ const generate: Command = {
   execute: async interaction => {
     if (!interaction.guild || !interaction.member) return;
 
+    await interaction.deferReply();
+
     const guildId = interaction.guild.id;
     const response = await generateResponse(guildId);
 
+    const emojiList = Array.from(Object.values(emojiMap.celestial)) 
+    const randomIndex = Math.floor(Math.random() * emojiList.length);
+
     if (!response) {
-      interaction.reply(
+      await interaction.editReply(
         `${emojiMap.error} I need to gather more messages. Try setting a watch channel with /watch then check how many messages are collected with /serverinfo.`,
       );
     } else {
-      interaction.reply(`${emojiMap.alien} ${response}`);
+      await interaction.editReply(`${emojiList[randomIndex]} ${response}`);
     }
   },
 };

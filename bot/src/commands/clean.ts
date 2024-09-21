@@ -37,11 +37,11 @@ const clean: Command = {
         }
 
         channel.bulkDelete(messages);
-        interaction.reply(`${emojiMap.success} Deleted ${messages.size} messages.`);
+        interaction.reply(`${emojiMap.success.check} Deleted ${messages.size} messages.`);
       } catch (error) {
         console.error('Failed to clean channel of bot messages.');
         interaction.reply(
-          `${emojiMap.error} Failed to clean the channel of bot messages.`,
+          `${emojiMap.error.denied} Failed to clean the channel of bot messages.`,
         );
       }
     }

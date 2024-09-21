@@ -41,12 +41,12 @@ const unwatch: Command = {
     try {
       await prisma.channel.delete({ where: { channelId: selectedChannel.id } });
       interaction.reply(
-        `${emojiMap.success} Channel <#${selectedChannel.id}> is no longer being watched for new messages.`,
+        `${emojiMap.success.check} Channel <#${selectedChannel.id}> is no longer being watched for new messages.`,
       );
     } catch (error) {
       console.error('Error while deleting channel record: ', error);
       interaction.reply(
-        `${emojiMap.error} An error occurred while removing the channel from the watch list.`,
+        `${emojiMap.error.cross} An error occurred while removing the channel from the watch list.`,
       );
     }
   },

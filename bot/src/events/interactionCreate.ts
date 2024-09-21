@@ -28,7 +28,7 @@ const interactionCreate = createEvent(
 
     if (isBlacklisted) {
       interaction.reply(
-        `${emojiMap.error} You are currently blacklisted. Please contact the developers for more information.`,
+        `${emojiMap.error.denied} You are currently blacklisted. Please contact the developers for more information.`,
       );
 
       return;
@@ -39,7 +39,7 @@ const interactionCreate = createEvent(
     } catch (error) {
       console.error(`Slash command error:\n\n${error}`);
       await interaction.reply({
-        content: `${emojiMap.error} There was an error while executing this command.`,
+        content: `${emojiMap.error.cross} There was an error while executing this command.`,
         ephemeral: true,
       });
     }

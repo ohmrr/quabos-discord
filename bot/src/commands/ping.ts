@@ -14,7 +14,7 @@ const ping: Command = {
     const reply = await interaction.fetchReply();
     const clientLatency = reply.createdTimestamp - interaction.createdTimestamp;
     interaction.editReply(
-      `${emojiMap.alien} **Client**: ${clientLatency}ms | **Websocket**: ${interaction.client.ws.ping}ms`,
+      `${emojiMap.celestial.alien} **Client**: ${clientLatency}ms | **Websocket**: ${interaction.client.ws.ping}ms`,
     );
   },
 };

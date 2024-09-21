@@ -46,10 +46,10 @@ const purge: Command = {
         }
 
         channel.bulkDelete(messages);
-        interaction.reply(`${emojiMap.success} Deleted ${messages.size} messages.`);
+        interaction.reply(`${emojiMap.success.check} Deleted ${messages.size} messages.`);
       } catch (error) {
         console.error('Failed to purge messages.');
-        interaction.reply(`${emojiMap.error} Failed to purge the messages.`);
+        interaction.reply(`${emojiMap.error.denied} Failed to purge the messages.`);
       }
     }
   },
