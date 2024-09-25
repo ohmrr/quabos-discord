@@ -30,17 +30,19 @@ const clean: Command = {
         );
 
         if (messages.size === 0) {
-          interaction.reply(
+          await interaction.reply(
             `${emojiMap.error} Messages cannot be deleted after 14 days.`,
           );
           return;
         }
 
         channel.bulkDelete(messages);
-        interaction.reply(`${emojiMap.success.check} Deleted ${messages.size} messages.`);
+        await interaction.reply(
+          `${emojiMap.success.check} Deleted ${messages.size} messages.`,
+        );
       } catch (error) {
         console.error('Failed to clean channel of bot messages.');
-        interaction.reply(
+        await interaction.reply(
           `${emojiMap.error.denied} Failed to clean the channel of bot messages.`,
         );
       }

@@ -32,7 +32,7 @@ const unwatch: Command = {
         channel => channel.channelId === selectedChannel.id,
       )
     ) {
-      interaction.reply(
+      await interaction.reply(
         `${emojiMap.error} Channel <#${selectedChannel.id}> is not being watched.`,
       );
       return;
@@ -45,7 +45,7 @@ const unwatch: Command = {
       );
     } catch (error) {
       console.error('Error while deleting channel record: ', error);
-      interaction.reply(
+      await interaction.reply(
         `${emojiMap.error.cross} An error occurred while removing the channel from the watch list.`,
       );
     }

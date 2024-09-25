@@ -28,7 +28,7 @@ const avatar: Command = {
       timestamp: Date.now(),
     });
 
-    interaction.reply({ embeds: [avatarEmbed] });
+    await interaction.reply({ embeds: [avatarEmbed] });
   },
 };
 

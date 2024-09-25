@@ -17,7 +17,7 @@ const generate: Command = {
     const guildId = interaction.guild.id;
     const response = await generateResponse(guildId);
 
-    const emojiList = Array.from(Object.values(emojiMap.celestial)) 
+    const emojiList = Array.from(Object.values(emojiMap.celestial));
     const randomIndex = Math.floor(Math.random() * emojiList.length);
 
     if (!response) {

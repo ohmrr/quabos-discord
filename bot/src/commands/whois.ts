@@ -55,7 +55,7 @@ const whois: Command = {
       timestamp: Date.now(),
     });
 
-    interaction.reply({ embeds: [whoisEmbed] });
+    await interaction.reply({ embeds: [whoisEmbed] });
   },
 };
 

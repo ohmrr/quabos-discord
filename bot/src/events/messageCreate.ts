@@ -18,7 +18,7 @@ const messageCreate = createEvent(
     const response = await generateResponse(guildId);
     if (!response) return;
 
-    const emojiList = Array.from(Object.values(emojiMap.celestial))
+    const emojiList = Array.from(Object.values(emojiMap.celestial));
     const randomIndex = Math.floor(Math.random() * emojiList.length);
 
     try {

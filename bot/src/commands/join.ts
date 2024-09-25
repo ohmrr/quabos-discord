@@ -15,7 +15,9 @@ const join: Command = {
     const voiceChannel = guildMember.voice.channel;
 
     if (!voiceChannel) {
-      interaction.reply(`${emojiMap.error.cross} You are not in a voice channel.`);
+      await interaction.reply(
+        `${emojiMap.error.cross} You are not in a voice channel.`,
+      );
       return;
     }
 
@@ -27,7 +29,7 @@ const join: Command = {
       adapterCreator: interaction.guild.voiceAdapterCreator,
     });
 
-    interaction.reply(
+    await interaction.reply(
       `${emojiMap.sound.normal} Joined the voice channel ${voiceChannel.name}`,
     );
   },

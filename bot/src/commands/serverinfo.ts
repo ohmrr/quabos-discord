@@ -91,7 +91,7 @@ const serverInfo: Command = {
       ]);
     }
 
-    interaction.reply({ embeds: [serverInfoEmbed] });
+    await interaction.reply({ embeds: [serverInfoEmbed] });
   },
 };
 
