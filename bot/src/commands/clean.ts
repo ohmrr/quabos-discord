@@ -1,4 +1,9 @@
-import { PermissionFlagsBits, SlashCommandBuilder, TextChannel } from 'discord.js';
+import {
+  InteractionContextType,
+  PermissionFlagsBits,
+  SlashCommandBuilder,
+  TextChannel,
+} from 'discord.js';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 
@@ -7,7 +12,7 @@ const clean: Command = {
     .setName('clean')
     .setDescription("Clean the current channel of any of the bot's messages.")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
-    .setDMPermission(false),
+    .setContexts(InteractionContextType.Guild),
   usage: '/clean [count]',
   execute: async interaction => {
     if (!interaction.guild || !interaction.channel) return;

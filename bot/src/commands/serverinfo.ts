@@ -1,4 +1,9 @@
-import { SlashCommandBuilder, EmbedBuilder, ChannelType } from 'discord.js';
+import {
+  SlashCommandBuilder,
+  EmbedBuilder,
+  ChannelType,
+  InteractionContextType,
+} from 'discord.js';
 import Command from '../interfaces/command';
 import { prisma } from '..';
 import moment from 'moment';
@@ -7,7 +12,7 @@ const serverInfo: Command = {
   data: new SlashCommandBuilder()
     .setName('serverinfo')
     .setDescription('Get information on the current guild.')
-    .setDMPermission(false),
+    .setContexts(InteractionContextType.Guild),
   usage: '/serverinfo',
   execute: async interaction => {
     if (!interaction.guild) return;

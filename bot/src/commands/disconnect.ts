@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from 'discord.js';
+import { InteractionContextType, SlashCommandBuilder } from 'discord.js';
 import { getVoiceConnection } from '@discordjs/voice';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
@@ -7,7 +7,7 @@ const disconnect: Command = {
   data: new SlashCommandBuilder()
     .setName('disconnect')
     .setDescription('Disconnect from the voice channel.')
-    .setDMPermission(false),
+    .setContexts(InteractionContextType.Guild),
   usage: '/disconnect',
   execute: async interaction => {
     if (!interaction.guild || !interaction.member) return;

@@ -1,4 +1,8 @@
-import { GuildMember, SlashCommandBuilder } from 'discord.js';
+import {
+  GuildMember,
+  InteractionContextType,
+  SlashCommandBuilder,
+} from 'discord.js';
 import { joinVoiceChannel } from '@discordjs/voice';
 import emojiMap from '../utils/emojiMap';
 import Command from '../interfaces/command';
@@ -7,7 +11,7 @@ const join: Command = {
   data: new SlashCommandBuilder()
     .setName('join')
     .setDescription('Join the voice channel.')
-    .setDMPermission(false),
+    .setContexts(InteractionContextType.Guild),
   usage: '/join',
   execute: async interaction => {
     if (!interaction.guild || !interaction.member) return;

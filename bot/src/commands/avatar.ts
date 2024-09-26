@@ -1,11 +1,15 @@
-import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import {
+  SlashCommandBuilder,
+  EmbedBuilder,
+  InteractionContextType,
+} from 'discord.js';
 import Command from '../interfaces/command';
 
 const avatar: Command = {
   data: new SlashCommandBuilder()
     .setName('avatar')
     .setDescription('Display the avatar of the selected server member.')
-    .setDMPermission(false)
+    .setContexts(InteractionContextType.Guild)
     .addUserOption(option =>
       option
         .setName('user')
