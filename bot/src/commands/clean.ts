@@ -5,7 +5,7 @@ import emojiMap from '../utils/emojiMap';
 const clean: Command = {
   data: new SlashCommandBuilder()
     .setName('clean')
-    .setDescription("Clean the current channel of any of Quabos's messages.")
+    .setDescription("Clean the current channel of any of the bot's messages.")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
     .setDMPermission(false),
   usage: '/clean [count]',

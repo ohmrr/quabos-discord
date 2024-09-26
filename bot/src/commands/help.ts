@@ -33,13 +33,15 @@ const help: Command = {
     ) {
       helpEmbed = new EmbedBuilder({
         author: {
-          name: client.user.username,
+          name: client.user.tag,
           iconURL: clientAvatar,
         },
         thumbnail: {
           url: clientAvatar,
         },
-        title: `${client.user.username}${client.user.discriminator}`,
+        description:
+          `**${client.user.username} can learn from messages sent in your server and generate new ones based off of what was said.**\n\n` +
+          'You can start by typing: `/watch [channel]` and as more messages are collected, run `/serverinfo` to check how many were collected.',
       });
 
       await interaction.reply({ embeds: [helpEmbed] });
@@ -59,7 +61,7 @@ const help: Command = {
         iconURL: clientAvatar,
       },
       title: `Command: /${commandChoice}`,
-      description: `**Description**:${command.data.description}\n\n**Usage**: ${command.usage}`,
+      description: `**Description**: ${command.data.description}\n\n**Usage**: ${command.usage}`,
     });
 
     await interaction.reply({ embeds: [helpEmbed], ephemeral: true });
