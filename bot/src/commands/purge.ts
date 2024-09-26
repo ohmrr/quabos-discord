@@ -1,4 +1,9 @@
-import { PermissionFlagsBits, SlashCommandBuilder, TextChannel } from 'discord.js';
+import {
+  PermissionFlagsBits,
+  SlashCommandBuilder,
+  InteractionContextType,
+  TextChannel,
+} from 'discord.js';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 
@@ -7,7 +12,7 @@ const purge: Command = {
     .setName('purge')
     .setDescription('Delete messages in the current channel.')
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
-    .setDMPermission(false)
+    .setContexts(InteractionContextType.Guild)
     .addIntegerOption(amount =>
       amount
         .setName('amount')

@@ -1,4 +1,8 @@
-import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import {
+  SlashCommandBuilder,
+  EmbedBuilder,
+  InteractionContextType,
+} from 'discord.js';
 import Command from '../interfaces/command';
 import moment from 'moment';
 
@@ -6,7 +10,7 @@ const whois: Command = {
   data: new SlashCommandBuilder()
     .setName('whois')
     .setDescription('Get user information.')
-    .setDMPermission(false)
+    .setContexts(InteractionContextType.Guild)
     .addUserOption(option =>
       option
         .setName('member')

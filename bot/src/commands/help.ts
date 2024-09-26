@@ -1,12 +1,20 @@
-import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import {
+  SlashCommandBuilder,
+  EmbedBuilder,
+  InteractionContextType,
+} from 'discord.js';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 
 const help: Command = {
   data: new SlashCommandBuilder()
     .setName('help')
-    .setDescription('adsad')
-    .setDMPermission(false)
+    .setDescription('Shows command information.')
+    .setContexts([
+      InteractionContextType.Guild,
+      InteractionContextType.BotDM,
+      InteractionContextType.PrivateChannel,
+    ])
     .addStringOption(command =>
       command
         .setName('command')

@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from 'discord.js';
+import { InteractionContextType, SlashCommandBuilder } from 'discord.js';
 import { generateResponse } from '../utils/markov/markovUtils';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
@@ -7,7 +7,7 @@ const generate: Command = {
   data: new SlashCommandBuilder()
     .setName('generate')
     .setDescription('Force a new message to be generated.')
-    .setDMPermission(false),
+    .setContexts(InteractionContextType.Guild),
   usage: '/generate',
   execute: async interaction => {
     if (!interaction.guild || !interaction.member) return;
