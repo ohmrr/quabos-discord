@@ -5,9 +5,10 @@ import emojiMap from '../utils/emojiMap';
 const clean: Command = {
   data: new SlashCommandBuilder()
     .setName('clean')
-    .setDescription('Clean the current channel of any bot messages.')
+    .setDescription("Clean the current channel of any of the bot's messages.")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
     .setDMPermission(false),
+  usage: '/clean [count]',
   execute: async interaction => {
     if (!interaction.guild || !interaction.channel) return;
     if (!interaction.channel.isTextBased()) return;
@@ -24,23 +25,25 @@ const clean: Command = {
 
         const messages = allMessages.filter(
           message =>
-            message.author.bot &&
+            message.author.id === interaction.client.user.id &&
             currentTime - message.createdTimestamp < fourteenDaysMilli,
         );
 
         if (messages.size === 0) {
-          interaction.reply(
+          await interaction.reply(
             `${emojiMap.error} Messages cannot be deleted after 14 days.`,
           );
           return;
         }
 
         channel.bulkDelete(messages);
-        interaction.reply(`${emojiMap.success} Deleted ${messages.size} messages.`);
+        await interaction.reply(
+          `${emojiMap.success.check} Deleted ${messages.size} messages.`,
+        );
       } catch (error) {
         console.error('Failed to clean channel of bot messages.');
-        interaction.reply(
-          `${emojiMap.error} Failed to clean the channel of bot messages.`,
+        await interaction.reply(
+          `${emojiMap.error.denied} Failed to clean the channel of bot messages.`,
         );
       }
     }

@@ -8,14 +8,15 @@ const unwatch: Command = {
     .setName('unwatch')
     .setDescription('Select a channel to stop watching for new messages.')
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
+    .setDMPermission(false)
     .addChannelOption(option =>
       option
         .setName('channel')
         .setDescription('Channel to stop watching.')
         .addChannelTypes(ChannelType.GuildText)
         .setRequired(true),
-    )
-    .setDMPermission(false),
+    ),
+  usage: '/unwatch [channel]',
   execute: async interaction => {
     if (!interaction.guild) return;
 
@@ -31,7 +32,7 @@ const unwatch: Command = {
         channel => channel.channelId === selectedChannel.id,
       )
     ) {
-      interaction.reply(
+      await interaction.reply(
         `${emojiMap.error} Channel <#${selectedChannel.id}> is not being watched.`,
       );
       return;
@@ -40,12 +41,12 @@ const unwatch: Command = {
     try {
       await prisma.channel.delete({ where: { channelId: selectedChannel.id } });
       interaction.reply(
-        `${emojiMap.success} Channel <#${selectedChannel.id}> is no longer being watched for new messages.`,
+        `${emojiMap.success.check} Channel <#${selectedChannel.id}> is no longer being watched for new messages.`,
       );
     } catch (error) {
       console.error('Error while deleting channel record: ', error);
-      interaction.reply(
-        `${emojiMap.error} An error occurred while removing the channel from the watch list.`,
+      await interaction.reply(
+        `${emojiMap.error.cross} An error occurred while removing the channel from the watch list.`,
       );
     }
   },

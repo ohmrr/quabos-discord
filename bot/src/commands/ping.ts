@@ -7,13 +7,14 @@ const ping: Command = {
     .setName('ping')
     .setDescription('Get the client and websocket ping.')
     .setDMPermission(false),
+  usage: '/ping',
   execute: async interaction => {
     await interaction.deferReply();
 
     const reply = await interaction.fetchReply();
     const clientLatency = reply.createdTimestamp - interaction.createdTimestamp;
-    interaction.editReply(
-      `${emojiMap.alien} **Client**: ${clientLatency}ms | **Websocket**: ${interaction.client.ws.ping}ms`,
+    await interaction.editReply(
+      `${emojiMap.celestial.alien} **Client**: ${clientLatency}ms | **Websocket**: ${interaction.client.ws.ping}ms`,
     );
   },
 };

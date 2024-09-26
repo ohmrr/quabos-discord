@@ -18,10 +18,13 @@ const messageCreate = createEvent(
     const response = await generateResponse(guildId);
     if (!response) return;
 
+    const emojiList = Array.from(Object.values(emojiMap.celestial));
+    const randomIndex = Math.floor(Math.random() * emojiList.length);
+
     try {
       await message.channel.sendTyping();
       await new Promise(resolve => setTimeout(resolve, 5000));
-      await message.channel.send(`${emojiMap.alien} ${response}`);
+      await message.channel.send(`${emojiList[randomIndex]} ${response}`);
     } catch (error) {
       console.error(`Message creation error:\n\n${error}`);
     }

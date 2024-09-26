@@ -8,17 +8,22 @@ const disconnect: Command = {
     .setName('disconnect')
     .setDescription('Disconnect from the voice channel.')
     .setDMPermission(false),
+  usage: '/disconnect',
   execute: async interaction => {
     if (!interaction.guild || !interaction.member) return;
 
     const voiceConnection = getVoiceConnection(interaction.guild.id);
     if (!voiceConnection) {
-      interaction.reply(`${emojiMap.error} I am not in any voice channels.`);
+      await interaction.reply(
+        `${emojiMap.error.cross} I am not in any voice channels.`,
+      );
       return;
     }
 
     voiceConnection.destroy();
-    interaction.reply(`${emojiMap.success} Disconnected from the voice channel.`);
+    await interaction.reply(
+      `${emojiMap.success.check} Disconnected from the voice channel.`,
+    );
   },
 };
 

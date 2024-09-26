@@ -8,13 +8,16 @@ const join: Command = {
     .setName('join')
     .setDescription('Join the voice channel.')
     .setDMPermission(false),
+  usage: '/join',
   execute: async interaction => {
     if (!interaction.guild || !interaction.member) return;
     const guildMember = interaction.member as GuildMember;
     const voiceChannel = guildMember.voice.channel;
 
     if (!voiceChannel) {
-      interaction.reply(`${emojiMap.error} You are not in a voice channel.`);
+      await interaction.reply(
+        `${emojiMap.error.cross} You are not in a voice channel.`,
+      );
       return;
     }
 
@@ -26,8 +29,8 @@ const join: Command = {
       adapterCreator: interaction.guild.voiceAdapterCreator,
     });
 
-    interaction.reply(
-      `${emojiMap.sound} Joined the voice channel ${voiceChannel.name}`,
+    await interaction.reply(
+      `${emojiMap.sound.normal} Joined the voice channel ${voiceChannel.name}`,
     );
   },
 };

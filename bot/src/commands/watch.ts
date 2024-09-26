@@ -8,15 +8,15 @@ const watch: Command = {
     .setName('watch')
     .setDescription('Select a new channel for the model to gather messages from.')
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
+    .setDMPermission(false)
     .addChannelOption(option =>
       option
         .setName('channel')
         .setDescription('Channel to watch for messages.')
         .addChannelTypes(ChannelType.GuildText)
         .setRequired(true),
-    )
-    .setDMPermission(false),
-
+    ),
+  usage: '/watch [channel]',
   execute: async interaction => {
     if (!interaction.guild) return;
 
@@ -33,7 +33,7 @@ const watch: Command = {
 
       if (isAlreadyWatched) {
         interaction.reply(
-          `${emojiMap.error} Channel <#${selectedChannel.id}> is already being watched for new messages.`,
+          `${emojiMap.error.cross} Channel <#${selectedChannel.id}> is already being watched for new messages.`,
         );
         return;
       }
@@ -50,7 +50,7 @@ const watch: Command = {
           },
         });
 
-        interaction.reply(
+        await interaction.reply(
           `${emojiMap.success} Channel <#${selectedChannel.id}> is now being watched for new messages.`,
         );
         return;
@@ -58,8 +58,8 @@ const watch: Command = {
         console.error(
           `Error while creating guild record. Guild Name: ${interaction.guild.name} ID: ${interaction.guild.id}: ${error}`,
         );
-        interaction.reply(
-          `${emojiMap.error} An error occurred while creating the channel record.`,
+        await interaction.reply(
+          `${emojiMap.error.cross} An error occurred while creating the channel record.`,
         );
       }
     }
@@ -77,15 +77,15 @@ const watch: Command = {
         },
       });
 
-      interaction.reply(
-        `${emojiMap.success} Channel <#${selectedChannel.id}> is now being watched for new messages.`,
+      await interaction.reply(
+        `${emojiMap.success.check} Channel <#${selectedChannel.id}> is now being watched for new messages.`,
       );
     } catch (error) {
       console.error(
         `Error while creating guild record. Guild Name: ${interaction.guild.name} ID: ${interaction.guild.id}: ${error}`,
       );
-      interaction.reply(
-        `${emojiMap.error} An error occurred while creating the guild record. Please try again later.`,
+      await interaction.reply(
+        `${emojiMap.error.cross} An error occurred while creating the guild record. Please try again later.`,
       );
     }
   },

@@ -8,6 +8,7 @@ const serverInfo: Command = {
     .setName('serverinfo')
     .setDescription('Get information on the current guild.')
     .setDMPermission(false),
+  usage: '/serverinfo',
   execute: async interaction => {
     if (!interaction.guild) return;
 
@@ -90,7 +91,7 @@ const serverInfo: Command = {
       ]);
     }
 
-    interaction.reply({ embeds: [serverInfoEmbed] });
+    await interaction.reply({ embeds: [serverInfoEmbed] });
   },
 };
 

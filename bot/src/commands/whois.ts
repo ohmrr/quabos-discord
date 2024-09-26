@@ -6,13 +6,14 @@ const whois: Command = {
   data: new SlashCommandBuilder()
     .setName('whois')
     .setDescription('Get user information.')
+    .setDMPermission(false)
     .addUserOption(option =>
       option
         .setName('member')
         .setDescription('Guild member to get information about.')
         .setRequired(false),
-    )
-    .setDMPermission(false),
+    ),
+  usage: '/whois [user]',
   execute: async interaction => {
     if (!interaction.guild) return;
 
@@ -54,7 +55,7 @@ const whois: Command = {
       timestamp: Date.now(),
     });
 
-    interaction.reply({ embeds: [whoisEmbed] });
+    await interaction.reply({ embeds: [whoisEmbed] });
   },
 };
 

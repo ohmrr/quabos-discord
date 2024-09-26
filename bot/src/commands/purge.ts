@@ -7,6 +7,7 @@ const purge: Command = {
     .setName('purge')
     .setDescription('Delete messages in the current channel.')
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
+    .setDMPermission(false)
     .addIntegerOption(amount =>
       amount
         .setName('amount')
@@ -14,8 +15,8 @@ const purge: Command = {
         .setMaxValue(100)
         .setMinValue(1)
         .setRequired(true),
-    )
-    .setDMPermission(false),
+    ),
+  usage: '/purge [count]',
   execute: async interaction => {
     if (!interaction.guild || !interaction.channel) return;
     if (!interaction.channel.isTextBased()) return;
@@ -45,10 +46,12 @@ const purge: Command = {
         }
 
         channel.bulkDelete(messages);
-        interaction.reply(`${emojiMap.success} Deleted ${messages.size} messages.`);
+        interaction.reply(
+          `${emojiMap.success.check} Deleted ${messages.size} messages.`,
+        );
       } catch (error) {
         console.error('Failed to purge messages.');
-        interaction.reply(`${emojiMap.error} Failed to purge the messages.`);
+        interaction.reply(`${emojiMap.error.denied} Failed to purge the messages.`);
       }
     }
   },

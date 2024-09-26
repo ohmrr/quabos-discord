@@ -1,4 +1,5 @@
 # Etc
 
+*.txt
 .vscode
 **/.DS_STORE

@@ -12,6 +12,7 @@ const avatar: Command = {
         .setDescription('A user in the current server.')
         .setRequired(false),
     ),
+  usage: '/avatar [user]',
   execute: async interaction => {
     if (!interaction.guild) return;
 
@@ -27,7 +28,7 @@ const avatar: Command = {
       timestamp: Date.now(),
     });
 
-    interaction.reply({ embeds: [avatarEmbed] });
+    await interaction.reply({ embeds: [avatarEmbed] });
   },
 };
 
