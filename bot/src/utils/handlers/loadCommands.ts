@@ -1,11 +1,34 @@
 import { Collection, Client } from 'discord.js';
-import Command from '../../interfaces/command';
-import { readdirSync } from 'fs';
+import Command from '@interfaces/command';
+import { readdirSync, statSync } from 'fs';
 import path from 'path';
 
 const commands = new Collection<string, Command>();
 
-const loadCommandFromFile = async (filePath: string) => {
+function getCommandFiles(directory: string) {
+  let results: string[] = [];
+  const list = readdirSync(directory);
+
+  list.forEach(file => {
+    const filePath = path.join(directory, file);
+    const stat = statSync(filePath);
+
+    if (stat.isDirectory()) {
+      const mainCommandFilePath = path.join(filePath, `${file}.js`);
+      if (statSync(mainCommandFilePath).isFile()) {
+        results.push(mainCommandFilePath);
+      } else {
+        results = results.concat(getCommandFiles(filePath));
+      }
+    } else if (file.endsWith('.ts') || file.endsWith('.js')) {
+      results.push(filePath);
+    }
+  });
+
+  return results;
+}
+
+async function loadCommandFromFile(filePath: string) {
   try {
     const commandModule = (await import(filePath)).default;
     const cmd = commandModule as Command;
@@ -21,20 +44,15 @@ const loadCommandFromFile = async (filePath: string) => {
   } catch (error) {
     console.error(`Error loading in ${filePath}: ${error}`);
   }
-};
+}
 
-const loadCommands = async (client: Client) => {
+export default async function loadCommands(client: Client) {
   const commandFolderPath = path.join(__dirname, '..', '..', 'commands');
-  const commandFiles = readdirSync(commandFolderPath).filter(file =>
-    file.endsWith('.js'),
-  );
+  const commandFiles = getCommandFiles(commandFolderPath);
 
-  for (const file of commandFiles) {
-    const commandFilePath = path.join(commandFolderPath, file);
-    await loadCommandFromFile(commandFilePath);
+  for (const filePath of commandFiles) {
+    await loadCommandFromFile(filePath);
   }
 
   client.commands = commands;
-};
-
-export default loadCommands;
+}
