@@ -1,5 +1,5 @@
 import { ChannelType } from 'discord.js';
-import { createEvent } from '../interfaces/applicationEvent';
+import { createEvent } from '@interfaces/applicationEvent';
 
 const channelDelete = createEvent(
   'channelDelete',

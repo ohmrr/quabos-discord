@@ -3,8 +3,8 @@ import {
   EmbedBuilder,
   InteractionContextType,
 } from 'discord.js';
-import Command from '../interfaces/command';
-import emojiMap from '../utils/emojiMap';
+import Command from '@interfaces/command';
+import emojiMap from '@utils/emojiMap';
 
 const help: Command = {
   data: new SlashCommandBuilder()

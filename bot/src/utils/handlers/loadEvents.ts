@@ -1,4 +1,4 @@
-import { createEvent } from '../../interfaces/applicationEvent';
+import { createEvent } from '@interfaces/applicationEvent';
 import { Client } from 'discord.js';
 import { readdirSync } from 'fs';
 import { prisma } from '../..';

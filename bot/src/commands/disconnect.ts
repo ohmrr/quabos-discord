@@ -1,7 +1,7 @@
 import { InteractionContextType, SlashCommandBuilder } from 'discord.js';
 import { getVoiceConnection } from '@discordjs/voice';
-import Command from '../interfaces/command';
-import emojiMap from '../utils/emojiMap';
+import Command from '@interfaces/command';
+import emojiMap from '@utils/emojiMap';
 
 const disconnect: Command = {
   data: new SlashCommandBuilder()

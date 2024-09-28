@@ -3,7 +3,7 @@ import {
   EmbedBuilder,
   InteractionContextType,
 } from 'discord.js';
-import Command from '../interfaces/command';
+import Command from '@interfaces/command';
 import moment from 'moment';
 
 const whois: Command = {

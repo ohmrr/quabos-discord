@@ -4,8 +4,8 @@ import {
   SlashCommandBuilder,
 } from 'discord.js';
 import { joinVoiceChannel } from '@discordjs/voice';
-import emojiMap from '../utils/emojiMap';
-import Command from '../interfaces/command';
+import Command from '@interfaces/command';
+import emojiMap from '@utils/emojiMap';
 
 const join: Command = {
   data: new SlashCommandBuilder()

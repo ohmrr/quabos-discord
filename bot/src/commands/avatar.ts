@@ -3,7 +3,7 @@ import {
   EmbedBuilder,
   InteractionContextType,
 } from 'discord.js';
-import Command from '../interfaces/command';
+import Command from '@interfaces/command';
 
 const avatar: Command = {
   data: new SlashCommandBuilder()

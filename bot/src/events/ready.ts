@@ -1,5 +1,5 @@
-import { createEvent } from '../interfaces/applicationEvent';
-import deployCommands from '../utils/handlers/deployCommands';
+import { createEvent } from '@interfaces/applicationEvent';
+import deployCommands from '@utils/handlers/deployCommands';
 import { ActivityType } from 'discord.js';
 import moment from 'moment';
 

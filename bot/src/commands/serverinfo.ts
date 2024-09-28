@@ -4,7 +4,7 @@ import {
   ChannelType,
   InteractionContextType,
 } from 'discord.js';
-import Command from '../interfaces/command';
+import Command from '@interfaces/command';
 import { prisma } from '..';
 import moment from 'moment';
 

@@ -1,4 +1,4 @@
-import { createEvent } from '../interfaces/applicationEvent';
+import { createEvent } from "@interfaces/applicationEvent";
 
 const guildDelete = createEvent('guildDelete', false, async (prisma, guild) => {
   try {

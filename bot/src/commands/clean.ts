@@ -4,8 +4,8 @@ import {
   SlashCommandBuilder,
   TextChannel,
 } from 'discord.js';
-import Command from '../interfaces/command';
-import emojiMap from '../utils/emojiMap';
+import Command from '@interfaces/command';
+import emojiMap from '@utils/emojiMap';
 
 const clean: Command = {
   data: new SlashCommandBuilder()

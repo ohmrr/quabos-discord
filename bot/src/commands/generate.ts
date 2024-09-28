@@ -1,7 +1,8 @@
 import { InteractionContextType, SlashCommandBuilder } from 'discord.js';
-import { generateResponse } from '../utils/markov/markovUtils';
-import Command from '../interfaces/command';
-import emojiMap from '../utils/emojiMap';
+import { generateResponse } from '@utils/markov/markovUtils';
+import Command from '@interfaces/command';
+import emojiMap from '@utils/emojiMap';
+
 
 const generate: Command = {
   data: new SlashCommandBuilder()

@@ -17,7 +17,15 @@
     "target": "ESNext",
 
     "outDir": "dist/",
-    "removeComments": true
+    "removeComments": true,
+
+    "baseUrl": "./",
+    "paths": {
+      "@utils/*": ["src/utils/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@commands/*": ["src/commands/*"],
+      "@events/*": ["src/events/*"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
