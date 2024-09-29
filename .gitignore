@@ -1,5 +1,6 @@
 # Etc
 
+node_modules/
 *.txt
 .vscode
 **/.DS_STORE
