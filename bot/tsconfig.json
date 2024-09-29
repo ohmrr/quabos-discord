@@ -15,17 +15,10 @@
     "esModuleInterop": true,
     "module": "CommonJS",
     "target": "ESNext",
+    "moduleResolution": "node",
 
     "outDir": "dist/",
-    "removeComments": true,
-
-    "baseUrl": "./",
-    "paths": {
-      "@utils/*": ["src/utils/*"],
-      "@interfaces/*": ["src/interfaces/*"],
-      "@commands/*": ["src/commands/*"],
-      "@events/*": ["src/events/*"]
-    }
+    "removeComments": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
