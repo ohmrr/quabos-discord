@@ -33,7 +33,7 @@ const purge: Command = {
       try {
         const allMessages = await channel.messages.fetch({ limit: amount });
         if (!allMessages) {
-          interaction.reply(`${emojiMap.error} No messages found.`);
+          interaction.reply(`${emojiMap.error.cross} No messages found.`);
           return;
         }
 
@@ -45,7 +45,7 @@ const purge: Command = {
         );
         if (messages.size === 0) {
           interaction.reply(
-            `${emojiMap.error} Messages cannot be deleted after 14 days.`,
+            `${emojiMap.error.denied} Messages cannot be deleted after 14 days.`,
           );
           return;
         }

@@ -31,7 +31,7 @@ const remove: Subcommand = {
       )
     ) {
       await interaction.reply(
-        `${emojiMap.error} Channel <#${selectedChannel.id}> is not being read for new messages.`,
+        `${emojiMap.error.cross} Channel <#${selectedChannel.id}> is not being read for new messages.`,
       );
       return;
     }

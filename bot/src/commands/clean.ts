@@ -36,7 +36,7 @@ const clean: Command = {
 
         if (messages.size === 0) {
           await interaction.reply(
-            `${emojiMap.error} Messages cannot be deleted after 14 days.`,
+            `${emojiMap.error.denied} Messages cannot be deleted after 14 days.`,
           );
           return;
         }
@@ -48,7 +48,7 @@ const clean: Command = {
       } catch (error) {
         console.error("Failed to clean channel of Quabos's messages.");
         await interaction.reply(
-          `${emojiMap.error.denied} Failed to clean the channel of my messages.`,
+          `${emojiMap.error.cross} Failed to clean the channel of my messages.`,
         );
       }
     }
