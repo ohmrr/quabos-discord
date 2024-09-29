@@ -1,7 +1,7 @@
-import { createEvent } from '../interfaces/applicationEvent';
-import deployCommands from '../utils/handlers/deployCommands';
 import { ActivityType } from 'discord.js';
 import moment from 'moment';
+import { createEvent } from '../interfaces/applicationEvent';
+import deployCommands from '../utils/handlers/deployCommands';
 
 const ready = createEvent('ready', true, (prisma, client) => {
   const currentDate = moment(new Date()).format('ddd, MMM D, YYYY h:mm A');

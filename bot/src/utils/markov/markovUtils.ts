@@ -1,4 +1,4 @@
-import MarkovMachine from 'markov-strings';
+import Markov from 'markov-strings';
 import { Message } from 'discord.js';
 import { prisma } from '../..';
 
@@ -72,7 +72,7 @@ export async function generateResponse(guildId: string) {
   if (!messages) return;
 
   try {
-    const markov = new MarkovMachine({ stateSize: 2 });
+    const markov = new Markov({ stateSize: 2 });
     markov.addData(messages);
 
     const result = markov.generate({

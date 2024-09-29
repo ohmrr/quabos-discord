@@ -11,7 +11,7 @@ interface Command {
     | SlashCommandBuilder
     | SlashCommandSubcommandsOnlyBuilder
     | SlashCommandOptionsOnlyBuilder;
-  usage: string;
+  usage?: string;
   execute: (interaction: ChatInputCommandInteraction) => Promise<void>;
   autocomplete?: (interaction: AutocompleteInteraction) => Promise<void>;
 }

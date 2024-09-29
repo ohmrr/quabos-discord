@@ -1,27 +1,20 @@
-import {
-  ChannelType,
-  InteractionContextType,
-  PermissionFlagsBits,
-  SlashCommandBuilder,
-} from 'discord.js';
-import { prisma } from '..';
-import Command from '../interfaces/command';
-import emojiMap from '../utils/emojiMap';
+import { ChannelType, SlashCommandSubcommandBuilder } from 'discord.js';
+import { prisma } from '../../..';
+import Subcommand from '../../../interfaces/subcommand';
+import emojiMap from '../../../utils/emojiMap';
 
-const watch: Command = {
-  data: new SlashCommandBuilder()
-    .setName('watch')
-    .setDescription('Select a new channel for the model to gather messages from.')
-    .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
-    .setContexts(InteractionContextType.Guild)
+const add: Subcommand = {
+  data: new SlashCommandSubcommandBuilder()
+    .setName('add')
+    .setDescription('Adds a new channel for reading messages.')
     .addChannelOption(option =>
       option
         .setName('channel')
-        .setDescription('Channel to watch for messages.')
+        .setDescription('Channel to read for messages.')
         .addChannelTypes(ChannelType.GuildText)
         .setRequired(true),
     ),
-  usage: '/watch [channel]',
+  usage: '/config add [channel]',
   execute: async interaction => {
     if (!interaction.guild) return;
 
@@ -37,8 +30,8 @@ const watch: Command = {
       );
 
       if (isAlreadyWatched) {
-        interaction.reply(
-          `${emojiMap.error.cross} Channel <#${selectedChannel.id}> is already being watched for new messages.`,
+        await interaction.reply(
+          `${emojiMap.error.cross} Channel <#${selectedChannel.id}> is already being read for new messages.`,
         );
         return;
       }
@@ -56,7 +49,7 @@ const watch: Command = {
         });
 
         await interaction.reply(
-          `${emojiMap.success} Channel <#${selectedChannel.id}> is now being watched for new messages.`,
+          `${emojiMap.success.check} Channel <#${selectedChannel.id}> is now being read for new messages.`,
         );
         return;
       } catch (error) {
@@ -83,7 +76,7 @@ const watch: Command = {
       });
 
       await interaction.reply(
-        `${emojiMap.success.check} Channel <#${selectedChannel.id}> is now being watched for new messages.`,
+        `${emojiMap.success.check} Channel <#${selectedChannel.id}> is now being read for new messages.`,
       );
     } catch (error) {
       console.error(
@@ -96,4 +89,4 @@ const watch: Command = {
   },
 };
 
-export default watch;
+export default add;

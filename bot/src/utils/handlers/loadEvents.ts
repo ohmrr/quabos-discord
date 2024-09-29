@@ -1,8 +1,8 @@
-import { createEvent } from '../../interfaces/applicationEvent';
 import { Client } from 'discord.js';
 import { readdirSync } from 'fs';
-import { prisma } from '../..';
 import path from 'path';
+import { prisma } from '../..';
+import { createEvent } from '../../interfaces/applicationEvent';
 
 const loadEventFromFile = async (client: Client, filePath: string) => {
   try {

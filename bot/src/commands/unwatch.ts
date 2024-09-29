@@ -4,9 +4,9 @@ import {
   PermissionFlagsBits,
   SlashCommandBuilder,
 } from 'discord.js';
+import { prisma } from '..';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
-import { prisma } from '..';
 
 const unwatch: Command = {
   data: new SlashCommandBuilder()

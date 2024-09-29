@@ -10,7 +10,7 @@ import emojiMap from '../utils/emojiMap';
 const clean: Command = {
   data: new SlashCommandBuilder()
     .setName('clean')
-    .setDescription("Clean the current channel of any of the bot's messages.")
+    .setDescription("Clean the current channel of any of Quabos's messages.")
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
     .setContexts(InteractionContextType.Guild),
   usage: '/clean [count]',
@@ -46,9 +46,9 @@ const clean: Command = {
           `${emojiMap.success.check} Deleted ${messages.size} messages.`,
         );
       } catch (error) {
-        console.error('Failed to clean channel of bot messages.');
+        console.error("Failed to clean channel of Quabos's messages.");
         await interaction.reply(
-          `${emojiMap.error.denied} Failed to clean the channel of bot messages.`,
+          `${emojiMap.error.denied} Failed to clean the channel of my messages.`,
         );
       }
     }
