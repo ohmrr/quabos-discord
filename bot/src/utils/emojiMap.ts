@@ -14,6 +14,7 @@ const emojiMap = {
     galaxy: '🌌',
     comet: '☄️',
     ufo: '🛸',
+    star: '✦',
   },
   sound: {
     normal: '🔉',

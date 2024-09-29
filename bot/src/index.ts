@@ -1,8 +1,8 @@
-import { Client, GatewayIntentBits, Partials } from 'discord.js';
 import { PrismaClient } from '@prisma/client';
-import loadCommands from '@utils/handlers/loadCommands';
-import loadEvents from '@utils/handlers/loadEvents';
+import { Client, GatewayIntentBits, Partials } from 'discord.js';
 import 'dotenv/config';
+import loadCommands from './utils/handlers/loadCommands';
+import loadEvents from './utils/handlers/loadEvents';
 
 const client = new Client({
   intents: [

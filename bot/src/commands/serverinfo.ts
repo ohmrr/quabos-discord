@@ -1,12 +1,12 @@
 import {
-  SlashCommandBuilder,
-  EmbedBuilder,
   ChannelType,
+  EmbedBuilder,
   InteractionContextType,
+  SlashCommandBuilder,
 } from 'discord.js';
-import Command from '@interfaces/command';
-import { prisma } from '..';
 import moment from 'moment';
+import { prisma } from '..';
+import Command from '../interfaces/command';
 
 const serverInfo: Command = {
   data: new SlashCommandBuilder()

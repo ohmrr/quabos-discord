@@ -1,6 +1,6 @@
 import { createEvent } from '../interfaces/applicationEvent';
-import emojiMap from '@utils/emojiMap';
-import { saveMessage, generateResponse } from '@utils/markov/markovUtils';
+import { saveMessage, generateResponse } from '../utils/markov/markovUtils';
+import emojiMap from '../utils/emojiMap';
 
 const messageCreate = createEvent(
   'messageCreate',

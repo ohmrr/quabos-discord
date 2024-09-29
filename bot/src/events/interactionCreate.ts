@@ -1,5 +1,5 @@
-import { createEvent } from "@interfaces/applicationEvent";
-import emojiMap from "@utils/emojiMap";
+import { createEvent } from '../interfaces/applicationEvent';
+import emojiMap from '../utils/emojiMap';
 
 const interactionCreate = createEvent(
   'interactionCreate',
