@@ -26,9 +26,8 @@ const avatar: Command = {
         name: user.username,
         iconURL: user.displayAvatarURL({ size: 4096 }),
       },
-      thumbnail: {
-        url: user.displayAvatarURL({ size: 4096 }),
-      },
+      image: {
+        url: user.avatarURL({ size: 4096 }) || '' },
       timestamp: Date.now(),
     });
 
