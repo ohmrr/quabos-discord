@@ -8,19 +8,19 @@ const channelDelete = createEvent(
     if (channel.type != ChannelType.GuildText) return;
     if (!channel.guild) return;
 
-    const existingWatchChannel = await prisma.channel.findUnique({
+    const existingTrackedChannel = await prisma.channel.findUnique({
       where: { channelId: channel.id },
     });
 
-    if (!existingWatchChannel) return;
+    if (!existingTrackedChannel) return;
 
     try {
       await prisma.channel.delete({
-        where: { channelId: existingWatchChannel.channelId },
+        where: { channelId: existingTrackedChannel.channelId },
       });
     } catch (error) {
       console.error(
-        `Error deleting channel record [ID: ${existingWatchChannel.channelId}]: `,
+        `Error deleting channel record [ID: ${existingTrackedChannel.channelId}]: `,
         error,
       );
     }

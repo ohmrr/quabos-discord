@@ -6,7 +6,7 @@ import {
 } from 'discord.js';
 import { prisma } from '..';
 import Command from '../interfaces/command';
-import { FormatType, formatUnixTimestamp } from '../utils/timestamp';
+import { FormatType, formatUnixTimestamp } from '../utils/dateUtils';
 
 const serverInfo: Command = {
   data: new SlashCommandBuilder()
@@ -26,7 +26,7 @@ const serverInfo: Command = {
 
     const guildRecord = await prisma.guild.findUnique({
       where: { guildId: interaction.guild.id },
-      include: { watchChannels: { include: { messages: true } } },
+      include: { trackedChannels: { include: { messages: true } } },
     });
 
     const serverInfoEmbed = new EmbedBuilder({
@@ -78,16 +78,16 @@ const serverInfo: Command = {
       timestamp: Date.now(),
     });
 
-    if (guildRecord && guildRecord.watchChannels.length > 0) {
-      const totalMessages = guildRecord.watchChannels.reduce(
+    if (guildRecord && guildRecord.trackedChannels.length > 0) {
+      const totalMessages = guildRecord.trackedChannels.reduce(
         (acc, channel) => acc + channel.messages.length,
         0,
       );
 
       serverInfoEmbed.addFields([
         {
-          name: 'Watch Channels',
-          value: guildRecord.watchChannels
+          name: 'Tracked Channels',
+          value: guildRecord.trackedChannels
             .map(channel => `<#${channel.channelId}>`)
             .join(' '),
           inline: true,

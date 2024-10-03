@@ -30,7 +30,7 @@ async function loadEventFromFile(client: Client, filePath: string) {
   } catch (error) {
     console.error(`Error loading in ${filePath}: ${error}`);
   }
-};
+}
 
 async function loadEvents(client: Client) {
   const eventFolderPath = path.join(__dirname, '..', '..', 'events');
@@ -42,6 +42,6 @@ async function loadEvents(client: Client) {
     const eventFilePath = path.join(eventFolderPath, file);
     await loadEventFromFile(client, eventFilePath);
   }
-};
+}
 
 export default loadEvents;

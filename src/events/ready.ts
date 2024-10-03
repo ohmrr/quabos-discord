@@ -1,7 +1,7 @@
 import { ActivityType } from 'discord.js';
 import { createEvent } from '../interfaces/applicationEvent';
 import deployCommands from '../utils/handlers/deployCommands';
-import { formatDate } from '../utils/timestamp';
+import { formatDate } from '../utils/dateUtils';
 
 const ready = createEvent('ready', true, (prisma, client) => {
   const guildSize = client.guilds.cache.size;

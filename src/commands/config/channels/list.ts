@@ -13,10 +13,10 @@ const list: Subcommand = {
 
     const existingGuild = await prisma.guild.findUnique({
       where: { guildId: interaction.guild.id },
-      include: { watchChannels: true },
+      include: { trackedChannels: true },
     });
 
-    if (!existingGuild || !existingGuild.watchChannels) {
+    if (!existingGuild || !existingGuild.trackedChannels) {
       await interaction.reply(
         `${emojiMap.error.cross} There are no channels currently being read for messages.`,
       );
@@ -24,7 +24,7 @@ const list: Subcommand = {
       return;
     }
 
-    const channelList = existingGuild.watchChannels
+    const channelList = existingGuild.trackedChannels
       .map(channel => `${emojiMap.celestial.star} <#${channel.channelId}>`)
       .join('\n');
 

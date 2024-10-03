@@ -1,13 +1,13 @@
 import { EmbedBuilder, SlashCommandSubcommandBuilder } from 'discord.js';
 import { clientVersion } from '../..';
 import Subcommand from '../../interfaces/subcommand';
-import { formatUnixTimestamp, FormatType } from '../../utils/timestamp';
+import { formatUnixTimestamp, FormatType } from '../../utils/dateUtils';
 
 const status: Subcommand = {
   data: new SlashCommandSubcommandBuilder()
     .setName('status')
     .setDescription('Shows information about Quabos.'),
-  usage: '/status',
+  usage: '/info status',
   execute: async interaction => {
     if (!interaction.guild) return;
 
@@ -15,14 +15,20 @@ const status: Subcommand = {
       title: 'Quabos Status',
       fields: [
         {
-          name: 'Uptime',
-          value: formatUnixTimestamp(interaction.client.readyAt, FormatType.Relative),
+          name: 'Client Version',
+          value: `v${clientVersion}`,
+          inline: true,
         },
         {
-          name: 'Version',
-          value: `v${clientVersion}`,
+          name: 'Uptime',
+          value: formatUnixTimestamp(
+            interaction.client.readyAt,
+            FormatType.Relative,
+          ),
+          inline: true,
         },
       ],
+      thumbnail: { url: interaction.client.user.displayAvatarURL({ size: 4096 }) },
       timestamp: Date.now(),
     });
 

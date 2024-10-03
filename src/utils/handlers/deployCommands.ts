@@ -16,7 +16,9 @@ async function deployCommands(client: Client) {
 
   try {
     await rest.put(route, { body: [] });
-    console.log(`Application (/) commands successfully refreshed to ${process.env.NODE_ENV}.`);
+    console.log(
+      `Application (/) commands successfully refreshed to ${process.env.NODE_ENV}.`,
+    );
 
     await rest.put(route, { body: commandsData });
     console.log(
@@ -25,6 +27,6 @@ async function deployCommands(client: Client) {
   } catch (error) {
     console.error(`Error registering (/) commands: ${error}`);
   }
-};
+}
 
 export default deployCommands;

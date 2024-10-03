@@ -42,4 +42,3 @@ init().finally(async () => {
 });
 
 export { clientVersion, prisma };
-

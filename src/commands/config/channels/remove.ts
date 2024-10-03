@@ -21,12 +21,12 @@ const remove: Subcommand = {
     const selectedChannel = interaction.options.getChannel('channel', true);
     const existingGuild = await prisma.guild.findUnique({
       where: { guildId: interaction.guild.id },
-      include: { watchChannels: true },
+      include: { trackedChannels: true },
     });
 
     if (
       !existingGuild ||
-      !existingGuild.watchChannels.some(
+      !existingGuild.trackedChannels.some(
         channel => channel.channelId === selectedChannel.id,
       )
     ) {
