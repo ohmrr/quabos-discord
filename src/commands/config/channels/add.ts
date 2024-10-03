@@ -14,18 +14,18 @@ const add: Subcommand = {
         .addChannelTypes(ChannelType.GuildText)
         .setRequired(true),
     ),
-  usage: '/config add [channel]',
+  usage: '/config channels add [channel]',
   execute: async interaction => {
     if (!interaction.guild) return;
 
     const selectedChannel = interaction.options.getChannel('channel', true);
     const existingGuild = await prisma.guild.findUnique({
       where: { guildId: interaction.guild.id },
-      include: { watchChannels: true },
+      include: { trackedChannels: true },
     });
 
     if (existingGuild) {
-      const isAlreadyWatched = existingGuild.watchChannels.some(
+      const isAlreadyWatched = existingGuild.trackedChannels.some(
         channel => channel.channelId === selectedChannel.id,
       );
 
@@ -40,7 +40,7 @@ const add: Subcommand = {
         await prisma.guild.update({
           where: { guildId: interaction.guild.id },
           data: {
-            watchChannels: {
+            trackedChannels: {
               create: {
                 channelId: selectedChannel.id,
               },
@@ -67,7 +67,7 @@ const add: Subcommand = {
         data: {
           guildId: interaction.guild.id,
           name: interaction.guild.name,
-          watchChannels: {
+          trackedChannels: {
             create: {
               channelId: selectedChannel.id,
             },

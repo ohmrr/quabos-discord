@@ -8,16 +8,23 @@ datasource db {
 }
 
 model Guild {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  guildId String @unique
-  name    String
+  guildId String @id @map("_id")
+  name String
 
-  watchChannels Channel[] @relation("GuildChannels")
+  probability Float @default(0.05)
+  inactivityThreshold Int?
+  lastActivity DateTime?
+
+  trackedChannels Channel[] @relation("GuildChannels")
+}
+
+model User {
+  userId String @id @map("_id")
+  ignored Boolean @default(false)
 }
 
 model Channel {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  channelId String @unique
+  channelId String @id @map("_id")
 
   messages Message[] @relation("ChannelMessages")
 
@@ -26,8 +33,7 @@ model Channel {
 }
 
 model Message {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  messageId String @unique
+  messageId String @id @map("_id")
   content   String
 
   channel   Channel? @relation("ChannelMessages", fields: [channelId], references: [channelId])

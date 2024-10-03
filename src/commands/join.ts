@@ -1,9 +1,9 @@
+import { joinVoiceChannel } from '@discordjs/voice';
 import {
   GuildMember,
   InteractionContextType,
   SlashCommandBuilder,
 } from 'discord.js';
-import { joinVoiceChannel } from '@discordjs/voice';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 

@@ -13,10 +13,9 @@ export function isValidMessage(message: Message): boolean {
   return true;
 }
 
-export function normalizeString(content: string) {
+export function normalizeString(content: string): string {
   return content
-    .toLowerCase()
-    .replace(/[^a-z0-9@#<>*_~\s]/g, '')
+    .replace(/[^a-z0-9@#<>&*_~\s]/g, '')
     .replace(/\s{2,}/g, ' ')
     .trim();
 }
@@ -49,14 +48,14 @@ export async function getGuildMessages(guildId: string) {
       where: {
         guildId: guildId,
       },
-      include: { watchChannels: { include: { messages: true } } },
+      include: { trackedChannels: { include: { messages: true } } },
     });
 
     if (!guild) {
       return null;
     }
 
-    const messages = guild.watchChannels
+    const messages = guild.trackedChannels
       .flatMap(channel => channel.messages)
       .map(message => message.content);
 
@@ -69,7 +68,7 @@ export async function getGuildMessages(guildId: string) {
 
 export async function generateResponse(guildId: string) {
   const messages = await getGuildMessages(guildId);
-  if (!messages) return;
+  if (!messages) return null;
 
   try {
     const markov = new Markov({ stateSize: 2 });
