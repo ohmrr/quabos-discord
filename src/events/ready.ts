@@ -1,11 +1,11 @@
 import { ActivityType } from 'discord.js';
-import moment from 'moment';
 import { createEvent } from '../interfaces/applicationEvent';
 import deployCommands from '../utils/handlers/deployCommands';
+import { formatDate } from '../utils/timestamp';
 
 const ready = createEvent('ready', true, (prisma, client) => {
-  const currentDate = moment(new Date()).format('ddd, MMM D, YYYY h:mm A');
   const guildSize = client.guilds.cache.size;
+  const currentDate = formatDate(new Date());
   console.log(
     `${currentDate} | Logged in as ${client.user.tag} in ${client.guilds.cache.size} servers.`,
   );

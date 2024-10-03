@@ -4,7 +4,7 @@ import {
   InteractionContextType,
 } from 'discord.js';
 import Command from '../interfaces/command';
-import moment from 'moment';
+import { formatUnixTimestamp, FormatType } from '../utils/timestamp';
 
 const whois: Command = {
   data: new SlashCommandBuilder()
@@ -23,7 +23,7 @@ const whois: Command = {
 
     const user = interaction.options.getUser('member', false) ?? interaction.user;
     const guildMember = interaction.guild.members.cache.get(user.id);
-    if (!guildMember) return;
+    if (!guildMember || !guildMember.joinedAt) return;
 
     const memberRoles = guildMember.roles.cache
       .filter(role => role.name !== '@everyone')
@@ -39,12 +39,12 @@ const whois: Command = {
       fields: [
         {
           name: 'Joined',
-          value: moment(guildMember.joinedAt).format('ddd, MMM D, YYYY h:mm A'),
+          value: formatUnixTimestamp(guildMember.joinedAt, FormatType.FullDate),
           inline: true,
         },
         {
           name: 'Registered',
-          value: moment(user.createdAt).format('ddd, MMM D, YYYY h:mm A'),
+          value: formatUnixTimestamp(user.createdAt, FormatType.FullDate),
           inline: true,
         },
         {

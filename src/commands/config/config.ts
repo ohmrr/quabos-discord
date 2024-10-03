@@ -30,7 +30,7 @@ const config: Command = {
     const subcommand = interaction.options.getSubcommand();
     if (!commandGroup || !subcommand) {
       interaction.reply(
-        `${emojiMap.error.denied} Error getting the command group or subcommand.`,
+        `${emojiMap.error.cross} Error getting the command group or subcommand.`,
       );
       return;
     }
@@ -56,7 +56,9 @@ const config: Command = {
         break;
 
       default:
-        await interaction.reply(`${emojiMap.error.denied} Command group not found.`);
+        await interaction.reply(
+          `${emojiMap.error.cross} Error executing or finding subcommand group.`,
+        );
         break;
     }
   },

@@ -14,7 +14,7 @@ const add: Subcommand = {
         .addChannelTypes(ChannelType.GuildText)
         .setRequired(true),
     ),
-  usage: '/config add [channel]',
+  usage: '/config channels add [channel]',
   execute: async interaction => {
     if (!interaction.guild) return;
 

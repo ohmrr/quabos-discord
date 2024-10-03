@@ -4,9 +4,9 @@ import {
   InteractionContextType,
   SlashCommandBuilder,
 } from 'discord.js';
-import moment from 'moment';
 import { prisma } from '..';
 import Command from '../interfaces/command';
+import { FormatType, formatUnixTimestamp } from '../utils/timestamp';
 
 const serverInfo: Command = {
   data: new SlashCommandBuilder()
@@ -43,7 +43,7 @@ const serverInfo: Command = {
         },
         {
           name: 'Server Created',
-          value: `${moment(guild.createdAt).format('MM/DD/YYYY h:mm A')}`,
+          value: formatUnixTimestamp(guild.createdAt, FormatType.FullDate),
           inline: true,
         },
         {
