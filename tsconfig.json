@@ -17,6 +17,7 @@
     "target": "ESNext",
     "moduleResolution": "node",
 
+    "rootDir": "src/",
     "outDir": "dist/",
     "removeComments": true
   },
