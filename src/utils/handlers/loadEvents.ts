@@ -4,7 +4,7 @@ import path from 'path';
 import { prisma } from '../..';
 import { createEvent } from '../../interfaces/applicationEvent';
 
-const loadEventFromFile = async (client: Client, filePath: string) => {
+async function loadEventFromFile(client: Client, filePath: string) {
   try {
     const eventModule = (await import(filePath)).default;
 
@@ -32,7 +32,7 @@ const loadEventFromFile = async (client: Client, filePath: string) => {
   }
 };
 
-const loadEvents = async (client: Client) => {
+async function loadEvents(client: Client) {
   const eventFolderPath = path.join(__dirname, '..', '..', 'events');
   const eventFiles = readdirSync(eventFolderPath).filter(file =>
     file.endsWith('.js'),

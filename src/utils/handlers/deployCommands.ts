@@ -1,6 +1,6 @@
 import { REST, Routes, Client } from 'discord.js';
 
-const deployCommands = async (client: Client) => {
+async function deployCommands(client: Client) {
   if (!client.user) {
     console.error('Client missing user properties, cancelling command deployment.');
     return;
@@ -15,8 +15,8 @@ const deployCommands = async (client: Client) => {
       : Routes.applicationGuildCommands(client.user.id, process.env.DEV_GUILD_ID);
 
   try {
-    // await rest.put(route, { body: [] });
-    // console.log(`Application (/) commands successfully refreshed to ${process.env.NODE_ENV}.`);
+    await rest.put(route, { body: [] });
+    console.log(`Application (/) commands successfully refreshed to ${process.env.NODE_ENV}.`);
 
     await rest.put(route, { body: commandsData });
     console.log(

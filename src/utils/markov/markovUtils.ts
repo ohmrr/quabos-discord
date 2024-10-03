@@ -13,7 +13,7 @@ export function isValidMessage(message: Message): boolean {
   return true;
 }
 
-export function normalizeString(content: string) {
+export function normalizeString(content: string): string {
   return content
     .toLowerCase()
     .replace(/[^a-z0-9@#<>*_~\s]/g, '')
@@ -69,7 +69,7 @@ export async function getGuildMessages(guildId: string) {
 
 export async function generateResponse(guildId: string) {
   const messages = await getGuildMessages(guildId);
-  if (!messages) return;
+  if (!messages) return null;
 
   try {
     const markov = new Markov({ stateSize: 2 });

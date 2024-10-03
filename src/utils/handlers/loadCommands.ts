@@ -5,7 +5,7 @@ import path from 'path';
 
 const commands = new Collection<string, Command>();
 
-function getCommandFiles(directory: string) {
+function getCommandFiles(directory: string): string[] {
   let results: string[] = [];
   const list = readdirSync(directory);
 
