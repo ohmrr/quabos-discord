@@ -22,7 +22,7 @@ const generate: Command = {
 
     if (!response) {
       await interaction.editReply(
-        `${emojiMap.error.cross} I need to gather more messages. Try setting a watch channel with /watch then check how many messages are collected with /serverinfo.`,
+        `${emojiMap.error.cross} I need to gather more messages. Try adding a channel with /config channels add [channel] then check how many messages are collected with /info stats.`,
       );
     } else {
       await interaction.editReply(`${emojiList[randomIndex]} ${response}`);

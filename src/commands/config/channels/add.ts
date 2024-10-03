@@ -25,11 +25,11 @@ const add: Subcommand = {
     });
 
     if (existingGuild) {
-      const isAlreadyWatched = existingGuild.trackedChannels.some(
+      const isAlreadyTracked = existingGuild.trackedChannels.some(
         channel => channel.channelId === selectedChannel.id,
       );
 
-      if (isAlreadyWatched) {
+      if (isAlreadyTracked) {
         await interaction.reply(
           `${emojiMap.error.cross} Channel <#${selectedChannel.id}> is already being read for new messages.`,
         );

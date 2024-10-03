@@ -49,7 +49,7 @@ const help: Command = {
         },
         description:
           `**${client.user.username} can learn from messages sent in your server and generate new ones based off of what was said.**\n\n` +
-          'You can start by typing: `/watch [channel]` and as more messages are collected, run `/serverinfo` to check how many were collected.',
+          'You can start by typing: `/config channels add [channel]` and as more messages are collected, run `/info stats` to check how many were collected.',
       });
 
       await interaction.reply({ embeds: [helpEmbed] });

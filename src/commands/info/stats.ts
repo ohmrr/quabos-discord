@@ -47,7 +47,7 @@ const stats: Subcommand = {
 
     if (channelFields.length === 0) {
       await interaction.reply(
-        `${emojiMap.error.cross} There are no watch channels or messages found.`,
+        `${emojiMap.error.cross} There are no tracked channels or messages found.`,
       );
       return;
     }

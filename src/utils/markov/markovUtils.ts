@@ -15,17 +15,17 @@ export function isValidMessage(message: Message): boolean {
 
 export function normalizeString(content: string): string {
   return content
-    .replace(/[^a-z0-9@#<>&*_~\s]/g, '')
+    .replace(/[^a-zA-Z0-9@#<>&*_~\s]/g, '')
     .replace(/\s{2,}/g, ' ')
     .trim();
 }
 
 export async function saveMessage(message: Message) {
-  const isWatchChannel = await prisma.channel.findUnique({
+  const isTrackedChannel = await prisma.channel.findUnique({
     where: { channelId: message.channel.id },
   });
 
-  if (!isWatchChannel || !isValidMessage(message)) return;
+  if (!isTrackedChannel || !isValidMessage(message)) return;
 
   const content = normalizeString(message.content);
 
@@ -35,7 +35,7 @@ export async function saveMessage(message: Message) {
       messageId: message.id,
       channel: {
         connect: {
-          channelId: isWatchChannel.channelId,
+          channelId: isTrackedChannel.channelId,
         },
       },
     },
