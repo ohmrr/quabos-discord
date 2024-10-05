@@ -16,11 +16,22 @@ model Guild {
   lastActivity DateTime?
 
   trackedChannels Channel[] @relation("GuildChannels")
+  members GuildMember[] @relation("GuildMembers")
 }
 
 model User {
   userId String @id @map("_id")
   ignored Boolean @default(false)
+}
+
+model GuildMember {
+  userId String @id @map("_id")
+  guildId String
+  ignored Boolean @default(false)
+
+  guild Guild @relation("GuildMembers", fields: [guildId], references: [guildId])
+
+  @@unique([userId, guildId])
 }
 
 model Channel {
@@ -39,3 +50,4 @@ model Message {
   channel   Channel? @relation("ChannelMessages", fields: [channelId], references: [channelId])
   channelId String?
 }
+

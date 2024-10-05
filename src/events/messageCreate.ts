@@ -26,7 +26,7 @@ const messageCreate = createEvent(
       await new Promise(resolve => setTimeout(resolve, 5000));
       await message.channel.send(`${emojiList[randomIndex]} ${response}`);
     } catch (error) {
-      console.error(`Message creation error:\n\n${error}`);
+      console.error(`Message creation error: ${error}`);
     }
   },
 );
