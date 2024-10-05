@@ -58,19 +58,19 @@ const optout: Subcommand = {
 
       if (!guildMember || !guildMember.ignored) {
         await prisma.guildMember.upsert({
-          where: { userId_guildId: { userId, guildId }, guildId },
+          where: { userId_guildId: { userId, guildId } },
           update: { ignored: true },
           create: { userId, guildId, ignored: true },
         });
 
         await interaction.reply(
-          `${emojiMap.success.check} You have successfully opted-out in this server!`,
+          `${emojiMap.success.check} You have successfully opted-out for this server!`,
         );
         return;
       }
 
       await interaction.reply(
-        `${emojiMap.error.cross} You have already opted-out in this server!`,
+        `${emojiMap.error.cross} You have already opted-out for this server!`,
       );
     }
   },

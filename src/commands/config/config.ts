@@ -29,7 +29,7 @@ const config: Command = {
     const commandGroup = interaction.options.getSubcommandGroup();
     const subcommand = interaction.options.getSubcommand();
     if (!commandGroup || !subcommand) {
-      interaction.reply(
+      await interaction.reply(
         `${emojiMap.error.cross} Error getting the command group or subcommand.`,
       );
       return;
