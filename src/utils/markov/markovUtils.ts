@@ -68,7 +68,7 @@ export async function getGuildMessages(guildId: string) {
 
 export async function generateResponse(guildId: string) {
   const messages = await getGuildMessages(guildId);
-  if (!messages) return null;
+  if (!messages || messages.length < 50) return null;
 
   try {
     const markov = new Markov({ stateSize: 2 });
