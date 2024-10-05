@@ -1,8 +1,4 @@
-import {
-  SlashCommandSubcommandBuilder,
-  EmbedBuilder,
-  APIEmbedField,
-} from 'discord.js';
+import { SlashCommandSubcommandBuilder, EmbedBuilder } from 'discord.js';
 import Subcommand from '../../interfaces/subcommand';
 import emojiMap from '../../utils/emojiMap';
 import { prisma } from '../..';
@@ -27,7 +23,7 @@ const stats: Subcommand = {
       return;
     }
 
-    const channelFields: APIEmbedField[] = [];
+    const channelStatsList: string[] = [];
     if (guildRecord.trackedChannels.length > 0) {
       for (let i = 0; i < guildRecord.trackedChannels.length; i++) {
         const channel = interaction.guild.channels.cache.get(
@@ -36,20 +32,8 @@ const stats: Subcommand = {
         if (!channel) continue;
 
         const messageCount = guildRecord.trackedChannels[i].messages.length;
-
-        channelFields.push({
-          name: 'Channel:',
-          value: `<#${channel.id}> - Messages: ${messageCount}`,
-          inline: true,
-        });
+        channelStatsList[i] = `<#${channel.id}>: ${messageCount}`;
       }
-    }
-
-    if (channelFields.length === 0) {
-      await interaction.reply(
-        `${emojiMap.error.cross} There are no tracked channels or messages found.`,
-      );
-      return;
     }
 
     const statsEmbed = new EmbedBuilder({
@@ -58,7 +42,11 @@ const stats: Subcommand = {
         iconURL: interaction.guild.iconURL({ size: 4096 }) || '',
       },
       title: `Quabos Stats in ${interaction.guild.name}`,
-      fields: channelFields,
+      description:
+        `**Messages Count**:\n` +
+        channelStatsList
+          .map(text => `${emojiMap.celestial.star} ${text}`)
+          .join('\n'),
     });
 
     await interaction.reply({ embeds: [statsEmbed] });

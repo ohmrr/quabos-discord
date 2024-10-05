@@ -21,11 +21,22 @@ export function normalizeString(content: string): string {
 }
 
 export async function saveMessage(message: Message) {
+  if (!isValidMessage(message) || !message.guild) return;
+
   const isTrackedChannel = await prisma.channel.findUnique({
     where: { channelId: message.channel.id },
   });
+  if (!isTrackedChannel) return;
 
-  if (!isTrackedChannel || !isValidMessage(message)) return;
+  const isOptedOutGlobally = await prisma.user.findUnique({
+    where: { userId: message.author.id },
+  });
+  const isOptedOutLocally = await prisma.guildMember.findUnique({
+    where: {
+      userId_guildId: { userId: message.author.id, guildId: message.guild.id },
+    },
+  });
+  if (isOptedOutGlobally?.ignored || isOptedOutLocally?.ignored) return;
 
   const content = normalizeString(message.content);
 
