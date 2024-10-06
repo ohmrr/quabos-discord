@@ -69,7 +69,7 @@ const help: Command = {
         iconURL: clientAvatar,
       },
       title: `Command: /${commandChoice}`,
-      description: `**Description**: ${command.data.description}\n\n**Usage**: ${command.usage}`,
+      description: `**Description**: ${command.data.description}\n\n**Usage**:\n${command.usage}`,
     });
 
     await interaction.reply({ embeds: [helpEmbed], ephemeral: true });

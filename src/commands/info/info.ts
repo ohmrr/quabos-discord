@@ -1,7 +1,7 @@
 import { InteractionContextType, SlashCommandBuilder } from 'discord.js';
 import Command from '../../interfaces/command';
-import status from './status';
 import emojiMap from '../../utils/emojiMap';
+import status from './status';
 import stats from './stats';
 
 const info: Command = {
@@ -11,6 +11,7 @@ const info: Command = {
     .setContexts(InteractionContextType.Guild)
     .addSubcommand(status.data)
     .addSubcommand(stats.data),
+  usage: `${status.usage}\n${stats.usage}`,
   execute: async interaction => {
     if (!interaction.guild) return;
 
