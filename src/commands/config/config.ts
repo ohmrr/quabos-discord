@@ -22,7 +22,8 @@ const config: Command = {
         .addSubcommand(add.data)
         .addSubcommand(list.data)
         .addSubcommand(remove.data),
-    ),
+  ),
+  usage: `${add.usage}\n${remove.usage}\n${list.usage}`,
   execute: async interaction => {
     if (!interaction.guild) return;
 

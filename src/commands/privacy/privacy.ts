@@ -13,6 +13,7 @@ const privacy: Command = {
     .setContexts(InteractionContextType.Guild)
     .addSubcommand(optin.data)
     .addSubcommand(optout.data),
+  usage: `${optin.usage}\n${optout.usage}`,
   execute: async interaction => {
     if (!interaction.guild) return;
 
