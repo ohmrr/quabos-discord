@@ -1,34 +1,12 @@
 {
   "name": "quabos",
-  "version": "1.1.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "build": "tsc --build",
-    "watch": "tsc -w",
-    "dev": "nodemon -q dist/index.js",
-    "start": "node dist/index.js",
-    "fmt": "prettier . --write"
+    "build": "pnpm -r run build",
+    "build:bot": "pnpm --filter bot run build",
+    "start": "pnpm --filter bot run start",
+    "fmt": "pnpm -r run fmt"
   },
   "author": "Ohmrr",
-  "license": "MIT",
-  "dependencies": {
-    "@discordjs/voice": "^0.17.0",
-    "@prisma/client": "^5.20.0",
-    "discord-api-types": "^0.37.101",
-    "discord.js": "^14.16.3",
-    "dotenv": "^16.4.5",
-    "libsodium-wrappers": "^0.7.15",
-    "markov-strings": "^3.0.1",
-    "mongodb": "^6.9.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.7",
-    "prettier": "^3.3.3",
-    "prisma": "^5.20.0",
-    "typescript": "^5.6.2"
-  },
-  "resolutions": {
-    "discord-api-types": "0.37.100"
-  }
+  "license": "MIT"
 }
