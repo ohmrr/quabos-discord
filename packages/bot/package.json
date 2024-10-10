@@ -17,6 +17,7 @@
     "markov-strings": "^3.0.1"
   },
   "devDependencies": {
+    "discord-api-types": "0.37.100",
     "prettier": "^3.1.1",
     "prisma": "^5.20.0",
     "typescript": "^5.6.3"

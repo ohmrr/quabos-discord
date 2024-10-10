@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  discord-api-types: 0.37.100
+
 importers:
 
   .: {}
@@ -26,6 +29,9 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
     devDependencies:
+      discord-api-types:
+        specifier: 0.37.100
+        version: 0.37.100
       prettier:
         specifier: ^3.1.1
         version: 3.3.3
@@ -684,12 +690,6 @@ packages:
   discord-api-types@0.37.100:
     resolution: {integrity: sha512-a8zvUI0GYYwDtScfRd/TtaNBDTXwP5DiDVX7K5OmE+DRT57gBqKnwtOC5Ol8z0mRW8KQfETIgiB8U0YZ9NXiCA==}
 
-  discord-api-types@0.37.83:
-    resolution: {integrity: sha512-urGGYeWtWNYMKnYlZnOnDHm8fVRffQs3U0SpE8RHeiuLKb/u92APS8HoQnPTFbnXmY1vVnXjXO4dOxcAn3J+DA==}
-
-  discord-api-types@0.37.97:
-    resolution: {integrity: sha512-No1BXPcVkyVD4ZVmbNgDKaBoqgeQ+FJpzZ8wqHkfmBnTZig1FcH3iPPersiK1TUIAzgClh2IvOuVUYfcWLQAOA==}
-
   discord.js@14.16.3:
     resolution: {integrity: sha512-EPCWE9OkA9DnFFNrO7Kl1WHHDYFXu3CNVFJg63bfU7hVtjZGyhShwZtSBImINQRWxWP2tgo2XI+QhdXx28r0aA==}
     engines: {node: '>=18'}
@@ -1319,7 +1319,7 @@ snapshots:
       '@discordjs/formatters': 0.5.0
       '@discordjs/util': 1.1.1
       '@sapphire/shapeshift': 4.0.0
-      discord-api-types: 0.37.97
+      discord-api-types: 0.37.100
       fast-deep-equal: 3.1.3
       ts-mixer: 6.0.4
       tslib: 2.7.0
@@ -1330,7 +1330,7 @@ snapshots:
 
   '@discordjs/formatters@0.5.0':
     dependencies:
-      discord-api-types: 0.37.97
+      discord-api-types: 0.37.100
 
   '@discordjs/rest@2.4.0':
     dependencies:
@@ -1339,7 +1339,7 @@ snapshots:
       '@sapphire/async-queue': 1.5.3
       '@sapphire/snowflake': 3.5.3
       '@vladfrangu/async_event_emitter': 2.4.6
-      discord-api-types: 0.37.97
+      discord-api-types: 0.37.100
       magic-bytes.js: 1.10.0
       tslib: 2.7.0
       undici: 6.19.8
@@ -1349,7 +1349,7 @@ snapshots:
   '@discordjs/voice@0.17.0':
     dependencies:
       '@types/ws': 8.5.12
-      discord-api-types: 0.37.83
+      discord-api-types: 0.37.100
       prism-media: 1.3.5
       tslib: 2.7.0
       ws: 8.18.0
@@ -1369,7 +1369,7 @@ snapshots:
       '@sapphire/async-queue': 1.5.3
       '@types/ws': 8.5.12
       '@vladfrangu/async_event_emitter': 2.4.6
-      discord-api-types: 0.37.83
+      discord-api-types: 0.37.100
       tslib: 2.7.0
       ws: 8.18.0
     transitivePeerDependencies:
@@ -1851,10 +1851,6 @@ snapshots:
   devalue@5.1.1: {}
 
   discord-api-types@0.37.100: {}
-
-  discord-api-types@0.37.83: {}
-
-  discord-api-types@0.37.97: {}
 
   discord.js@14.16.3:
     dependencies:
