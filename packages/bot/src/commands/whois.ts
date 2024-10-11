@@ -4,7 +4,7 @@ import {
   InteractionContextType,
 } from 'discord.js';
 import Command from '../interfaces/command';
-import { formatUnixTimestamp, FormatType } from '../utils/dateUtils';
+import { formatUnixTimestamp, FormatType } from '../utils/date';
 
 const whois: Command = {
   data: new SlashCommandBuilder()

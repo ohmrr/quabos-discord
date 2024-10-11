@@ -6,7 +6,7 @@ import {
 } from 'discord.js';
 import { prisma } from '..';
 import Command from '../interfaces/command';
-import { FormatType, formatUnixTimestamp } from '../utils/dateUtils';
+import { FormatType, formatUnixTimestamp } from '../utils/date';
 
 const serverInfo: Command = {
   data: new SlashCommandBuilder()
