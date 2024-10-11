@@ -14,7 +14,9 @@ const config: Command = {
     .setName('config')
     .setDescription('Manage bot configuration.')
     .setContexts(InteractionContextType.Guild)
-    .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
+    .setDefaultMemberPermissions(
+      PermissionFlagsBits.ManageChannels | PermissionFlagsBits.ManageGuild,
+    )
     .addSubcommandGroup(channels =>
       channels
         .setName('channels')

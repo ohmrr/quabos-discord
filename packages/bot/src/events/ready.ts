@@ -3,7 +3,7 @@ import { createEvent } from '../interfaces/applicationEvent';
 import deployCommands from '../handlers/deployCommands';
 import { formatDate } from '../utils/date';
 
-const ready = createEvent('ready', true, (prisma, client) => {
+const ready = createEvent('ready', true, async (prisma, client) => {
   const guildSize = client.guilds.cache.size;
   const currentDate = formatDate(new Date());
   const wordArt = `   ____              __              
@@ -27,7 +27,7 @@ const ready = createEvent('ready', true, (prisma, client) => {
     ],
   });
 
-  deployCommands(client);
+  await deployCommands(client);
 });
 
 export default ready;
