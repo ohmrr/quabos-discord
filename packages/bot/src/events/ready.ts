@@ -11,8 +11,8 @@ const ready = createEvent('ready', true, (prisma, client) => {
  / / / / / / / __ \`/ __ \\/ __ \\/ ___/
 / /_/ / /_/ / /_/ / /_/ / /_/ (__  ) 
 \\___\\_\\__,_/\\__,_/_.___/\\____/____/\n\n`;
-  
-  console.log(wordArt)
+
+  console.log(wordArt);
   console.log(
     `${currentDate} | Logged in as ${client.user.tag} in ${client.guilds.cache.size} servers.`,
   );

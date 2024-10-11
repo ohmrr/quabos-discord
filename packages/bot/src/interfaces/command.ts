@@ -8,9 +8,9 @@ import {
 
 interface Command {
   data:
-  | SlashCommandBuilder
-  | SlashCommandSubcommandsOnlyBuilder
-  | SlashCommandOptionsOnlyBuilder;
+    | SlashCommandBuilder
+    | SlashCommandSubcommandsOnlyBuilder
+    | SlashCommandOptionsOnlyBuilder;
   usage: string;
   execute: (interaction: ChatInputCommandInteraction) => Promise<void>;
   autocomplete?: (interaction: AutocompleteInteraction) => Promise<void>;

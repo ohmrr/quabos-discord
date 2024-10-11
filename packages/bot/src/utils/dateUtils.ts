@@ -26,6 +26,7 @@ export function formatDate(date: Date) {
     hour: 'numeric',
     minute: 'numeric',
     hour12: true,
+    timeZone: 'America/Los_Angeles',
   };
 
   return new Intl.DateTimeFormat('en-US', options).format(date);

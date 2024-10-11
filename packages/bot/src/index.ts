@@ -17,7 +17,7 @@ const client = new Client({
 
   allowedMentions: {
     repliedUser: true,
-    parse: ['roles', 'users']
+    parse: ['roles', 'users'],
   },
 });
 
@@ -27,7 +27,7 @@ const clientVersion = version;
 async function init() {
   try {
     await prisma.$connect();
-    
+
     await loadEvents(client);
     await loadCommands(client);
     await client.login(process.env.DISCORD_TOKEN);
@@ -40,7 +40,6 @@ async function init() {
 init().finally(async () => {
   await prisma.$disconnect();
 });
-
 
 client.login(process.env.DISCORD_TOKEN);
 

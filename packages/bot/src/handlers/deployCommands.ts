@@ -10,9 +10,9 @@ async function deployCommands(client: Client) {
   const commandsData = client.commands.map(command => command.data.toJSON());
 
   const route =
-    process.env.NODE_ENV === 'production'
-      ? Routes.applicationCommands(client.user.id)
-      : Routes.applicationGuildCommands(client.user.id, process.env.DEV_GUILD_ID);
+    process.env.NODE_ENV === 'production' ?
+      Routes.applicationCommands(client.user.id)
+    : Routes.applicationGuildCommands(client.user.id, process.env.DEV_GUILD_ID);
 
   try {
     await rest.put(route, { body: [] });
