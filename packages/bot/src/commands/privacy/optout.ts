@@ -13,10 +13,7 @@ const optout: Subcommand = {
         .setDescription(
           'Opt-out either only in this server, or globally (in every server that both you and Quabos are in).',
         )
-        .addChoices(
-          { name: 'server', value: 'server' },
-          { name: 'global', value: 'global' },
-        )
+        .addChoices({ name: 'server', value: 'server' }, { name: 'global', value: 'global' })
         .setRequired(true),
     ),
   usage: '/privacy opt-out [scope]',
@@ -45,9 +42,7 @@ const optout: Subcommand = {
         return;
       }
 
-      await interaction.reply(
-        `${emojiMap.error.cross} You have already opted-out globally!`,
-      );
+      await interaction.reply(`${emojiMap.error.cross} You have already opted-out globally!`);
       return;
     }
 

@@ -14,16 +14,12 @@ const disconnect: Command = {
 
     const voiceConnection = getVoiceConnection(interaction.guild.id);
     if (!voiceConnection) {
-      await interaction.reply(
-        `${emojiMap.error.cross} I am not in any voice channels.`,
-      );
+      await interaction.reply(`${emojiMap.error.cross} I am not in any voice channels.`);
       return;
     }
 
     voiceConnection.destroy();
-    await interaction.reply(
-      `${emojiMap.success.check} Disconnected from the voice channel.`,
-    );
+    await interaction.reply(`${emojiMap.success.check} Disconnected from the voice channel.`);
   },
 };
 

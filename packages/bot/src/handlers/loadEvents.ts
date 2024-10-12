@@ -9,18 +9,12 @@ async function loadEventFromFile(client: Client, filePath: string) {
     const { default: eventModule } = (await import(filePath)).default;
 
     if (!eventModule.name || !eventModule.execute) {
-      console.log(
-        `${filePath} is missing properties. Skipping onto the next file...`,
-      );
+      console.log(`${filePath} is missing properties. Skipping onto the next file...`);
 
       return;
     }
 
-    const event = createEvent(
-      eventModule.name,
-      eventModule.once,
-      eventModule.execute,
-    );
+    const event = createEvent(eventModule.name, eventModule.once, eventModule.execute);
 
     if (event.once) {
       client.once(event.name, (...params) => event.execute(prisma, ...params));
@@ -34,9 +28,7 @@ async function loadEventFromFile(client: Client, filePath: string) {
 
 async function loadEvents(client: Client) {
   const eventFolderPath = path.join(__dirname, '..', 'events');
-  const eventFiles = readdirSync(eventFolderPath).filter(file =>
-    file.endsWith('.js'),
-  );
+  const eventFiles = readdirSync(eventFolderPath).filter(file => file.endsWith('.js'));
 
   for (const file of eventFiles) {
     const eventFilePath = path.join(eventFolderPath, file);

@@ -26,9 +26,7 @@ const remove: Subcommand = {
 
     if (
       !existingGuild ||
-      !existingGuild.trackedChannels.some(
-        channel => channel.channelId === selectedChannel.id,
-      )
+      !existingGuild.trackedChannels.some(channel => channel.channelId === selectedChannel.id)
     ) {
       await interaction.reply(
         `${emojiMap.error.cross} Channel <#${selectedChannel.id}> is not being read for new messages.`,

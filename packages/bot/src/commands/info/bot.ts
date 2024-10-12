@@ -21,10 +21,7 @@ const bot: Subcommand = {
         },
         {
           name: 'Uptime',
-          value: formatUnixTimestamp(
-            interaction.client.readyAt,
-            FormatType.Relative,
-          ),
+          value: formatUnixTimestamp(interaction.client.readyAt, FormatType.Relative),
           inline: true,
         },
       ],

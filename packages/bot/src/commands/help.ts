@@ -1,8 +1,4 @@
-import {
-  SlashCommandBuilder,
-  EmbedBuilder,
-  InteractionContextType,
-} from 'discord.js';
+import { SlashCommandBuilder, EmbedBuilder, InteractionContextType } from 'discord.js';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 
@@ -28,17 +24,11 @@ const help: Command = {
 
     const client = interaction.client;
     const clientAvatar = client.user.avatarURL({ size: 4096 }) || '';
-    const commandChoice = interaction.options
-      .getString('command', false)
-      ?.toLowerCase();
+    const commandChoice = interaction.options.getString('command', false)?.toLowerCase();
 
     let helpEmbed;
 
-    if (
-      !commandChoice ||
-      commandChoice === 'help' ||
-      !client.commands.has(commandChoice)
-    ) {
+    if (!commandChoice || commandChoice === 'help' || !client.commands.has(commandChoice)) {
       helpEmbed = new EmbedBuilder({
         author: {
           name: client.user.tag,

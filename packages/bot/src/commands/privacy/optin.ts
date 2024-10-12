@@ -13,10 +13,7 @@ const optin: Subcommand = {
         .setDescription(
           'Opt-in either only in this server, or globally (in every server that both you and Quabos are in).',
         )
-        .addChoices(
-          { name: 'server', value: 'server' },
-          { name: 'global', value: 'global' },
-        )
+        .addChoices({ name: 'server', value: 'server' }, { name: 'global', value: 'global' })
         .setRequired(true),
     ),
   usage: '/privacy opt-in [scope]',
@@ -48,9 +45,7 @@ const optin: Subcommand = {
           `${emojiMap.success.check} You have successfully opted-in globally!`,
         );
       } else {
-        await interaction.reply(
-          `${emojiMap.error.cross} You are already opted-in globally!`,
-        );
+        await interaction.reply(`${emojiMap.error.cross} You are already opted-in globally!`);
       }
       return;
     }

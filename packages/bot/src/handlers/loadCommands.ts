@@ -34,9 +34,7 @@ async function loadCommandFromFile(filePath: string) {
     const cmd = commandModule as Command;
 
     if (!cmd.data || !cmd.execute) {
-      console.log(
-        `${filePath} is missing properties. Skipping onto the next file...`,
-      );
+      console.log(`${filePath} is missing properties. Skipping onto the next file...`);
       return;
     }
 

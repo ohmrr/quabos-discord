@@ -4,10 +4,7 @@ import { prisma } from '../';
 
 export function isValidMessage(message: Message): boolean {
   const startsWithCommandChar = /^[!\/?]/i;
-  if (
-    startsWithCommandChar.test(message.content) ||
-    message.content.split(' ').length < 2
-  )
+  if (startsWithCommandChar.test(message.content) || message.content.split(' ').length < 2)
     return false;
 
   return true;
@@ -137,16 +134,13 @@ export async function gatherMessagesFromGuild(guildId: string, client: Client) {
   }
 }
 
-async function fetchAllMessagesFromChannel(
-  channel: TextChannel,
-): Promise<Message[]> {
+async function fetchAllMessagesFromChannel(channel: TextChannel): Promise<Message[]> {
   let allMessages: Message[] = [];
   let lastMessageId: string | null = null;
   let fetchedMessages: Collection<Snowflake, Message<true>>;
 
   do {
-    const options =
-      lastMessageId ? { limit: 100, before: lastMessageId } : { limit: 100 };
+    const options = lastMessageId ? { limit: 100, before: lastMessageId } : { limit: 100 };
 
     fetchedMessages = await channel.messages.fetch(options);
     allMessages = allMessages.concat(Array.from(fetchedMessages.values()));

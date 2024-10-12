@@ -44,9 +44,7 @@ const stats: Subcommand = {
       title: `Quabos Stats in ${interaction.guild.name}`,
       description:
         `**Messages Count**:\n` +
-        channelStatsList
-          .map(text => `${emojiMap.celestial.star} ${text}`)
-          .join('\n'),
+        channelStatsList.map(text => `${emojiMap.celestial.star} ${text}`).join('\n'),
     });
 
     await interaction.reply({ embeds: [statsEmbed] });

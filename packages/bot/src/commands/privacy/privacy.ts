@@ -19,9 +19,7 @@ const privacy: Command = {
 
     const subcommand = interaction.options.getSubcommand();
     if (!subcommand) {
-      await interaction.reply(
-        `${emojiMap.error.cross} Error getting the subcommand.`,
-      );
+      await interaction.reply(`${emojiMap.error.cross} Error getting the subcommand.`);
       return;
     }
 

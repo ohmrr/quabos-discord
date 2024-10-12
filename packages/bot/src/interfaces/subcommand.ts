@@ -1,7 +1,4 @@
-import {
-  ChatInputCommandInteraction,
-  SlashCommandSubcommandBuilder,
-} from 'discord.js';
+import { ChatInputCommandInteraction, SlashCommandSubcommandBuilder } from 'discord.js';
 
 interface Subcommand {
   data: SlashCommandSubcommandBuilder;

@@ -1,9 +1,5 @@
 import { joinVoiceChannel } from '@discordjs/voice';
-import {
-  GuildMember,
-  InteractionContextType,
-  SlashCommandBuilder,
-} from 'discord.js';
+import { GuildMember, InteractionContextType, SlashCommandBuilder } from 'discord.js';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 
@@ -19,9 +15,7 @@ const join: Command = {
     const voiceChannel = guildMember.voice.channel;
 
     if (!voiceChannel) {
-      await interaction.reply(
-        `${emojiMap.error.cross} You are not in a voice channel.`,
-      );
+      await interaction.reply(`${emojiMap.error.cross} You are not in a voice channel.`);
       return;
     }
 
