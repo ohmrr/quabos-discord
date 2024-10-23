@@ -2,7 +2,6 @@
   "bracketSpacing": true,
   "arrowParens": "avoid",
   "endOfLine": "lf",
-  "experimentalTernaries": true,
   "semi": true,
   "singleQuote": true,
   "useTabs": false,

@@ -4,11 +4,15 @@ import emojiMap from '../utils/emojiMap';
 
 const messageCreate = createEvent('messageCreate', false, async (prisma, message) => {
   if (!message.guild || !message.channel) return;
-  if (message.author.bot || message.system) return;
 
   await saveMessage(message);
 
   const guildId = message.guild.id;
+  const guildRecord = await prisma.guild.findUnique({
+    where: { guildId },
+    select: { probability: true },
+  });
+
   const shouldRespond = Math.random() < 0.08;
   if (!shouldRespond) return;
 

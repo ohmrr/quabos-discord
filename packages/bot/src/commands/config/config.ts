@@ -1,13 +1,10 @@
-import {
-  InteractionContextType,
-  PermissionFlagsBits,
-  SlashCommandBuilder,
-} from 'discord.js';
+import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
 import Command from '../../interfaces/command';
 import emojiMap from '../../utils/emojiMap';
 import add from './channels/add';
 import list from './channels/list';
 import remove from './channels/remove';
+import resetlog from './resetlog';
 
 const config: Command = {
   data: new SlashCommandBuilder()
@@ -15,7 +12,7 @@ const config: Command = {
     .setDescription('Manage bot configuration.')
     .setContexts(InteractionContextType.Guild)
     .setDefaultMemberPermissions(
-      PermissionFlagsBits.ManageChannels | PermissionFlagsBits.ManageGuild,
+      PermissionFlagsBits.ManageGuild & PermissionFlagsBits.ManageMessages,
     )
     .addSubcommandGroup(channels =>
       channels
@@ -24,17 +21,23 @@ const config: Command = {
         .addSubcommand(add.data)
         .addSubcommand(list.data)
         .addSubcommand(remove.data),
-    ),
+    )
+    .addSubcommand(resetlog.data),
   usage: `${add.usage}\n${remove.usage}\n${list.usage}`,
   execute: async interaction => {
     if (!interaction.guild) return;
 
     const commandGroup = interaction.options.getSubcommandGroup();
     const subcommand = interaction.options.getSubcommand();
-    if (!commandGroup || !subcommand) {
+    if (!subcommand) {
       await interaction.reply(
         `${emojiMap.error.cross} Error getting the command group or subcommand.`,
       );
+      return;
+    }
+
+    if (subcommand === 'reset-log') {
+      await resetlog.execute(interaction);
       return;
     }
 
@@ -51,9 +54,7 @@ const config: Command = {
             await remove.execute(interaction);
             break;
           default:
-            await interaction.reply(
-              `${emojiMap.error.denied} Subcommand not found.`,
-            );
+            await interaction.reply(`${emojiMap.error.denied} Subcommand not found.`);
             break;
         }
         break;

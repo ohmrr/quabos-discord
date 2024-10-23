@@ -7,6 +7,8 @@ export function isValidMessage(message: Message): boolean {
   if (startsWithCommandChar.test(message.content) || message.content.split(' ').length < 2)
     return false;
 
+  if (message.author.bot || message.system) return false;
+
   return true;
 }
 
@@ -44,6 +46,11 @@ export async function saveMessage(message: Message) {
       channel: {
         connect: {
           channelId: isTrackedChannel.channelId,
+        },
+      },
+      guild: {
+        connect: {
+          guildId: message.guild.id,
         },
       },
     },

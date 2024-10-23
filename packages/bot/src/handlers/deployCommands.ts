@@ -1,4 +1,4 @@
-import { REST, Routes, Client, RESTPostAPIApplicationCommandsJSONBody } from 'discord.js';
+import { REST, Routes, Client } from 'discord.js';
 
 async function deployCommands(client: Client) {
   if (!client.user) {
@@ -6,38 +6,35 @@ async function deployCommands(client: Client) {
     return;
   }
 
-  const rest = new REST().setToken(process.env.DISCORD_TOKEN);
+  if (!process.env.NODE_ENV) {
+    console.error('Missing environment variable: NODE_ENV.');
+    process.exit(1);
+  }
 
+  if (process.env.NODE_ENV === 'development' && !process.env.DEV_GUILD_ID) {
+    console.error('Missing environment variable: DEV_GUILD_ID.');
+    process.exit(1);
+  }
+
+  const rest = new REST().setToken(process.env.DISCORD_TOKEN);
   const commandsData = client.commands.map(command => command.data.toJSON());
 
   const route =
-    process.env.NODE_ENV === 'production' ?
-      Routes.applicationCommands(client.user.id)
-    : Routes.applicationGuildCommands(client.user.id, process.env.DEV_GUILD_ID);
+    process.env.NODE_ENV === 'production'
+      ? Routes.applicationCommands(client.user.id)
+      : Routes.applicationGuildCommands(client.user.id, process.env.DEV_GUILD_ID);
 
   try {
-    const existingCommands = (await rest.get(
-      route,
-    )) as RESTPostAPIApplicationCommandsJSONBody[];
-
-    const commandNames = commandsData.map(cmd => cmd.name);
-    const existingCommandNames = existingCommands.map(cmd => cmd.name);
-
-    const needsUpdate =
-      commandNames.length !== existingCommandNames.length ||
-      !commandNames.every(name => existingCommandNames.includes(name));
-
-    if (!needsUpdate) {
-      console.log('No changes detected in commands. Skipping deployment.');
-      return;
-    }
-
     await rest.put(route, { body: commandsData });
+
     console.log(
       `Application (/) commands successfully registered to ${process.env.NODE_ENV}.`,
     );
-  } catch (error) {
-    console.error(`Error registering (/) commands: ${error}`);
+  } catch (err) {
+    console.error(
+      `Error registering application (/) commands to ${process.env.NODE_ENV}: ${err}`,
+    );
+    process.exit(1);
   }
 }
 
