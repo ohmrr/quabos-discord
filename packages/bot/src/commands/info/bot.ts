@@ -7,11 +7,11 @@ const bot: Subcommand = {
   data: new SlashCommandSubcommandBuilder()
     .setName('bot')
     .setDescription('Shows information about Quabos.'),
-  usage: '/info status',
+  usage: '/info bot',
   execute: async interaction => {
     if (!interaction.guild) return;
 
-    const statusEmbed = new EmbedBuilder({
+    const botEmbed = new EmbedBuilder({
       title: 'Quabos Status',
       fields: [
         {
@@ -29,7 +29,7 @@ const bot: Subcommand = {
       timestamp: Date.now(),
     });
 
-    await interaction.reply({ embeds: [statusEmbed] });
+    await interaction.reply({ embeds: [botEmbed], ephemeral: true });
   },
 };
 
