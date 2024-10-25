@@ -27,42 +27,36 @@ const config: Command = {
   execute: async interaction => {
     if (!interaction.guild) return;
 
-    const commandGroup = interaction.options.getSubcommandGroup();
-    const subcommand = interaction.options.getSubcommand();
-    if (!subcommand) {
+    if (!interaction.guild.members.me.permissions.has(PermissionFlagsBits.ManageChannels)) {
       await interaction.reply(
-        `${emojiMap.error.cross} Error getting the command group or subcommand.`,
+        `${emojiMap.error.cross} I do not have permission to manage channels.`,
       );
       return;
     }
 
-    if (subcommand === 'reset-log') {
-      await resetlog.execute(interaction);
+    const subcommand = interaction.options.getSubcommand();
+    if (!subcommand) {
+      await interaction.reply(
+        `${emojiMap.error.cross} Error getting the subcommand.`,
+      );
       return;
     }
 
-    switch (commandGroup) {
-      case 'channels':
-        switch (subcommand) {
-          case 'add':
-            await add.execute(interaction);
-            break;
-          case 'list':
-            await list.execute(interaction);
-            break;
-          case 'remove':
-            await remove.execute(interaction);
-            break;
-          default:
-            await interaction.reply(`${emojiMap.error.denied} Subcommand not found.`);
-            break;
-        }
+    switch (subcommand) {
+      case 'add':
+        await add.execute(interaction);
         break;
-
+      case 'list':
+        await list.execute(interaction);
+        break;
+      case 'remove':
+        await remove.execute(interaction);
+        break;
+      case 'reset-log':
+        await resetlog.execute(interaction);
+        break;
       default:
-        await interaction.reply(
-          `${emojiMap.error.cross} Error executing or finding subcommand group.`,
-        );
+        await interaction.reply(`${emojiMap.error.denied} Subcommand not found.`);
         break;
     }
   },
