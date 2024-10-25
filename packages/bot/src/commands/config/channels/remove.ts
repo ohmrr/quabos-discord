@@ -2,6 +2,7 @@ import { ChannelType, SlashCommandSubcommandBuilder } from 'discord.js';
 import { prisma } from '../../..';
 import Subcommand from '../../../interfaces/subcommand';
 import emojiMap from '../../../utils/emojiMap';
+import { checkAndDeleteChannelRecord } from '../../../utils/guildUtils';
 
 const remove: Subcommand = {
   data: new SlashCommandSubcommandBuilder()
@@ -24,10 +25,11 @@ const remove: Subcommand = {
       include: { trackedChannels: true },
     });
 
-    if (
-      !existingGuild ||
-      !existingGuild.trackedChannels.some(channel => channel.channelId === selectedChannel.id)
-    ) {
+    const isTracked = existingGuild?.trackedChannels.some(
+      channel => channel.channelId === selectedChannel.id,
+    );
+
+    if (!isTracked) {
       await interaction.reply(
         `${emojiMap.error.cross} Channel <#${selectedChannel.id}> is not being read for new messages.`,
       );
@@ -35,14 +37,16 @@ const remove: Subcommand = {
     }
 
     try {
-      await prisma.channel.delete({ where: { channelId: selectedChannel.id } });
+      await checkAndDeleteChannelRecord(interaction.guild.id, selectedChannel.id);
       await interaction.reply(
         `${emojiMap.success.check} Channel <#${selectedChannel.id}> is no longer being read for new messages.`,
       );
     } catch (error) {
-      console.error('Error while deleting channel record: ', error);
+      console.error(
+        `Error while deleting channel record. Guild ID: ${interaction.guild.id} Channel ID: ${selectedChannel.id}: ${error}`,
+      );
       await interaction.reply(
-        `${emojiMap.error.cross} An error occurred while removing the channel.`,
+        `${emojiMap.error.cross} An error occurred while removing the channel. Please try again later.`,
       );
     }
   },

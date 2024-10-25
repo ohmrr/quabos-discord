@@ -2,6 +2,7 @@ import { ChannelType, SlashCommandSubcommandBuilder } from 'discord.js';
 import { prisma } from '../../..';
 import Subcommand from '../../../interfaces/subcommand';
 import emojiMap from '../../../utils/emojiMap';
+import { checkAndUpdateGuildRecord } from '../../../utils/guildUtils';
 
 const add: Subcommand = {
   data: new SlashCommandSubcommandBuilder()
@@ -24,57 +25,19 @@ const add: Subcommand = {
       include: { trackedChannels: true },
     });
 
-    if (existingGuild) {
-      const isAlreadyTracked = existingGuild.trackedChannels.some(
-        channel => channel.channelId === selectedChannel.id,
+    const isAlreadyTracked = existingGuild?.trackedChannels.some(
+      channel => channel.channelId === selectedChannel.id,
+    );
+
+    if (isAlreadyTracked) {
+      await interaction.reply(
+        `${emojiMap.error.cross} Channel <#${selectedChannel.id}> is already being read for new messages.`,
       );
-
-      if (isAlreadyTracked) {
-        await interaction.reply(
-          `${emojiMap.error.cross} Channel <#${selectedChannel.id}> is already being read for new messages.`,
-        );
-        return;
-      }
-
-      try {
-        await prisma.guild.update({
-          where: { guildId: interaction.guild.id },
-          data: {
-            trackedChannels: {
-              create: {
-                channelId: selectedChannel.id,
-              },
-            },
-          },
-        });
-
-        await interaction.reply(
-          `${emojiMap.success.check} Channel <#${selectedChannel.id}> is now being read for new messages.`,
-        );
-        return;
-      } catch (error) {
-        console.error(
-          `Error while creating guild record. Guild Name: ${interaction.guild.name} ID: ${interaction.guild.id}: ${error}`,
-        );
-        await interaction.reply(
-          `${emojiMap.error.cross} An error occurred while creating the channel record.`,
-        );
-      }
+      return;
     }
 
     try {
-      await prisma.guild.create({
-        data: {
-          guildId: interaction.guild.id,
-          name: interaction.guild.name,
-          trackedChannels: {
-            create: {
-              channelId: selectedChannel.id,
-            },
-          },
-        },
-      });
-
+      await checkAndUpdateGuildRecord(interaction.guild.id, interaction.guild.name, selectedChannel.id);
       await interaction.reply(
         `${emojiMap.success.check} Channel <#${selectedChannel.id}> is now being read for new messages.`,
       );
