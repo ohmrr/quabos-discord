@@ -2,7 +2,7 @@
 
 ## Project Description
 
-Quabos is a Discord bot designed to enhance your server experience with various commands and features. It includes commands for displaying user avatars, managing server configurations, providing help and information, and more.
+Quabos is an entertainment focused Discord bot designed to promote activity in your Discord server. Through the use of a Markov Chaining algorithm, Quabos will use messages previously sent in your server in order to generate new ones.
 
 ## Setup Instructions
 
@@ -19,11 +19,15 @@ pnpm install
 Create a `.env` file in the `packages/bot` directory and add the following environment variables:
 
 ```
-DISCORD_TOKEN=your_discord_bot_token
-DATABASE_URL=your_database_url
+DISCORD_TOKEN="your_discord_bot_token"
+DATABASE_URL="your_database_url"
+NODE_ENV="production"
+DEV_GUILD_ID=""
 ```
 
-Replace `your_discord_bot_token` with your actual Discord bot token and `your_database_url` with your database connection URL.
+Replace `your_discord_bot_token` with your actual Discord bot token and `your_database_url` with your MongoDB connection URL.
+
+`NODE_ENV` must be either "production" or "development". If you wish to deploy the slash commands to a development guild, `DEV_GUILD_ID` must be properly set with the ID of that guild.
 
 ## Usage Examples
 
