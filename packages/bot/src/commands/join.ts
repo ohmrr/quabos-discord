@@ -1,5 +1,5 @@
 import { joinVoiceChannel } from '@discordjs/voice';
-import { GuildMember, InteractionContextType, PermissionsBitField, SlashCommandBuilder } from 'discord.js';
+import { InteractionContextType, PermissionsBitField, SlashCommandBuilder } from 'discord.js';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 
@@ -11,9 +11,9 @@ const join: Command = {
   usage: '/join',
   execute: async interaction => {
     if (!interaction.guild || !interaction.member) return;
-    const guildMember = interaction.member as GuildMember;
+    const guildMember = interaction.guild.members.cache.get(interaction.user.id);
     const clientGuildMember = interaction.guild.members.me;
-    const voiceChannel = guildMember.voice.channel;
+    const voiceChannel = guildMember?.voice.channel;
 
     if (!voiceChannel) {
       await interaction.reply(`${emojiMap.error.cross} You are not in a voice channel.`);
@@ -22,7 +22,9 @@ const join: Command = {
 
     const clientPermissions = clientGuildMember?.permissionsIn(voiceChannel) || null;
     if (!clientPermissions || !clientPermissions.has(PermissionsBitField.Flags.Connect)) {
-      await interaction.reply(`${emojiMap.error.cross} I do not the permission to join the voice channel.`);
+      await interaction.reply(
+        `${emojiMap.error.cross} I do not the permission to join the voice channel.`,
+      );
       return;
     }
 

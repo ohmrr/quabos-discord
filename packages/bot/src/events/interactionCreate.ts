@@ -34,7 +34,7 @@ const interactionCreate = createEvent(
 
       await interaction.reply({
         content: `${emojiMap.error.denied} You are missing the following permissions: ${missingPermissionsNames}`,
-        ephemeral: true
+        ephemeral: true,
       });
       return;
     }

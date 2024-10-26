@@ -2,7 +2,7 @@ import {
   InteractionContextType,
   PermissionsBitField,
   SlashCommandBuilder,
-  TextChannel
+  TextChannel,
 } from 'discord.js';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
@@ -52,7 +52,9 @@ const purge: Command = {
         }
 
         channel.bulkDelete(messages);
-        await interaction.reply(`${emojiMap.success.check} Deleted ${messages.size} messages.`);
+        await interaction.reply(
+          `${emojiMap.success.check} Deleted ${messages.size} messages.`,
+        );
       } catch (error) {
         console.error('Failed to purge messages.');
         await interaction.reply(`${emojiMap.error.denied} Failed to purge the messages.`);
