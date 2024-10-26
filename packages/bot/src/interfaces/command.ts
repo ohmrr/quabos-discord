@@ -1,6 +1,7 @@
 import {
   AutocompleteInteraction,
   ChatInputCommandInteraction,
+  PermissionsBitField,
   SlashCommandBuilder,
   SlashCommandOptionsOnlyBuilder,
   SlashCommandSubcommandsOnlyBuilder,
@@ -8,9 +9,10 @@ import {
 
 interface Command {
   data:
-    | SlashCommandBuilder
-    | SlashCommandSubcommandsOnlyBuilder
-    | SlashCommandOptionsOnlyBuilder;
+  | SlashCommandBuilder
+  | SlashCommandSubcommandsOnlyBuilder
+  | SlashCommandOptionsOnlyBuilder;
+  permissions?: PermissionsBitField;
   usage: string;
   execute: (interaction: ChatInputCommandInteraction) => Promise<void>;
   autocomplete?: (interaction: AutocompleteInteraction) => Promise<void>;
