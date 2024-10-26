@@ -6,12 +6,14 @@ import {
   SlashCommandOptionsOnlyBuilder,
   SlashCommandSubcommandsOnlyBuilder,
 } from 'discord.js';
+import Subcommand from './subcommand';
 
 interface Command {
   data:
-  | SlashCommandBuilder
-  | SlashCommandSubcommandsOnlyBuilder
-  | SlashCommandOptionsOnlyBuilder;
+    | SlashCommandBuilder
+    | SlashCommandSubcommandsOnlyBuilder
+    | SlashCommandOptionsOnlyBuilder;
+  subcommands?: Record<string, Subcommand>;
   permissions?: PermissionsBitField;
   usage: string;
   execute: (interaction: ChatInputCommandInteraction) => Promise<void>;
