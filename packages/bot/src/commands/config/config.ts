@@ -1,4 +1,4 @@
-import { InteractionContextType, PermissionFlagsBits, SlashCommandBuilder } from 'discord.js';
+import { InteractionContextType, SlashCommandBuilder } from 'discord.js';
 import Command from '../../interfaces/command';
 import emojiMap from '../../utils/emojiMap';
 import add from './channels/add';
@@ -11,9 +11,6 @@ const config: Command = {
     .setName('config')
     .setDescription('Manage bot configuration.')
     .setContexts(InteractionContextType.Guild)
-    .setDefaultMemberPermissions(
-      PermissionFlagsBits.ManageGuild & PermissionFlagsBits.ManageMessages,
-    )
     .addSubcommandGroup(channels =>
       channels
         .setName('channels')
@@ -23,11 +20,16 @@ const config: Command = {
         .addSubcommand(remove.data),
     )
     .addSubcommand(resetlog.data),
-  usage: `${add.usage}\n${remove.usage}\n${list.usage}`,
+  subcommands: {
+    add,
+    list,
+    remove,
+    resetlog,
+  },
+  usage: `${add.usage}\n${remove.usage}\n${list.usage}\n${resetlog.usage}`,
   execute: async interaction => {
     if (!interaction.guild) return;
 
-    const commandGroup = interaction.options.getSubcommandGroup();
     const subcommand = interaction.options.getSubcommand();
     if (!subcommand) {
       await interaction.reply(
@@ -36,33 +38,21 @@ const config: Command = {
       return;
     }
 
-    if (subcommand === 'reset-log') {
-      await resetlog.execute(interaction);
-      return;
-    }
-
-    switch (commandGroup) {
-      case 'channels':
-        switch (subcommand) {
-          case 'add':
-            await add.execute(interaction);
-            break;
-          case 'list':
-            await list.execute(interaction);
-            break;
-          case 'remove':
-            await remove.execute(interaction);
-            break;
-          default:
-            await interaction.reply(`${emojiMap.error.denied} Subcommand not found.`);
-            break;
-        }
+    switch (subcommand) {
+      case 'add':
+        await add.execute(interaction);
         break;
-
+      case 'list':
+        await list.execute(interaction);
+        break;
+      case 'remove':
+        await remove.execute(interaction);
+        break;
+      case 'reset-log':
+        await resetlog.execute(interaction);
+        break;
       default:
-        await interaction.reply(
-          `${emojiMap.error.cross} Error executing or finding subcommand group.`,
-        );
+        await interaction.reply(`${emojiMap.error.denied} Subcommand not found.`);
         break;
     }
   },

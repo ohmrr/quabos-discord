@@ -1,4 +1,4 @@
-import { ChannelType, SlashCommandSubcommandBuilder } from 'discord.js';
+import { ChannelType, PermissionsBitField, SlashCommandSubcommandBuilder } from 'discord.js';
 import { prisma } from '../../..';
 import Subcommand from '../../../interfaces/subcommand';
 import emojiMap from '../../../utils/emojiMap';
@@ -14,6 +14,7 @@ const remove: Subcommand = {
         .addChannelTypes(ChannelType.GuildText)
         .setRequired(true),
     ),
+  permissions: new PermissionsBitField(PermissionsBitField.Flags.ManageGuild),
   usage: '/config channels remove [channel]',
   execute: async interaction => {
     if (!interaction.guild) return;

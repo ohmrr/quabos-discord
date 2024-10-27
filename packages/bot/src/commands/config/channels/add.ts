@@ -1,4 +1,9 @@
-import { ChannelType, SlashCommandSubcommandBuilder } from 'discord.js';
+import {
+  ChannelType,
+  PermissionsBitField,
+  SlashCommandSubcommandBuilder,
+  TextChannel,
+} from 'discord.js';
 import { prisma } from '../../..';
 import Subcommand from '../../../interfaces/subcommand';
 import emojiMap from '../../../utils/emojiMap';
@@ -14,11 +19,28 @@ const add: Subcommand = {
         .addChannelTypes(ChannelType.GuildText)
         .setRequired(true),
     ),
+  permissions: new PermissionsBitField(PermissionsBitField.Flags.ManageGuild),
   usage: '/config channels add [channel]',
   execute: async interaction => {
     if (!interaction.guild) return;
 
     const selectedChannel = interaction.options.getChannel('channel', true);
+    if (!(selectedChannel instanceof TextChannel)) {
+      await interaction.reply(
+        `${emojiMap.error.cross} The selected channel is not a text channel.`,
+      );
+      return;
+    }
+
+    const clientGuildMember = interaction.guild.members.me;
+    const clientPermissions = clientGuildMember?.permissionsIn(selectedChannel) || null;
+    if (!clientPermissions || !clientPermissions.has(PermissionsBitField.Flags.ViewChannel)) {
+      await interaction.reply(
+        `${emojiMap.error.cross} I don't have permission to read messages in the selected channel.`,
+      );
+      return;
+    }
+
     const existingGuild = await prisma.guild.findUnique({
       where: { guildId: interaction.guild.id },
       include: { trackedChannels: true },

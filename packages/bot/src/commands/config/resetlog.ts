@@ -5,6 +5,7 @@ import {
   ButtonStyle,
   ComponentType,
   EmbedBuilder,
+  PermissionsBitField,
 } from 'discord.js';
 import Subcommand from '../../interfaces/subcommand';
 import { prisma } from '../..';
@@ -12,9 +13,10 @@ import emojiMap from '../../utils/emojiMap';
 
 const resetlog: Subcommand = {
   data: new SlashCommandSubcommandBuilder()
-    .setName('reset-log')
+    .setName('resetlog')
     .setDescription('Deletes all the message logs for your server.'),
-  usage: '/config reset-log',
+  permissions: new PermissionsBitField(PermissionsBitField.Flags.ManageGuild),
+  usage: '/config resetlog',
   execute: async interaction => {
     if (!interaction.guild) return;
 

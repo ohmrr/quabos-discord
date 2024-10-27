@@ -1,8 +1,8 @@
+import { InteractionContextType, SlashCommandBuilder } from 'discord.js';
 import Command from '../../interfaces/command';
-import { SlashCommandBuilder, InteractionContextType } from 'discord.js';
+import emojiMap from '../../utils/emojiMap';
 import optin from './optin';
 import optout from './optout';
-import emojiMap from '../../utils/emojiMap';
 
 const privacy: Command = {
   data: new SlashCommandBuilder()
@@ -13,6 +13,10 @@ const privacy: Command = {
     .setContexts(InteractionContextType.Guild)
     .addSubcommand(optin.data)
     .addSubcommand(optout.data),
+  subcommands: {
+    optin,
+    optout,
+  },
   usage: `${optin.usage}\n${optout.usage}`,
   execute: async interaction => {
     if (!interaction.guild) return;

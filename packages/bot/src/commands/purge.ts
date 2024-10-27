@@ -1,7 +1,7 @@
 import {
-  PermissionFlagsBits,
-  SlashCommandBuilder,
   InteractionContextType,
+  PermissionsBitField,
+  SlashCommandBuilder,
   TextChannel,
 } from 'discord.js';
 import Command from '../interfaces/command';
@@ -11,7 +11,7 @@ const purge: Command = {
   data: new SlashCommandBuilder()
     .setName('purge')
     .setDescription('Delete messages in the current channel.')
-    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
+    .setDefaultMemberPermissions(PermissionsBitField.Flags.ManageMessages)
     .setContexts(InteractionContextType.Guild)
     .addIntegerOption(amount =>
       amount
@@ -21,7 +21,8 @@ const purge: Command = {
         .setMinValue(1)
         .setRequired(true),
     ),
-  usage: '/purge [count]',
+  permissions: new PermissionsBitField(PermissionsBitField.Flags.ManageMessages),
+  usage: '/purge [amount]',
   execute: async interaction => {
     if (!interaction.guild || !interaction.channel) return;
     if (!interaction.channel.isTextBased()) return;
@@ -33,7 +34,7 @@ const purge: Command = {
       try {
         const allMessages = await channel.messages.fetch({ limit: amount });
         if (!allMessages) {
-          interaction.reply(`${emojiMap.error.cross} No messages found.`);
+          await interaction.reply(`${emojiMap.error.cross} No messages found.`);
           return;
         }
 
@@ -44,17 +45,19 @@ const purge: Command = {
           msg => currentTime - msg.createdTimestamp < fourteenDaysMilli,
         );
         if (messages.size === 0) {
-          interaction.reply(
+          await interaction.reply(
             `${emojiMap.error.denied} Messages cannot be deleted after 14 days.`,
           );
           return;
         }
 
         channel.bulkDelete(messages);
-        interaction.reply(`${emojiMap.success.check} Deleted ${messages.size} messages.`);
+        await interaction.reply(
+          `${emojiMap.success.check} Deleted ${messages.size} messages.`,
+        );
       } catch (error) {
         console.error('Failed to purge messages.');
-        interaction.reply(`${emojiMap.error.denied} Failed to purge the messages.`);
+        await interaction.reply(`${emojiMap.error.denied} Failed to purge the messages.`);
       }
     }
   },
