@@ -1,6 +1,6 @@
 import { createEvent } from '../interfaces/applicationEvent';
-import { saveMessage, generateResponse } from '../utils/markov';
 import emojiMap from '../utils/emojiMap';
+import { generateResponse, saveMessage } from '../utils/markov';
 
 const messageCreate = createEvent('messageCreate', false, async (prisma, message) => {
   if (!message.guild || !message.channel) return;
@@ -13,7 +13,9 @@ const messageCreate = createEvent('messageCreate', false, async (prisma, message
     select: { probability: true },
   });
 
-  const shouldRespond = Math.random() < 0.08;
+  if (!guildRecord) return;
+
+  const shouldRespond = Math.random() < guildRecord.probability;
   if (!shouldRespond) return;
 
   const response = await generateResponse(guildId);
