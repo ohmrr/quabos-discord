@@ -23,7 +23,10 @@ const privacy: Command = {
 
     const subcommand = interaction.options.getSubcommand();
     if (!subcommand) {
-      await interaction.reply(`${emojiMap.error.cross} Error getting the subcommand.`);
+      await interaction.reply({
+        content: `${emojiMap.error.cross} Error getting the subcommand.`,
+        ephemeral: true,
+      });
       return;
     }
 
@@ -37,9 +40,10 @@ const privacy: Command = {
         break;
 
       default:
-        await interaction.reply(
-          `${emojiMap.error.cross} Error executing or finding the subcommand.`,
-        );
+        await interaction.reply({
+          content: `${emojiMap.error.cross} Error executing or finding the subcommand.`,
+          ephemeral: true,
+        });
         break;
     }
   },

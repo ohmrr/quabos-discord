@@ -1,5 +1,5 @@
-import { InteractionContextType, SlashCommandBuilder } from 'discord.js';
 import { getVoiceConnection } from '@discordjs/voice';
+import { InteractionContextType, SlashCommandBuilder } from 'discord.js';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 
@@ -14,7 +14,10 @@ const disconnect: Command = {
 
     const voiceConnection = getVoiceConnection(interaction.guild.id);
     if (!voiceConnection) {
-      await interaction.reply(`${emojiMap.error.cross} I am not in any voice channels.`);
+      await interaction.reply({
+        content: `${emojiMap.error.cross} I am not in any voice channels.`,
+        ephemeral: true,
+      });
       return;
     }
 

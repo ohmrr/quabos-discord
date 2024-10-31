@@ -16,7 +16,10 @@ const join: Command = {
     const voiceChannel = guildMember?.voice.channel;
 
     if (!voiceChannel) {
-      await interaction.reply(`${emojiMap.error.cross} You are not in a voice channel.`);
+      await interaction.reply({
+        content: `${emojiMap.error.cross} You are not in a voice channel.`,
+        ephemeral: true,
+      });
       return;
     }
 

@@ -1,6 +1,6 @@
 import { SlashCommandSubcommandBuilder } from 'discord.js';
-import Subcommand from '../../interfaces/subcommand';
 import { prisma } from '../..';
+import Subcommand from '../../interfaces/subcommand';
 import emojiMap from '../../utils/emojiMap';
 
 const optout: Subcommand = {
@@ -36,13 +36,17 @@ const optout: Subcommand = {
           create: { userId, ignored: true },
         });
 
-        await interaction.reply(
-          `${emojiMap.success.check} You have successfully opted-out globally!`,
-        );
+        await interaction.reply({
+          content: `${emojiMap.success.check} You have successfully opted-out globally!`,
+          ephemeral: true,
+        });
         return;
       }
 
-      await interaction.reply(`${emojiMap.error.cross} You have already opted-out globally!`);
+      await interaction.reply({
+        content: `${emojiMap.error.cross} You have already opted-out globally!`,
+        ephemeral: true,
+      });
       return;
     }
 
@@ -58,15 +62,17 @@ const optout: Subcommand = {
           create: { userId, guildId, ignored: true },
         });
 
-        await interaction.reply(
-          `${emojiMap.success.check} You have successfully opted-out for this server!`,
-        );
+        await interaction.reply({
+          content: `${emojiMap.success.check} You have successfully opted-out for this server!`,
+          ephemeral: true,
+        });
         return;
       }
 
-      await interaction.reply(
-        `${emojiMap.error.cross} You have already opted-out for this server!`,
-      );
+      await interaction.reply({
+        content: `${emojiMap.error.cross} You have already opted-out for this server!`,
+        ephemeral: true,
+      });
     }
   },
 };

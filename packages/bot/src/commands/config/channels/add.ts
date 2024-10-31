@@ -26,9 +26,10 @@ const add: Subcommand = {
 
     const selectedChannel = interaction.options.getChannel('channel', true);
     if (!(selectedChannel instanceof TextChannel)) {
-      await interaction.reply(
-        `${emojiMap.error.cross} The selected channel is not a text channel.`,
-      );
+      await interaction.reply({
+        content: `${emojiMap.error.cross} The selected channel is not a text channel.`,
+        ephemeral: true,
+      });
       return;
     }
 
@@ -52,9 +53,10 @@ const add: Subcommand = {
       );
 
       if (isAlreadyTracked) {
-        await interaction.reply(
-          `${emojiMap.error.cross} Channel <#${selectedChannel.id}> is already being read for new messages.`,
-        );
+        await interaction.reply({
+          content: `${emojiMap.error.cross} Channel <#${selectedChannel.id}> is already being read for new messages.`,
+          ephemeral: true,
+        });
         return;
       }
 
@@ -78,9 +80,10 @@ const add: Subcommand = {
         console.error(
           `Error while creating guild record. Guild Name: ${interaction.guild.name} ID: ${interaction.guild.id}: ${error}`,
         );
-        await interaction.reply(
-          `${emojiMap.error.cross} An error occurred while creating the channel record.`,
-        );
+        await interaction.reply({
+          content: `${emojiMap.error.cross} An error occurred while creating the channel record.`,
+          ephemeral: true,
+        });
       }
     }
 
@@ -102,11 +105,12 @@ const add: Subcommand = {
       );
     } catch (error) {
       console.error(
-        `Error while creating guild record. Guild Name: ${interaction.guild.name} ID: ${interaction.guild.id}: ${error}`,
+        `Error while creating guild record. Guild Name: ${interaction.guild.name} ID: ${interaction.guild.id}:\n${error}`,
       );
-      await interaction.reply(
-        `${emojiMap.error.cross} An error occurred while creating the guild record. Please try again later.`,
-      );
+      await interaction.reply({
+        content: `${emojiMap.error.cross} An error occurred while creating the guild record. Please try again later.`,
+        ephemeral: true,
+      });
     }
   },
 };

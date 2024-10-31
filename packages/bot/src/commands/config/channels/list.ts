@@ -17,9 +17,10 @@ const list: Subcommand = {
     });
 
     if (!existingGuild || !existingGuild.trackedChannels) {
-      await interaction.reply(
-        `${emojiMap.error.cross} There are no channels currently being read for messages.`,
-      );
+      await interaction.reply({
+        content: `${emojiMap.error.cross} There are no channels currently being read for messages.`,
+        ephemeral: true,
+      });
 
       return;
     }
