@@ -1,14 +1,14 @@
 import {
-  SlashCommandSubcommandBuilder,
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
   ComponentType,
   EmbedBuilder,
   PermissionsBitField,
+  SlashCommandSubcommandBuilder,
 } from 'discord.js';
-import Subcommand from '../../interfaces/subcommand';
 import { prisma } from '../..';
+import Subcommand from '../../interfaces/subcommand';
 import emojiMap from '../../utils/emojiMap';
 
 const resetlog: Subcommand = {
@@ -27,9 +27,10 @@ const resetlog: Subcommand = {
     });
 
     if (!guildRecord || guildRecord.messages.length === 0) {
-      await interaction.reply(
-        `${emojiMap.error.cross} There are currently no messages stored.`,
-      );
+      await interaction.reply({
+        content: `${emojiMap.error.cross} There are currently no messages stored.`,
+        ephemeral: true,
+      });
       return;
     }
 

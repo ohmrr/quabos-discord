@@ -45,9 +45,10 @@ const purge: Command = {
           msg => currentTime - msg.createdTimestamp < fourteenDaysMilli,
         );
         if (messages.size === 0) {
-          await interaction.reply(
-            `${emojiMap.error.denied} Messages cannot be deleted after 14 days.`,
-          );
+          await interaction.reply({
+            content: `${emojiMap.error.denied} Messages cannot be deleted after 14 days.`,
+            ephemeral: true,
+          });
           return;
         }
 
@@ -57,7 +58,10 @@ const purge: Command = {
         );
       } catch (error) {
         console.error('Failed to purge messages.');
-        await interaction.reply(`${emojiMap.error.denied} Failed to purge the messages.`);
+        await interaction.reply({
+          content: `${emojiMap.error.denied} Failed to purge the messages.`,
+          ephemeral: true,
+        });
       }
     }
   },

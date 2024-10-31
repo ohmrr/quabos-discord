@@ -41,7 +41,7 @@ const config: Command = {
     const subcommand = interaction.options.getSubcommand();
     if (!subcommand) {
       await interaction.reply({
-        content: `${emojiMap.error.cross} Error getting the command group or subcommand.`,
+        content: `${emojiMap.error.cross} Error getting the subcommand.`,
         ephemeral: true,
       });
       return;

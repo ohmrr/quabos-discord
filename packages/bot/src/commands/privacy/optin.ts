@@ -1,6 +1,6 @@
 import { SlashCommandSubcommandBuilder } from 'discord.js';
-import Subcommand from '../../interfaces/subcommand';
 import { prisma } from '../..';
+import Subcommand from '../../interfaces/subcommand';
 import emojiMap from '../../utils/emojiMap';
 
 const optin: Subcommand = {
@@ -30,9 +30,10 @@ const optin: Subcommand = {
       });
 
       if (!user) {
-        await interaction.reply(
-          `${emojiMap.success.check} You are already opted-in globally!`,
-        );
+        await interaction.reply({
+          content: `${emojiMap.success.check} You are already opted-in globally!`,
+          ephemeral: true,
+        });
         return;
       }
 
@@ -41,11 +42,15 @@ const optin: Subcommand = {
           where: { userId },
           data: { ignored: false },
         });
-        await interaction.reply(
-          `${emojiMap.success.check} You have successfully opted-in globally!`,
-        );
+        await interaction.reply({
+          content: `${emojiMap.success.check} You have successfully opted-in globally!`,
+          ephemeral: true,
+        });
       } else {
-        await interaction.reply(`${emojiMap.error.cross} You are already opted-in globally!`);
+        await interaction.reply({
+          content: `${emojiMap.error.cross} You are already opted-in globally!`,
+          ephemeral: true,
+        });
       }
       return;
     }
@@ -56,9 +61,10 @@ const optin: Subcommand = {
       });
 
       if (!guildMember) {
-        await interaction.reply(
-          `${emojiMap.success.check} You are already opted-in for this server!`,
-        );
+        await interaction.reply({
+          content: `${emojiMap.success.check} You are already opted-in for this server!`,
+          ephemeral: true,
+        });
         return;
       }
 
@@ -67,13 +73,15 @@ const optin: Subcommand = {
           where: { userId_guildId: { userId, guildId } },
           data: { ignored: false },
         });
-        await interaction.reply(
-          `${emojiMap.success.check} You have successfully opted-in for this server!`,
-        );
+        await interaction.reply({
+          content: `${emojiMap.success.check} You have successfully opted-in for this server!`,
+          ephemeral: true,
+        });
       } else {
-        await interaction.reply(
-          `${emojiMap.error.cross} You are already opted-in for this server!`,
-        );
+        await interaction.reply({
+          content: `${emojiMap.error.cross} You are already opted-in for this server!`,
+          ephemeral: true,
+        });
       }
     }
   },

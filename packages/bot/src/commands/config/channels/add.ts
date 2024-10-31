@@ -109,7 +109,7 @@ const add: Subcommand = {
       );
       await interaction.reply({
         content: `${emojiMap.error.cross} An error occurred while creating the guild record. Please try again later.`,
-        ephemeral: true
+        ephemeral: true,
       });
     }
   },
