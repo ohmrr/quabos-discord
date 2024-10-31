@@ -4,6 +4,7 @@ import emojiMap from '../../utils/emojiMap';
 import add from './channels/add';
 import list from './channels/list';
 import remove from './channels/remove';
+import set from './probability/set';
 import view from './probability/view';
 import resetlog from './resetlog';
 
@@ -24,6 +25,7 @@ const config: Command = {
       probability
         .setName('probability')
         .setDescription('Manage probability settings for Quabos.')
+        .addSubcommand(set.data)
         .addSubcommand(view.data),
     )
     .addSubcommand(resetlog.data),
@@ -31,6 +33,7 @@ const config: Command = {
     add,
     list,
     remove,
+    set,
     view,
     resetlog,
   },
@@ -56,6 +59,9 @@ const config: Command = {
         break;
       case 'remove':
         await remove.execute(interaction);
+        break;
+      case 'set':
+        await set.execute(interaction);
         break;
       case 'view':
         await view.execute(interaction);

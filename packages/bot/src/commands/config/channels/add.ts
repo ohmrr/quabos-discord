@@ -105,7 +105,7 @@ const add: Subcommand = {
       );
     } catch (error) {
       console.error(
-        `Error while creating guild record. Guild Name: ${interaction.guild.name} ID: ${interaction.guild.id}: ${error}`,
+        `Error while creating guild record. Guild Name: ${interaction.guild.name} ID: ${interaction.guild.id}:\n${error}`,
       );
       await interaction.reply({
         content: `${emojiMap.error.cross} An error occurred while creating the guild record. Please try again later.`,
