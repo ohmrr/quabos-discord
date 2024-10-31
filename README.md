@@ -2,7 +2,7 @@
 
 ## Project Description
 
-Quabos is an entertainment focused Discord bot designed to promote activity in your Discord server. Through the use of a Markov Chaining algorithm, Quabos will use messages previously sent in your server in order to generate new ones.
+Quabos is an entertainment-focused Discord bot designed to promote activity in your Discord server. Using a Markov Chaining algorithm, Quabos will use messages previously sent to your server to generate new ones.
 
 ## Setup Instructions
 
@@ -61,7 +61,7 @@ View the list of channels being read for messages.
 
 #### /config channels remove
 
-Removes a channel that Quabos reads messages from.
+It removes a channel from which Quabos reads messages.
 
 ```
 /config channels remove [channel]
@@ -108,7 +108,7 @@ If you encounter any issues or bugs, please report them by creating a new issue 
 If you would like to contribute code to the project, follow these steps:
 
 1. Fork the repository on GitHub.
-2. Create a new branch for your feature or bugfix.
+2. Create a new branch for your feature or bug fix.
 3. Make your changes and commit them with clear and descriptive commit messages.
 4. Push your changes to your forked repository.
 5. Create a pull request on the main repository, describing your changes and the problem they solve.
