@@ -59,6 +59,7 @@ const config: Command = {
         break;
       case 'view':
         await view.execute(interaction);
+        break;
       case 'resetlog':
         await resetlog.execute(interaction);
         break;
