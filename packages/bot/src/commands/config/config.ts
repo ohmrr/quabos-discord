@@ -4,6 +4,7 @@ import emojiMap from '../../utils/emojiMap';
 import add from './channels/add';
 import list from './channels/list';
 import remove from './channels/remove';
+import view from './probability/view';
 import resetlog from './resetlog';
 
 const config: Command = {
@@ -19,11 +20,18 @@ const config: Command = {
         .addSubcommand(list.data)
         .addSubcommand(remove.data),
     )
+    .addSubcommandGroup(probability =>
+      probability
+        .setName('probability')
+        .setDescription('Manage probability settings for Quabos.')
+        .addSubcommand(view.data),
+    )
     .addSubcommand(resetlog.data),
   subcommands: {
     add,
     list,
     remove,
+    view,
     resetlog,
   },
   usage: `${add.usage}\n${remove.usage}\n${list.usage}\n${resetlog.usage}`,
@@ -32,9 +40,10 @@ const config: Command = {
 
     const subcommand = interaction.options.getSubcommand();
     if (!subcommand) {
-      await interaction.reply(
-        `${emojiMap.error.cross} Error getting the command group or subcommand.`,
-      );
+      await interaction.reply({
+        content: `${emojiMap.error.cross} Error getting the command group or subcommand.`,
+        ephemeral: true,
+      });
       return;
     }
 
@@ -48,11 +57,16 @@ const config: Command = {
       case 'remove':
         await remove.execute(interaction);
         break;
-      case 'reset-log':
+      case 'view':
+        await view.execute(interaction);
+      case 'resetlog':
         await resetlog.execute(interaction);
         break;
       default:
-        await interaction.reply(`${emojiMap.error.denied} Subcommand not found.`);
+        await interaction.reply({
+          content: `${emojiMap.error.denied} Subcommand not found.`,
+          ephemeral: true,
+        });
         break;
     }
   },
