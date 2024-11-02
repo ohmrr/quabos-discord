@@ -1,7 +1,8 @@
 import { ChannelType } from 'discord.js';
+import { prisma } from '..';
 import { createEvent } from '../interfaces/applicationEvent';
 
-const channelDelete = createEvent('channelDelete', false, async (prisma, channel) => {
+const channelDelete = createEvent('channelDelete', false, async channel => {
   if (channel.type !== ChannelType.GuildText) return;
   if (!channel.guild) return;
 

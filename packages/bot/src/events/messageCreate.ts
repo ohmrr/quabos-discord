@@ -1,8 +1,9 @@
+import { prisma } from '..';
 import { createEvent } from '../interfaces/applicationEvent';
 import emojiMap from '../utils/emojiMap';
 import { generateResponse, saveMessage } from '../utils/markov';
 
-const messageCreate = createEvent('messageCreate', false, async (prisma, message) => {
+const messageCreate = createEvent('messageCreate', false, async message => {
   if (!message.guild || !message.channel) return;
 
   await saveMessage(message);
