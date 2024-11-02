@@ -1,7 +1,6 @@
 import { createEvent } from '../interfaces/applicationEvent';
-import { prisma } from '..';
 
-const guildDelete = createEvent('guildDelete', false, async guild => {
+const guildDelete = createEvent('guildDelete', false, async (prisma, guild) => {
   try {
     await prisma.guild.delete({ where: { guildId: guild.id } });
   } catch (error) {
