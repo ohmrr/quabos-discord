@@ -4,7 +4,7 @@ import {
   SlashCommandBuilder,
   TextChannel,
 } from 'discord.js';
-import Command from '../interfaces/command';
+import type Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 
 const purge: Command = {

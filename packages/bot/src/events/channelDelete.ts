@@ -2,7 +2,7 @@ import { ChannelType } from 'discord.js';
 import { createEvent } from '../interfaces/applicationEvent';
 
 const channelDelete = createEvent('channelDelete', false, async (prisma, channel) => {
-  if (channel.type != ChannelType.GuildText) return;
+  if (channel.type !== ChannelType.GuildText) return;
   if (!channel.guild) return;
 
   const existingTrackedChannel = await prisma.channel.findUnique({

@@ -1,5 +1,5 @@
 import { EmbedBuilder, InteractionContextType, SlashCommandBuilder } from 'discord.js';
-import Command from '../interfaces/command';
+import type Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 
 const help: Command = {

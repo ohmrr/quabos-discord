@@ -1,4 +1,4 @@
-import {
+import type {
   AutocompleteInteraction,
   ChatInputCommandInteraction,
   PermissionsBitField,
@@ -6,7 +6,7 @@ import {
   SlashCommandOptionsOnlyBuilder,
   SlashCommandSubcommandsOnlyBuilder,
 } from 'discord.js';
-import Subcommand from './subcommand';
+import type Subcommand from './subcommand';
 
 interface Command {
   data:

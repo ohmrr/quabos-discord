@@ -1,6 +1,6 @@
 import { EmbedBuilder, PermissionsBitField, SlashCommandSubcommandBuilder } from 'discord.js';
 import { prisma } from '../../..';
-import Subcommand from '../../../interfaces/subcommand';
+import type Subcommand from '../../../interfaces/subcommand';
 import emojiMap from '../../../utils/emojiMap';
 
 const set: Subcommand = {

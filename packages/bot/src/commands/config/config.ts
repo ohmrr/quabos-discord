@@ -1,5 +1,5 @@
 import { InteractionContextType, SlashCommandBuilder } from 'discord.js';
-import Command from '../../interfaces/command';
+import type Command from '../../interfaces/command';
 import emojiMap from '../../utils/emojiMap';
 import add from './channels/add';
 import list from './channels/list';

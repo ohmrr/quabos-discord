@@ -1,6 +1,6 @@
 import { EmbedBuilder, SlashCommandSubcommandBuilder } from 'discord.js';
 import { clientVersion } from '../..';
-import Subcommand from '../../interfaces/subcommand';
+import type Subcommand from '../../interfaces/subcommand';
 import { formatUnixTimestamp, FormatType } from '../../utils/date';
 
 const bot: Subcommand = {

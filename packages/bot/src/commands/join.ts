@@ -1,6 +1,6 @@
 import { joinVoiceChannel } from '@discordjs/voice';
 import { InteractionContextType, PermissionsBitField, SlashCommandBuilder } from 'discord.js';
-import Command from '../interfaces/command';
+import type Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 
 const join: Command = {

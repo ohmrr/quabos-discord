@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
-import { ClientEvents } from 'discord.js';
+import type { ClientEvents } from 'discord.js';
 
-export interface ApplicationEvent<K extends keyof ClientEvents> {
+interface ApplicationEvent<K extends keyof ClientEvents> {
   name: K;
   once: boolean;
   execute: (prisma: PrismaClient, ...params: ClientEvents[K]) => void;

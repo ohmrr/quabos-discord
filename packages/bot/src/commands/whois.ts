@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, EmbedBuilder, InteractionContextType } from 'discord.js';
+import { EmbedBuilder, InteractionContextType, SlashCommandBuilder } from 'discord.js';
 import Command from '../interfaces/command';
 import { formatUnixTimestamp, FormatType } from '../utils/date';
 
