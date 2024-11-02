@@ -7,6 +7,7 @@ const messageCreate = createEvent('messageCreate', false, async (prisma, message
 
   await saveMessage(message);
 
+  if (message.author.bot || message.author.system) return;
   const guildId = message.guild.id;
   const guildRecord = await prisma.guild.findUnique({
     where: { guildId },
