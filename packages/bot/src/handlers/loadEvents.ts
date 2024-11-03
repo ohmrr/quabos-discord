@@ -1,7 +1,6 @@
 import { Client } from 'discord.js';
 import { readdirSync } from 'fs';
 import path from 'path';
-import { prisma } from '../';
 import { createEvent } from '../interfaces/applicationEvent';
 
 async function loadEventFromFile(client: Client, filePath: string) {
@@ -17,9 +16,9 @@ async function loadEventFromFile(client: Client, filePath: string) {
     const event = createEvent(eventModule.name, eventModule.once, eventModule.execute);
 
     if (event.once) {
-      client.once(event.name, (...params) => event.execute(prisma, ...params));
+      client.once(event.name, (...params) => event.execute(...params));
     } else {
-      client.on(event.name, (...params) => event.execute(prisma, ...params));
+      client.on(event.name, (...params) => event.execute(...params));
     }
   } catch (error) {
     console.error(`Error loading in ${filePath}: ${error}`);
