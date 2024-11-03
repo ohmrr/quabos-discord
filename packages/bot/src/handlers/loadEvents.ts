@@ -21,7 +21,7 @@ async function loadEventFromFile(client: Client, filePath: string) {
       client.on(event.name, (...params) => event.execute(...params));
     }
   } catch (error) {
-    console.error(`Error loading in ${filePath}: ${error}`);
+    console.error(`Event Execution Error ${filePath}: ${error}`);
   }
 }
 
