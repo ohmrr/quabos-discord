@@ -1,6 +1,7 @@
-import { Message } from 'discord.js';
+import { Client, Collection, Message, Snowflake, TextChannel } from 'discord.js';
 import Markov from 'markov-strings';
 import { prisma } from '../';
+import logger from './logger';
 
 export function isValidMessage(message: Message): boolean {
   const startsWithCommandChar = /^[!\/?]/i;
@@ -79,7 +80,7 @@ export async function getGuildMessages(guildId: string) {
 
     return messages;
   } catch (error) {
-    console.error('Error fetching guild messages: ', error);
+    logger.error(error, 'Unable to fetch guild messages for message response generation.');
     return null;
   }
 }
@@ -104,59 +105,61 @@ export async function generateResponse(guildId: string) {
 }
 
 // For testing purposes only, use with development guild.
-// export async function gatherMessagesFromGuild(guildId: string, client: Client) {
-//   const devGuild = await prisma.guild.findUnique({
-//     where: { guildId },
-//     include: { trackedChannels: true },
-//   });
+export async function gatherMessagesFromGuild(guildId: string, client: Client) {
+  const devGuild = await prisma.guild.findUnique({
+    where: { guildId },
+    include: { trackedChannels: true },
+  });
 
-//   if (!devGuild || !devGuild.trackedChannels) {
-//     console.error('The specified development guild is not being watched.');
-//     return;
-//   }
+  if (!devGuild || !devGuild.trackedChannels) {
+    logger.error('The specified development guild is not being watched.');
+    return;
+  }
 
-//   for (const trackedChannel of devGuild.trackedChannels) {
-//     const channel = client.channels.cache.get(trackedChannel.channelId);
-//     if (!channel || !(channel instanceof TextChannel)) {
-//       console.error(
-//         `Channel #${trackedChannel.channelId} is not a text channel or is unavailable.`,
-//       );
-//       continue;
-//     }
+  logger.debug(guildId, 'Starting message collection for the specified development guild.');
+  for (const trackedChannel of devGuild.trackedChannels) {
+    const channel = client.channels.cache.get(trackedChannel.channelId);
+    const channelId = trackedChannel.channelId;
+    if (!channel || !(channel instanceof TextChannel)) {
+      logger.warn(
+        channelId, 'Channel is not a text channel or is unavailable.'
+      );
+      continue;
+    }
 
-//     try {
-//       const allMessages = await fetchAllMessagesFromChannel(channel);
-//       console.log(
-//         `Fetched ${allMessages.length} total messages from channel #${channel.name}.`,
-//       );
+    try {
+      const allMessages = await fetchAllMessagesFromChannel(channel);
+      logger.debug(
+        { id: channelId, name: channel.name, messageCount: allMessages.length }, `Fetched all messages from the specified channel.`,
+      );
 
-//       for (const message of allMessages) {
-//         if (message.author.bot || message.system) continue;
+      logger.debug('Removing bot and system messages.');
+      for (const message of allMessages) {
+        if (message.author.bot || message.system) continue;
 
-//         await saveMessage(message);
-//       }
-//     } catch (error) {
-//       console.error(
-//         `Error fetching messages from channel #${trackedChannel.channelId}:`,
-//         error,
-//       );
-//     }
-//   }
-// }
+        await saveMessage(message);
+      }
+    } catch (error) {
+      logger.error(
+        error, `Error fetching messages from channel ${trackedChannel.channelId}`
+      );
+    }
+  }
+}
 
-// async function fetchAllMessagesFromChannel(channel: TextChannel): Promise<Message[]> {
-//   let allMessages: Message[] = [];
-//   let lastMessageId: string | null = null;
-//   let fetchedMessages: Collection<Snowflake, Message<true>>;
+async function fetchAllMessagesFromChannel(channel: TextChannel): Promise<Message[]> {
+  let allMessages: Message[] = [];
+  let lastMessageId: string | null = null;
+  let fetchedMessages: Collection<Snowflake, Message<true>>;
 
-//   do {
-//     const options = lastMessageId ? { limit: 100, before: lastMessageId } : { limit: 100 };
+  do {
+    const options = lastMessageId ? { limit: 100, before: lastMessageId } : { limit: 100 };
 
-//     fetchedMessages = await channel.messages.fetch(options);
-//     allMessages = allMessages.concat(Array.from(fetchedMessages.values()));
+    fetchedMessages = await channel.messages.fetch(options);
+    allMessages = allMessages.concat(Array.from(fetchedMessages.values()));
 
-//     lastMessageId = fetchedMessages.last()?.id ?? null;
-//   } while (fetchedMessages.size === 100);
+    lastMessageId = fetchedMessages.last()?.id ?? null;
+  } while (fetchedMessages.size === 100);
 
-//   return allMessages;
-// }
+  return allMessages;
+}

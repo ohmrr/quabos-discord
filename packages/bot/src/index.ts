@@ -4,6 +4,7 @@ import 'dotenv/config';
 import { version } from '../package.json';
 import loadCommands from './handlers/loadCommands';
 import loadEvents from './handlers/loadEvents';
+import logger from './utils/logger';
 
 const client = new Client({
   intents: [
@@ -32,7 +33,7 @@ async function init() {
     await loadCommands(client);
     await client.login(process.env.DISCORD_TOKEN);
   } catch (error) {
-    console.error('Error initializing client:', error);
+    logger.fatal(error, 'Unable to initialize database and client.');
     process.exit(1);
   }
 }

@@ -1,7 +1,8 @@
 import { ActivityType } from 'discord.js';
-import { createEvent } from '../interfaces/applicationEvent';
 import deployCommands from '../handlers/deployCommands';
+import { createEvent } from '../interfaces/applicationEvent';
 import { formatDate } from '../utils/date';
+import logger from '../utils/logger';
 
 const ready = createEvent('ready', true, async client => {
   const guildSize = client.guilds.cache.size;
@@ -10,10 +11,10 @@ const ready = createEvent('ready', true, async client => {
   / __ \\__  ______ _/ /_  ____  _____
  / / / / / / / __ \`/ __ \\/ __ \\/ ___/
 / /_/ / /_/ / /_/ / /_/ / /_/ (__  ) 
-\\___\\_\\__,_/\\__,_/_.___/\\____/____/\n\n`;
+\\___\\_\\__,_/\\__,_/_.___/\\____/____/\n`;
 
-  console.log(wordArt);
-  console.log(
+  logger.info(`\n${wordArt}`);
+  logger.info(
     `${currentDate} | Logged in as ${client.user.tag} in ${client.guilds.cache.size} servers.`,
   );
 

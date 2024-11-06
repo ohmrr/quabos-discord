@@ -6,6 +6,7 @@ import {
 } from 'discord.js';
 import type Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
+import logger from '../utils/logger';
 
 const purge: Command = {
   data: new SlashCommandBuilder()
@@ -57,7 +58,7 @@ const purge: Command = {
           `${emojiMap.success.check} Deleted ${messages.size} messages.`,
         );
       } catch (error) {
-        console.error('Failed to purge messages.');
+        logger.error(error, 'Failed to purge messages.');
         await interaction.reply({
           content: `${emojiMap.error.denied} Failed to purge the messages.`,
           ephemeral: true,
