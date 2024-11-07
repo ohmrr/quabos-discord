@@ -1,12 +1,14 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      [key: string]: string | undefined;
+      CONNECTION_STRING: string;
       DISCORD_TOKEN: string;
+      NODE_ENV: 'production' | 'development';
       DEV_GUILD_ID: string;
-      NODE_ENV: 'development' | 'production';
+      [key: string]: string;
     }
   }
 }
 
-export {};
+export { };
+

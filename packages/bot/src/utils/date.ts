@@ -16,18 +16,3 @@ export function formatUnixTimestamp(date: Date, format: FormatType) {
   const timestamp = Math.floor(date.getTime() / 1000);
   return `<t:${timestamp}:${format}>`;
 }
-
-export function formatDate(date: Date) {
-  const options: Intl.DateTimeFormatOptions = {
-    weekday: 'short',
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true,
-    timeZone: 'America/Los_Angeles',
-  };
-
-  return new Intl.DateTimeFormat('en-US', options).format(date);
-}

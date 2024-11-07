@@ -6,7 +6,11 @@ const transport = pino.transport({
   targets: [
     {
       target: 'pino-pretty',
-      options: { destination: 1, translateTime: timeFormat, colorize: true },
+      options: {
+        destination: 1,
+        translateTime: timeFormat,
+        colorize: true
+      },
       level: 'debug',
     },
     {
