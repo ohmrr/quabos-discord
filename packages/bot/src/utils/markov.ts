@@ -121,16 +121,15 @@ export async function gatherMessagesFromGuild(guildId: string, client: Client) {
     const channel = client.channels.cache.get(trackedChannel.channelId);
     const channelId = trackedChannel.channelId;
     if (!channel || !(channel instanceof TextChannel)) {
-      logger.warn(
-        channelId, 'Channel is not a text channel or is unavailable.'
-      );
+      logger.warn(channelId, 'Channel is not a text channel or is unavailable.');
       continue;
     }
 
     try {
       const allMessages = await fetchAllMessagesFromChannel(channel);
       logger.debug(
-        { id: channelId, name: channel.name, messageCount: allMessages.length }, `Fetched all messages from the specified channel.`,
+        { id: channelId, name: channel.name, messageCount: allMessages.length },
+        `Fetched all messages from the specified channel.`,
       );
 
       logger.debug('Removing bot and system messages.');
@@ -140,9 +139,7 @@ export async function gatherMessagesFromGuild(guildId: string, client: Client) {
         await saveMessage(message);
       }
     } catch (error) {
-      logger.error(
-        error, `Error fetching messages from channel ${trackedChannel.channelId}`
-      );
+      logger.error(error, `Error fetching messages from channel ${trackedChannel.channelId}`);
     }
   }
 }

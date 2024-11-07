@@ -33,7 +33,8 @@ async function deployCommands(client: Client) {
     );
   } catch (error) {
     logger.error(
-      error, `Error registering application (/) commands to ${process.env.NODE_ENV}`,
+      error,
+      `Error registering application (/) commands to ${process.env.NODE_ENV}`,
     );
     process.exit(1);
   }

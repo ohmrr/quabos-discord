@@ -41,7 +41,7 @@ async function loadCommandFromFile(filePath: string) {
 
     commands.set(cmd.data.name, cmd);
   } catch (error) {
-    logger.error({filePath, error}, 'Unable to load in command file.');
+    logger.error({ filePath, error }, 'Unable to load in command file.');
   }
 }
 

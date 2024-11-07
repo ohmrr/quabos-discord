@@ -8,7 +8,7 @@ const guildDelete = createEvent('guildDelete', false, async guild => {
   try {
     await prisma.guild.delete({ where: { guildId } });
   } catch (error) {
-    logger.error({ guildId, error }, 'Error deleting guild record from database')
+    logger.error({ guildId, error }, 'Error deleting guild record from database');
   }
 });
 

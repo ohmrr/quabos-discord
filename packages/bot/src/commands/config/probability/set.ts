@@ -56,7 +56,10 @@ const set: Subcommand = {
 
       await interaction.reply({ embeds: [probabilityUpdateEmbed] });
     } catch (error) {
-      logger.error({ guildId: interaction.guild.id, newProbabilityValue, error }, 'Error updating the guild probability.');
+      logger.error(
+        { guildId: interaction.guild.id, newProbabilityValue, error },
+        'Error updating the guild probability.',
+      );
       await interaction.reply({
         content: `${emojiMap.error.cross} There was an error updating the probability. Please try again.`,
         ephemeral: true,

@@ -1,4 +1,4 @@
-import pino from "pino";
+import pino from 'pino';
 
 const timeFormat = 'dd-mm-yyyy HH:MM:ss';
 
@@ -12,12 +12,15 @@ const transport = pino.transport({
     {
       target: 'pino-pretty',
       options: {
-        destination: '../../logs/output.log', translateTime: timeFormat, mkdir: true, colorize: false
+        destination: '../../logs/output.log',
+        translateTime: timeFormat,
+        mkdir: true,
+        colorize: false,
       },
-      level: 'info'
-    }
-  ]
-})
+      level: 'info',
+    },
+  ],
+});
 
 const logger = pino(transport);
 

@@ -42,7 +42,10 @@ const remove: Subcommand = {
         `${emojiMap.success.check} Channel <#${selectedChannel.id}> is no longer being read for new messages.`,
       );
     } catch (error) {
-      logger.error({ guildId: interaction.guild.id, channelId: selectedChannel.id, error }, 'Error while deleting channel record');
+      logger.error(
+        { guildId: interaction.guild.id, channelId: selectedChannel.id, error },
+        'Error while deleting channel record',
+      );
       await interaction.reply(
         `${emojiMap.error.cross} An error occurred while removing the channel.`,
       );

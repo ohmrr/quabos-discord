@@ -14,7 +14,10 @@ const interactionCreate = createEvent('interactionCreate', false, async interact
     try {
       await command.autocomplete(interaction);
     } catch (error) {
-      logger.error({ commandName: command.data.name, error }, 'Error handling autocomplete interaction');
+      logger.error(
+        { commandName: command.data.name, error },
+        'Error handling autocomplete interaction',
+      );
     }
 
     return;

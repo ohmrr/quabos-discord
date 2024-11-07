@@ -22,7 +22,7 @@ async function loadEventFromFile(client: Client, filePath: string) {
       client.on(event.name, (...params) => event.execute(...params));
     }
   } catch (error) {
-    logger.error({ filePath, error}, 'Unable to initialize event listener.');
+    logger.error({ filePath, error }, 'Unable to initialize event listener.');
   }
 }
 

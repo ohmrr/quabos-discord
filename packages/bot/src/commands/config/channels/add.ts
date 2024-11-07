@@ -79,7 +79,8 @@ const add: Subcommand = {
         return;
       } catch (error) {
         logger.error(
-          { guildId: interaction.guild.id, name: interaction.guild.name, error }, 'Error updating guild record.',
+          { guildId: interaction.guild.id, name: interaction.guild.name, error },
+          'Error updating guild record.',
         );
         await interaction.reply({
           content: `${emojiMap.error.cross} An error occurred while updating the channel record.`,
@@ -106,7 +107,8 @@ const add: Subcommand = {
       );
     } catch (error) {
       logger.error(
-        { guildId: interaction.guild.id, name: interaction.guild.id, error }, 'Error creating guild record.',
+        { guildId: interaction.guild.id, name: interaction.guild.id, error },
+        'Error creating guild record.',
       );
       await interaction.reply({
         content: `${emojiMap.error.cross} An error occurred while creating the guild record. Please try again later.`,
