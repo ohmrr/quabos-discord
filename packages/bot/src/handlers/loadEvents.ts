@@ -2,13 +2,14 @@ import { Client } from 'discord.js';
 import { readdirSync } from 'fs';
 import path from 'path';
 import { createEvent } from '../interfaces/applicationEvent';
+import logger from '../utils/logger';
 
 async function loadEventFromFile(client: Client, filePath: string) {
   try {
     const { default: eventModule } = (await import(filePath)).default;
 
     if (!eventModule.name || !eventModule.execute) {
-      console.log(`${filePath} is missing properties. Skipping onto the next file...`);
+      logger.warn(filePath, 'Event is missing properties. Skipping onto next file.');
 
       return;
     }
@@ -21,7 +22,7 @@ async function loadEventFromFile(client: Client, filePath: string) {
       client.on(event.name, (...params) => event.execute(...params));
     }
   } catch (error) {
-    console.error(`Event Execution Error ${filePath}: ${error}`);
+    logger.error({ filePath, error }, 'Unable to initialize event listener.');
   }
 }
 

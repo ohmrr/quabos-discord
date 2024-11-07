@@ -2,6 +2,7 @@ import { PermissionsBitField } from 'discord.js';
 import { createEvent } from '../interfaces/applicationEvent';
 import emojiMap from '../utils/emojiMap';
 import hasPermissions from '../utils/hasPermissions';
+import logger from '../utils/logger';
 
 const interactionCreate = createEvent('interactionCreate', false, async interaction => {
   if (!interaction.isChatInputCommand()) {
@@ -13,7 +14,10 @@ const interactionCreate = createEvent('interactionCreate', false, async interact
     try {
       await command.autocomplete(interaction);
     } catch (error) {
-      console.error(`Error handling autocomplete interaction: ${error}`);
+      logger.error(
+        { commandName: command.data.name, error },
+        'Error handling autocomplete interaction',
+      );
     }
 
     return;
@@ -39,9 +43,9 @@ const interactionCreate = createEvent('interactionCreate', false, async interact
   try {
     await command.execute(interaction);
   } catch (error) {
-    console.error(`Slash command error: ${error}`);
+    logger.error({ commandName: command.data.name, error }, 'Unable to execute slash command');
     await interaction.reply({
-      content: `${emojiMap.error.cross} There was an error while executing this command.`,
+      content: `${emojiMap.error.cross} There was an error while executing this command. Please try again later.`,
       ephemeral: true,
     });
   }

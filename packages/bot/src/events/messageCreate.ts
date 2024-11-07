@@ -1,6 +1,7 @@
 import { prisma } from '..';
 import { createEvent } from '../interfaces/applicationEvent';
 import emojiMap from '../utils/emojiMap';
+import logger from '../utils/logger';
 import { generateResponse, saveMessage } from '../utils/markov';
 
 const messageCreate = createEvent('messageCreate', false, async message => {
@@ -31,7 +32,7 @@ const messageCreate = createEvent('messageCreate', false, async message => {
     await new Promise(resolve => setTimeout(resolve, 5000));
     await message.channel.send(`${emojiList[randomIndex]} ${response}`);
   } catch (error) {
-    console.error(`Message creation error: ${error}`);
+    logger.error(error, 'Error sending randomly generated message');
   }
 });
 

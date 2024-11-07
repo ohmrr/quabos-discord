@@ -1,18 +1,19 @@
-import { REST, Routes, Client } from 'discord.js';
+import { Client, REST, Routes } from 'discord.js';
+import logger from '../utils/logger';
 
 async function deployCommands(client: Client) {
   if (!client.user) {
-    console.error('Client missing user properties, cancelling command deployment.');
-    return;
+    logger.error('Client missing user properties, cancelling command deployment.');
+    process.exit(1);
   }
 
   if (!process.env.NODE_ENV) {
-    console.error('Missing environment variable: NODE_ENV.');
+    logger.error('Missing environment variable: NODE_ENV.');
     process.exit(1);
   }
 
   if (process.env.NODE_ENV === 'development' && !process.env.DEV_GUILD_ID) {
-    console.error('Missing environment variable: DEV_GUILD_ID.');
+    logger.error('Missing environment variable: DEV_GUILD_ID.');
     process.exit(1);
   }
 
@@ -27,12 +28,13 @@ async function deployCommands(client: Client) {
   try {
     await rest.put(route, { body: commandsData });
 
-    console.log(
+    logger.info(
       `Application (/) commands successfully registered to ${process.env.NODE_ENV}.`,
     );
-  } catch (err) {
-    console.error(
-      `Error registering application (/) commands to ${process.env.NODE_ENV}: ${err}`,
+  } catch (error) {
+    logger.error(
+      error,
+      `Error registering application (/) commands to ${process.env.NODE_ENV}`,
     );
     process.exit(1);
   }

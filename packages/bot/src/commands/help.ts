@@ -1,6 +1,7 @@
 import { EmbedBuilder, InteractionContextType, SlashCommandBuilder } from 'discord.js';
 import type Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
+import logger from '../utils/logger';
 
 const help: Command = {
   data: new SlashCommandBuilder()
@@ -48,11 +49,11 @@ const help: Command = {
 
     const command = client.commands.get(commandChoice);
     if (!command) {
+      logger.error({ commandChoice }, 'Error providing help for command.');
       await interaction.reply({
         content: `${emojiMap.error.cross} Error finding command.`,
         ephemeral: true,
       });
-      console.error(`Error providing help for command ${commandChoice}: ${command}`);
       return;
     }
 

@@ -7,6 +7,7 @@ import {
 import { prisma } from '../../..';
 import type Subcommand from '../../../interfaces/subcommand';
 import emojiMap from '../../../utils/emojiMap';
+import logger from '../../../utils/logger';
 
 const add: Subcommand = {
   data: new SlashCommandSubcommandBuilder()
@@ -77,11 +78,12 @@ const add: Subcommand = {
         );
         return;
       } catch (error) {
-        console.error(
-          `Error while creating guild record. Guild Name: ${interaction.guild.name} ID: ${interaction.guild.id}: ${error}`,
+        logger.error(
+          { guildId: interaction.guild.id, name: interaction.guild.name, error },
+          'Error updating guild record.',
         );
         await interaction.reply({
-          content: `${emojiMap.error.cross} An error occurred while creating the channel record.`,
+          content: `${emojiMap.error.cross} An error occurred while updating the channel record.`,
           ephemeral: true,
         });
       }
@@ -104,8 +106,9 @@ const add: Subcommand = {
         `${emojiMap.success.check} Channel <#${selectedChannel.id}> is now being read for new messages.`,
       );
     } catch (error) {
-      console.error(
-        `Error while creating guild record. Guild Name: ${interaction.guild.name} ID: ${interaction.guild.id}:\n${error}`,
+      logger.error(
+        { guildId: interaction.guild.id, name: interaction.guild.id, error },
+        'Error creating guild record.',
       );
       await interaction.reply({
         content: `${emojiMap.error.cross} An error occurred while creating the guild record. Please try again later.`,

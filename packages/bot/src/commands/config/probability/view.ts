@@ -2,6 +2,7 @@ import { EmbedBuilder, SlashCommandSubcommandBuilder } from 'discord.js';
 import { prisma } from '../../..';
 import type Subcommand from '../../../interfaces/subcommand';
 import emojiMap from '../../../utils/emojiMap';
+import logger from '../../../utils/logger';
 
 const view: Subcommand = {
   data: new SlashCommandSubcommandBuilder()
@@ -34,7 +35,7 @@ const view: Subcommand = {
 
       await interaction.reply({ embeds: [probabilityEmbed], ephemeral: true });
     } catch (error) {
-      console.error(`Fetch Guild Probability Error:\n${error}`);
+      logger.error(error, 'Unable to fetch guild probability.');
       await interaction.reply({
         content: `${emojiMap.error.cross} There was an fetching the guild probability. Please try again.`,
         ephemeral: true,

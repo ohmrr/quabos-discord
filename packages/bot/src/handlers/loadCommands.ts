@@ -1,7 +1,8 @@
-import { Collection, Client } from 'discord.js';
-import Command from '../interfaces/command';
+import { Client, Collection } from 'discord.js';
 import { readdirSync, statSync } from 'fs';
 import path from 'path';
+import Command from '../interfaces/command';
+import logger from '../utils/logger';
 
 const commands = new Collection<string, Command>();
 
@@ -20,7 +21,7 @@ function getCommandFiles(directory: string): string[] {
       } else {
         results = results.concat(getCommandFiles(filePath));
       }
-    } else if (file.endsWith('.ts') || file.endsWith('.js')) {
+    } else if (file.endsWith('.js')) {
       results.push(filePath);
     }
   });
@@ -34,13 +35,13 @@ async function loadCommandFromFile(filePath: string) {
     const cmd = commandModule as Command;
 
     if (!cmd.data || !cmd.execute) {
-      console.log(`${filePath} is missing properties. Skipping onto the next file...`);
+      logger.warn(filePath, 'Command is missing properties. Skipping onto next file.');
       return;
     }
 
     commands.set(cmd.data.name, cmd);
   } catch (error) {
-    console.error(`Error loading in ${filePath}: ${error}`);
+    logger.error({ filePath, error }, 'Unable to load in command file.');
   }
 }
 

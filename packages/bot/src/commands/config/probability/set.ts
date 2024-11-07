@@ -2,6 +2,7 @@ import { EmbedBuilder, PermissionsBitField, SlashCommandSubcommandBuilder } from
 import { prisma } from '../../..';
 import type Subcommand from '../../../interfaces/subcommand';
 import emojiMap from '../../../utils/emojiMap';
+import logger from '../../../utils/logger';
 
 const set: Subcommand = {
   data: new SlashCommandSubcommandBuilder()
@@ -55,7 +56,10 @@ const set: Subcommand = {
 
       await interaction.reply({ embeds: [probabilityUpdateEmbed] });
     } catch (error) {
-      console.error(`Guild Probability Update Error:\n${error}`);
+      logger.error(
+        { guildId: interaction.guild.id, newProbabilityValue, error },
+        'Error updating the guild probability.',
+      );
       await interaction.reply({
         content: `${emojiMap.error.cross} There was an error updating the probability. Please try again.`,
         ephemeral: true,
