@@ -8,7 +8,7 @@ import set from './probability/set';
 import view from './probability/view';
 import resetlog from './resetlog';
 
-const config: Command = {
+export default {
   data: new SlashCommandBuilder()
     .setName('config')
     .setDescription('Manage bot configuration.')
@@ -77,6 +77,4 @@ const config: Command = {
         break;
     }
   },
-};
-
-export default config;
+} satisfies Command;

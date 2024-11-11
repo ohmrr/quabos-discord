@@ -3,7 +3,7 @@ import { prisma } from '../..';
 import type Subcommand from '../../interfaces/subcommand';
 import emojiMap from '../../utils/emojiMap';
 
-const optout: Subcommand = {
+export default {
   data: new SlashCommandSubcommandBuilder()
     .setName('opt-out')
     .setDescription('Opt-out of message collection for the model.')
@@ -75,6 +75,4 @@ const optout: Subcommand = {
       });
     }
   },
-};
-
-export default optout;
+} satisfies Subcommand;

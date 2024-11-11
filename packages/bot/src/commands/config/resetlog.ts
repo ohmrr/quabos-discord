@@ -11,7 +11,7 @@ import { prisma } from '../..';
 import type Subcommand from '../../interfaces/subcommand';
 import emojiMap from '../../utils/emojiMap';
 
-const resetlog: Subcommand = {
+export default {
   data: new SlashCommandSubcommandBuilder()
     .setName('resetlog')
     .setDescription('Deletes all the message logs for your server.'),
@@ -90,6 +90,4 @@ const resetlog: Subcommand = {
       }
     });
   },
-};
-
-export default resetlog;
+} satisfies Subcommand;

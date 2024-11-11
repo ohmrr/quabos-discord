@@ -4,7 +4,7 @@ import type Subcommand from '../../../interfaces/subcommand';
 import emojiMap from '../../../utils/emojiMap';
 import logger from '../../../utils/logger';
 
-const set: Subcommand = {
+export default {
   data: new SlashCommandSubcommandBuilder()
     .setName('set')
     .setDescription(
@@ -66,6 +66,5 @@ const set: Subcommand = {
       });
     }
   },
-};
+} satisfies Subcommand;
 
-export default set;

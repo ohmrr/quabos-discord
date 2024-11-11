@@ -4,7 +4,7 @@ import emojiMap from '../../utils/emojiMap';
 import bot from './bot';
 import stats from './stats';
 
-const info: Command = {
+export default {
   data: new SlashCommandBuilder()
     .setName('info')
     .setDescription('Information about Quabos and the current guild.')
@@ -41,6 +41,4 @@ const info: Command = {
         break;
     }
   },
-};
-
-export default info;
+} satisfies Command;

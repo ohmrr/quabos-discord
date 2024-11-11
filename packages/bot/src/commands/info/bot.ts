@@ -3,7 +3,7 @@ import { clientVersion } from '../..';
 import type Subcommand from '../../interfaces/subcommand';
 import { formatUnixTimestamp, FormatType } from '../../utils/date';
 
-const bot: Subcommand = {
+export default {
   data: new SlashCommandSubcommandBuilder()
     .setName('bot')
     .setDescription('Shows information about Quabos.'),
@@ -31,6 +31,4 @@ const bot: Subcommand = {
 
     await interaction.reply({ embeds: [botEmbed], ephemeral: true });
   },
-};
-
-export default bot;
+} satisfies Subcommand;

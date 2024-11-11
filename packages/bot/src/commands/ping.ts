@@ -2,7 +2,7 @@ import { InteractionContextType, SlashCommandBuilder } from 'discord.js';
 import type Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 
-const ping: Command = {
+export default {
   data: new SlashCommandBuilder()
     .setName('ping')
     .setDescription('Get the client and websocket ping.')
@@ -17,6 +17,4 @@ const ping: Command = {
       `${emojiMap.celestial.alien} **Client**: ${clientLatency}ms | **Websocket**: ${interaction.client.ws.ping}ms`,
     );
   },
-};
-
-export default ping;
+} satisfies Command;

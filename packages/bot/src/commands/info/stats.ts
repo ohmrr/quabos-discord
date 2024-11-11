@@ -3,7 +3,7 @@ import type Subcommand from '../../interfaces/subcommand';
 import emojiMap from '../../utils/emojiMap';
 import { prisma } from '../..';
 
-const stats: Subcommand = {
+export default {
   data: new SlashCommandSubcommandBuilder()
     .setName('stats')
     .setDescription("Shows Quabos's stats for the current server."),
@@ -49,6 +49,4 @@ const stats: Subcommand = {
 
     await interaction.reply({ embeds: [statsEmbed] });
   },
-};
-
-export default stats;
+} satisfies Subcommand;

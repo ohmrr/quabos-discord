@@ -3,7 +3,7 @@ import { InteractionContextType, SlashCommandBuilder } from 'discord.js';
 import type Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 
-const disconnect: Command = {
+export default {
   data: new SlashCommandBuilder()
     .setName('disconnect')
     .setDescription('Disconnect from the voice channel.')
@@ -24,6 +24,4 @@ const disconnect: Command = {
     voiceConnection.destroy();
     await interaction.reply(`${emojiMap.success.check} Disconnected from the voice channel.`);
   },
-};
-
-export default disconnect;
+} satisfies Command;

@@ -3,7 +3,7 @@ import { prisma } from '../../..';
 import type Subcommand from '../../../interfaces/subcommand';
 import emojiMap from '../../../utils/emojiMap';
 
-const list: Subcommand = {
+export default {
   data: new SlashCommandSubcommandBuilder()
     .setName('list')
     .setDescription('View the list of channels being read for messages.'),
@@ -40,6 +40,4 @@ const list: Subcommand = {
 
     await interaction.reply({ embeds: [listEmbed] });
   },
-};
-
-export default list;
+} satisfies Subcommand;

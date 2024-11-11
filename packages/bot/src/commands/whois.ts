@@ -2,7 +2,7 @@ import { EmbedBuilder, InteractionContextType, SlashCommandBuilder } from 'disco
 import Command from '../interfaces/command';
 import { formatUnixTimestamp, FormatType } from '../utils/date';
 
-const whois: Command = {
+export default {
   data: new SlashCommandBuilder()
     .setName('whois')
     .setDescription('Get user information.')
@@ -57,6 +57,4 @@ const whois: Command = {
 
     await interaction.reply({ embeds: [whoisEmbed] });
   },
-};
-
-export default whois;
+} satisfies Command;

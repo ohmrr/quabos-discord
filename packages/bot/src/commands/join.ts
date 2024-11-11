@@ -3,7 +3,7 @@ import { InteractionContextType, PermissionsBitField, SlashCommandBuilder } from
 import type Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 
-const join: Command = {
+export default {
   data: new SlashCommandBuilder()
     .setName('join')
     .setDescription('Join the voice channel.')
@@ -43,6 +43,4 @@ const join: Command = {
       `${emojiMap.sound.normal} Joined the voice channel ${voiceChannel.name}`,
     );
   },
-};
-
-export default join;
+} satisfies Command;

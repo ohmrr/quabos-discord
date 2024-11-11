@@ -1,7 +1,7 @@
 import { EmbedBuilder, InteractionContextType, SlashCommandBuilder } from 'discord.js';
 import type Command from '../interfaces/command';
 
-const avatar: Command = {
+export default {
   data: new SlashCommandBuilder()
     .setName('avatar')
     .setDescription('Display the avatar of the selected server member.')
@@ -30,6 +30,4 @@ const avatar: Command = {
 
     await interaction.reply({ embeds: [avatarEmbed] });
   },
-};
-
-export default avatar;
+} satisfies Command;

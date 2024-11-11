@@ -4,7 +4,7 @@ import type Subcommand from '../../../interfaces/subcommand';
 import emojiMap from '../../../utils/emojiMap';
 import logger from '../../../utils/logger';
 
-const view: Subcommand = {
+export default {
   data: new SlashCommandSubcommandBuilder()
     .setName('view')
     .setDescription(
@@ -42,6 +42,4 @@ const view: Subcommand = {
       });
     }
   },
-};
-
-export default view;
+} satisfies Subcommand;

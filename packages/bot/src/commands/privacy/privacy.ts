@@ -4,7 +4,7 @@ import emojiMap from '../../utils/emojiMap';
 import optin from './optin';
 import optout from './optout';
 
-const privacy: Command = {
+export default {
   data: new SlashCommandBuilder()
     .setName('privacy')
     .setDescription(
@@ -47,6 +47,4 @@ const privacy: Command = {
         break;
     }
   },
-};
-
-export default privacy;
+} satisfies Command;

@@ -9,7 +9,7 @@ import type Subcommand from '../../../interfaces/subcommand';
 import emojiMap from '../../../utils/emojiMap';
 import logger from '../../../utils/logger';
 
-const add: Subcommand = {
+export default {
   data: new SlashCommandSubcommandBuilder()
     .setName('add')
     .setDescription('Adds a new channel for reading messages.')
@@ -116,6 +116,4 @@ const add: Subcommand = {
       });
     }
   },
-};
-
-export default add;
+} satisfies Subcommand;

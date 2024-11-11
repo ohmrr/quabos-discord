@@ -8,7 +8,7 @@ import { prisma } from '..';
 import type Command from '../interfaces/command';
 import { FormatType, formatUnixTimestamp } from '../utils/date';
 
-const serverInfo: Command = {
+export default {
   data: new SlashCommandBuilder()
     .setName('serverinfo')
     .setDescription('Get information on the current guild.')
@@ -98,6 +98,4 @@ const serverInfo: Command = {
 
     await interaction.reply({ embeds: [serverInfoEmbed] });
   },
-};
-
-export default serverInfo;
+} satisfies Command;

@@ -8,7 +8,7 @@ import type Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 import logger from '../utils/logger';
 
-const purge: Command = {
+export default {
   data: new SlashCommandBuilder()
     .setName('purge')
     .setDescription('Delete messages in the current channel.')
@@ -66,6 +66,4 @@ const purge: Command = {
       }
     }
   },
-};
-
-export default purge;
+} satisfies Command;

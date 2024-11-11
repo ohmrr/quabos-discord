@@ -3,7 +3,7 @@ import { generateResponse } from '../utils/markov';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 
-const generate: Command = {
+export default {
   data: new SlashCommandBuilder()
     .setName('generate')
     .setDescription('Force a new message to be generated.')
@@ -28,6 +28,4 @@ const generate: Command = {
       await interaction.editReply(`${emojiList[randomIndex]} ${response}`);
     }
   },
-};
-
-export default generate;
+} satisfies Command;

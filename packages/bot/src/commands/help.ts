@@ -3,7 +3,7 @@ import type Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 import logger from '../utils/logger';
 
-const help: Command = {
+export default {
   data: new SlashCommandBuilder()
     .setName('help')
     .setDescription('Shows command information.')
@@ -77,6 +77,4 @@ const help: Command = {
 
     await interaction.respond(filteredCommands);
   },
-};
-
-export default help;
+} satisfies Command;
