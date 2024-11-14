@@ -9,7 +9,7 @@ const transport = pino.transport({
       options: {
         destination: 1,
         translateTime: timeFormat,
-        colorize: true
+        colorize: true,
       },
       level: 'debug',
     },
