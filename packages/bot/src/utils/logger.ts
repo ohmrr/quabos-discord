@@ -1,6 +1,10 @@
 import pino from 'pino';
+import path from 'path';
 
-const timeFormat = 'dd-mm-yyyy HH:MM:ss';
+const subfolder = process.env.NODE_ENV === 'development' ? 'dev' : 'prod';
+const logPath = path.join('..', '..', 'logs', subfolder, 'output.log');
+
+const timeFormat = 'mm-dd-yyyy HH:MM:ss';
 
 const transport = pino.transport({
   targets: [
@@ -16,7 +20,7 @@ const transport = pino.transport({
     {
       target: 'pino-pretty',
       options: {
-        destination: '../../logs/output.log',
+        destination: logPath,
         translateTime: timeFormat,
         mkdir: true,
         colorize: false,
