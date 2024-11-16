@@ -9,6 +9,7 @@ export default {
     .setDescription('Disconnect from the voice channel.')
     .setContexts(InteractionContextType.Guild),
   usage: '/disconnect',
+  cooldown: 10_000,
   execute: async interaction => {
     if (!interaction.guild || !interaction.member) return;
 

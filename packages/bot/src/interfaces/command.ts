@@ -16,6 +16,7 @@ interface Command {
   subcommands?: Record<string, Subcommand>;
   permissions?: PermissionsBitField;
   usage: string;
+  cooldown?: number;
   execute: (interaction: ChatInputCommandInteraction) => Promise<void>;
   autocomplete?: (interaction: AutocompleteInteraction) => Promise<void>;
 }

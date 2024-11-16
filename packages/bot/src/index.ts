@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { Client, GatewayIntentBits, Partials } from 'discord.js';
+import { Client, Collection, GatewayIntentBits, Partials } from 'discord.js';
 import 'dotenv/config';
 import { version } from '../package.json';
 import loadCommands from './handlers/loadCommands';
@@ -22,6 +22,7 @@ const client = new Client({
 
 const prisma = new PrismaClient();
 const clientVersion = version;
+client.cooldowns = new Collection();
 
 async function init() {
   await prisma.$connect();

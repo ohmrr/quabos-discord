@@ -9,6 +9,7 @@ export default {
     .setDescription('Force a new message to be generated.')
     .setContexts(InteractionContextType.Guild),
   usage: '/generate',
+  cooldown: 5_000,
   execute: async interaction => {
     if (!interaction.guild || !interaction.member) return;
 

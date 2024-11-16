@@ -38,6 +38,7 @@ export default {
     resetlog,
   },
   usage: `${add.usage}\n${remove.usage}\n${list.usage}\n${resetlog.usage}`,
+  cooldown: 10_000,
   execute: async interaction => {
     if (!interaction.guild) return;
 

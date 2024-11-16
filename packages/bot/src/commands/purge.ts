@@ -24,6 +24,7 @@ export default {
     ),
   permissions: new PermissionsBitField(PermissionsBitField.Flags.ManageMessages),
   usage: '/purge [amount]',
+  cooldown: 10_000,
   execute: async interaction => {
     if (!interaction.guild || !interaction.channel) return;
     if (!interaction.channel.isTextBased()) return;

@@ -12,6 +12,7 @@ export default {
     .addSubcommand(bot.data)
     .addSubcommand(stats.data),
   usage: `${bot.usage}\n${stats.usage}`,
+  cooldown: 5_000,
   execute: async interaction => {
     if (!interaction.guild) return;
 

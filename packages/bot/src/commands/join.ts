@@ -9,6 +9,7 @@ export default {
     .setDescription('Join the voice channel.')
     .setContexts(InteractionContextType.Guild),
   usage: '/join',
+  cooldown: 10_000,
   execute: async interaction => {
     if (!interaction.guild || !interaction.member) return;
     const guildMember = interaction.guild.members.cache.get(interaction.user.id);
