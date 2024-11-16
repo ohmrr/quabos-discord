@@ -6,7 +6,6 @@ import hasPermissions from '../utils/hasPermissions';
 import logger from '../utils/logger';
 
 const interactionCreate = createEvent('interactionCreate', false, async interaction => {
-  const { cooldowns } = interaction.client;
   let command: Command | undefined;
 
   if (interaction.isChatInputCommand()) {
@@ -82,10 +81,9 @@ async function handleCooldown(interaction: ChatInputCommandInteraction, command:
     const expiration = fetchedTime + cooldownAmount;
 
     if (now < expiration) {
-      const timeLeft = Math.round(expiration / 1_000);
-      console.log(timeLeft);
+      const timeLeft = Math.round((expiration - now) / 1_000);
       await interaction.reply({
-        content: `${emojiMap.error.denied} Please wait, you are still on cooldown for ${timeLeft}`,
+        content: `${emojiMap.error.denied} Please wait, you are still on cooldown for ${timeLeft} ${timeLeft === 1 ? "second" : "seconds"}.`,
         ephemeral: true,
       });
       return true;
