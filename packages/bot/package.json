@@ -1,6 +1,6 @@
 {
   "name": "bot",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "private": true,
   "scripts": {
     "build": "tsc",
@@ -11,7 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "@discordjs/voice": "^0.17.0",
-    "@prisma/client": "^5.20.0",
+    "@prisma/client": "^5.22.0",
     "discord.js": "^14.16.3",
     "dotenv": "^16.4.5",
     "markov-strings": "^3.0.1",
@@ -20,8 +20,8 @@
   },
   "devDependencies": {
     "discord-api-types": "0.37.100",
-    "prettier": "^3.1.1",
-    "prisma": "^5.20.0",
+    "prettier": "^3.3.3",
+    "prisma": "^5.22.0",
     "typescript": "^5.6.3"
   }
 }
