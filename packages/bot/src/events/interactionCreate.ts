@@ -71,7 +71,7 @@ async function handleCooldown(interaction: ChatInputCommandInteraction, command:
 
   const now = Date.now();
   const timestamps = cooldowns.get(command.data.name);
-  const defaultCooldownAmount = 5_000;
+  const defaultCooldownAmount = 3_000;
   const cooldownAmount = command.cooldown ?? defaultCooldownAmount;
 
   if (!timestamps) return false;

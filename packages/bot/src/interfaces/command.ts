@@ -15,8 +15,8 @@ interface Command {
     | SlashCommandOptionsOnlyBuilder;
   subcommands?: Record<string, Subcommand>;
   permissions?: PermissionsBitField;
-  cooldown?: number;
   usage: string;
+  cooldown?: number;
   execute: (interaction: ChatInputCommandInteraction) => Promise<void>;
   autocomplete?: (interaction: AutocompleteInteraction) => Promise<void>;
 }
