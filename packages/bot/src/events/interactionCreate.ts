@@ -1,14 +1,53 @@
-import { PermissionsBitField } from 'discord.js';
+import { ChatInputCommandInteraction, Collection, PermissionsBitField } from 'discord.js';
 import { createEvent } from '../interfaces/applicationEvent';
+import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 import hasPermissions from '../utils/hasPermissions';
 import logger from '../utils/logger';
 
 const interactionCreate = createEvent('interactionCreate', false, async interaction => {
-  if (!interaction.isChatInputCommand()) {
-    if (!interaction.isAutocomplete()) return;
+  const { cooldowns } = interaction.client;
+  let command: Command | undefined;
 
-    const command = interaction.client.commands.get(interaction.commandName);
+  if (interaction.isChatInputCommand()) {
+    command = interaction.client.commands.get(interaction.commandName);
+    if (!command) return;
+
+    const hasCooldown = await handleCooldown(interaction, command);
+    if (hasCooldown) return;
+
+    const { canExecute, missingPermissions } = hasPermissions(interaction, command);
+    if (!canExecute && missingPermissions) {
+      const missingPermissionNames = missingPermissions
+        .map(permission => new PermissionsBitField(permission).toArray())
+        .flat()
+        .join(', ');
+
+      await interaction.reply({
+        content: `${emojiMap.error.denied} You are missing the following permissions: ${missingPermissionNames}`,
+        ephemeral: true,
+      });
+      return;
+    }
+
+    try {
+      await command.execute(interaction);
+    } catch (error) {
+      logger.error(
+        { commandName: command.data.name, error },
+        'Unable to execute slash command.',
+      );
+      await interaction.reply({
+        content: `${emojiMap.error.cross} There was an error executing the command. Please try again later.`,
+        ephemeral: true,
+      });
+    }
+
+    return;
+  }
+
+  if (interaction.isAutocomplete()) {
+    command = interaction.client.commands.get(interaction.commandName);
     if (!command || !command.autocomplete) return;
 
     try {
@@ -16,39 +55,49 @@ const interactionCreate = createEvent('interactionCreate', false, async interact
     } catch (error) {
       logger.error(
         { commandName: command.data.name, error },
-        'Error handling autocomplete interaction',
+        'Unable to execute autocomplete command.',
       );
     }
 
     return;
   }
-
-  const command = interaction.client.commands.get(interaction.commandName);
-  if (!command) return;
-
-  const { canExecute, missingPermissions } = hasPermissions(interaction, command);
-  if (!canExecute && missingPermissions) {
-    const missingPermissionsNames = missingPermissions
-      .map(perm => new PermissionsBitField(perm).toArray())
-      .flat()
-      .join(', ');
-
-    await interaction.reply({
-      content: `${emojiMap.error.denied} You are missing the following permissions: ${missingPermissionsNames}`,
-      ephemeral: true,
-    });
-    return;
-  }
-
-  try {
-    await command.execute(interaction);
-  } catch (error) {
-    logger.error({ commandName: command.data.name, error }, 'Unable to execute slash command');
-    await interaction.reply({
-      content: `${emojiMap.error.cross} There was an error while executing this command. Please try again later.`,
-      ephemeral: true,
-    });
-  }
 });
+
+async function handleCooldown(interaction: ChatInputCommandInteraction, command: Command) {
+  const { cooldowns } = interaction.client;
+
+  if (!cooldowns.has(command.data.name)) {
+    cooldowns.set(command.data.name, new Collection());
+  }
+
+  const now = Date.now();
+  const timestamps = cooldowns.get(command.data.name);
+  const defaultCooldownAmount = 5_000;
+  const cooldownAmount = command.cooldown ?? defaultCooldownAmount;
+
+  if (!timestamps) return false;
+  const fetchedTime = timestamps.get(interaction.user.id);
+
+  if (fetchedTime) {
+    const expiration = fetchedTime + cooldownAmount;
+
+    if (now < expiration) {
+      const timeLeft = Math.round(expiration / 1_000);
+      console.log(timeLeft);
+      await interaction.reply({
+        content: `${emojiMap.error.denied} Please wait, you are still on cooldown for ${timeLeft}`,
+        ephemeral: true,
+      });
+      return true;
+    }
+  }
+
+  timestamps.set(interaction.user.id, now);
+  setTimeout(() => {
+    timestamps.delete(interaction.user.id);
+  }, cooldownAmount);
+
+  return false;
+}
 
 export default interactionCreate;
