@@ -21,7 +21,7 @@ const client = new Client({
 });
 
 const prisma = new PrismaClient();
-const clientVersion = version;
+client.version = `v${version}`;
 client.cooldowns = new Collection();
 
 async function init() {
@@ -40,4 +40,4 @@ init()
     await prisma.$disconnect();
   });
 
-export { prisma, clientVersion };
+export { prisma };

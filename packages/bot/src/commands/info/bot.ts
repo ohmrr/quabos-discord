@@ -1,5 +1,4 @@
 import { EmbedBuilder, SlashCommandSubcommandBuilder } from 'discord.js';
-import { clientVersion } from '../..';
 import type Subcommand from '../../interfaces/subcommand';
 import { formatUnixTimestamp, FormatType } from '../../utils/date';
 
@@ -16,7 +15,7 @@ export default {
       fields: [
         {
           name: 'Client Version',
-          value: `v${clientVersion}`,
+          value: interaction.client.version,
           inline: true,
         },
         {
