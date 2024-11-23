@@ -1,8 +1,9 @@
-import { Client, Collection } from 'discord.js';
+import { Collection } from 'discord.js';
 import { readdirSync, statSync } from 'fs';
 import path from 'path';
 import Command from '../interfaces/command';
 import logger from '../utils/logger';
+import { client } from '../utils/quabos';
 
 const commands = new Collection<string, Command>();
 
@@ -45,7 +46,7 @@ async function loadCommandFromFile(filePath: string) {
   }
 }
 
-export default async function loadCommands(client: Client) {
+export default async function loadCommands() {
   const commandFolderPath = path.join(__dirname, '..', 'commands');
   const commandFiles = getCommandFiles(commandFolderPath);
 

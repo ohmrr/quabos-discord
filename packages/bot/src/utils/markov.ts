@@ -94,8 +94,8 @@ export async function generateResponse(guildId: string) {
     markov.addData(messages);
 
     const result = markov.generate({
-      maxTries: 150,
-      filter: result => result.string.split(' ').length >= 4,
+      maxTries: 100,
+      filter: result => result.string.split(' ').length >= 8,
     });
 
     return result.string;

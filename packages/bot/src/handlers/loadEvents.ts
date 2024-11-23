@@ -1,10 +1,10 @@
-import { Client } from 'discord.js';
 import { readdirSync } from 'fs';
 import path from 'path';
 import { createEvent } from '../interfaces/applicationEvent';
 import logger from '../utils/logger';
+import { client } from '../utils/quabos';
 
-async function loadEventFromFile(client: Client, filePath: string) {
+async function loadEventFromFile(filePath: string) {
   try {
     const { default: eventModule } = (await import(filePath)).default;
 
@@ -26,13 +26,13 @@ async function loadEventFromFile(client: Client, filePath: string) {
   }
 }
 
-async function loadEvents(client: Client) {
+async function loadEvents() {
   const eventFolderPath = path.join(__dirname, '..', 'events');
   const eventFiles = readdirSync(eventFolderPath).filter(file => file.endsWith('.js'));
 
   for (const file of eventFiles) {
     const eventFilePath = path.join(eventFolderPath, file);
-    await loadEventFromFile(client, eventFilePath);
+    await loadEventFromFile(eventFilePath);
   }
 }
 

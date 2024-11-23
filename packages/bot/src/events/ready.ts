@@ -25,7 +25,7 @@ const ready = createEvent('ready', false, async client => {
     ],
   });
 
-  await deployCommands(client);
+  await deployCommands();
 });
 
 export default ready;

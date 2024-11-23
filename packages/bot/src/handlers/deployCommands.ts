@@ -1,7 +1,8 @@
 import { Client, REST, Routes } from 'discord.js';
 import logger from '../utils/logger';
+import { client } from '../utils/quabos';
 
-async function deployCommands(client: Client) {
+async function deployCommands() {
   if (!client.user) {
     logger.error('Client missing user properties, cancelling command deployment.');
     process.exit(1);
