@@ -16,7 +16,7 @@ export default {
       include: { trackedChannels: true },
     });
 
-    if (!existingGuild || !existingGuild.trackedChannels) {
+    if (!existingGuild || existingGuild.trackedChannels.length === 0) {
       await interaction.reply({
         content: `${emojiMap.error.cross} There are no channels currently being read for messages.`,
         ephemeral: true,

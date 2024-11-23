@@ -93,7 +93,6 @@ export default {
       await prisma.guild.create({
         data: {
           guildId: interaction.guild.id,
-          name: interaction.guild.name,
           trackedChannels: {
             create: {
               channelId: selectedChannel.id,
