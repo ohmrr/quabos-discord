@@ -1,118 +1,88 @@
-# Quabos
+# 👽 Quabos 
 
-## Project Description
+Quabos is an entertainment Discord bot built with TypeScript, Discord.js v14 and MongoDB. Using a Markov chaining algorithm, it will read in messages sent in your server and generate its own messages. Quabos is heavily inspired by the [nMarkov bot](https://nmarkov.vixenteam.xyz/).
 
-Quabos is an entertainment-focused Discord bot designed to promote activity in your Discord server. Using a Markov Chaining algorithm, Quabos will use messages previously sent to your server to generate new ones.
+## 🌙 Requirements
 
-## Setup Instructions
+- Node.js 18 or newer
+- [Discord Developer Portal Bot Token](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)
+- [Free MongoDB Atlas Cluster](https://www.mongodb.com/docs/atlas/tutorial/deploy-free-tier-cluster/)
 
-### Installing Dependencies
+## 🛸 Installation
 
-To install the necessary dependencies, run the following command in the root directory of the project:
-
-```bash
+```sh
+git clone https://github.com/ohmrr/quabos.git
+cd quabos
 pnpm install
 ```
 
-### Configuring Environment Variables
+## ⚙️ Configuration
 
-Create a `.env` file in the `packages/bot` directory and add the following environment variables:
+In the packages/bot directory, you can create or rename `.env.example` to `.env`.
+Fill out all of the values with your Discord Bot Token, and with your MongoDB connection string.
 
-```
-DISCORD_TOKEN="your_discord_bot_token"
-DATABASE_URL="your_database_url"
-NODE_ENV="production"
-DEV_GUILD_ID=""
-```
+**⚠️ Never share your connection string or discord token with anyone. Also ensure that your .env file is not being tracked by Git.**
 
-Replace `your_discord_bot_token` with your actual Discord bot token and `your_database_url` with your MongoDB connection URL.
+```sh
+CONNECTION_STRING=""
+DISCORD_TOKEN=""
 
-`NODE_ENV` must be either "production" or "development". If you wish to deploy the slash commands to a development guild, `DEV_GUILD_ID` must be properly set with the ID of that guild.
-
-## Usage Examples
-
-### /avatar
-
-Displays the avatar of the selected server member.
-
-```
-/avatar [user]
+NODE_ENV="" # Can be either "development" or "production"
+DEV_GUILD_ID="" # If NODE_ENV is development, you will need a development discord server
 ```
 
-### /config
+## 🚀 Getting Started
 
-Manages bot configuration.
-
-#### /config channels add
-
-Adds a new channel for reading messages.
-
-```
-/config channels add [channel]
+```sh
+cd packages/bot
+pnpm build
+pnpm start
 ```
 
-#### /config channels list
+This will transpile the TypeScript code to JavaScript, and then start your own instance of Quabos as long as you have followed the above steps correctly. 
 
-View the list of channels being read for messages.
+## 🌌 Features & Commands
 
-```
-/config channels list
-```
+Quabos is still a work in progress, but below are many of the commands that Quabos currently supports.
 
-#### /config channels remove
+`/config channels add [channel]` - Adds a new channel for Quabos to read messages from.
 
-It removes a channel from which Quabos reads messages.
+`/config channels remove [channel]` - Removes a tracked channel.
 
-```
-/config channels remove [channel]
-```
+`/config channels list` - Lists all the channels currently being tracked by Quabos.
 
-### /help
+`/config probability set [percentage]` - Changes the percent chance that Quabos will randomly respond when a message is sent in the server (5% by default).
 
-Shows command information.
+`/config probability view` - Sends the current server's probability of Quabos randomly responding to messages sent. 
 
-```
-/help [command]
-```
+`/config resetlog` - Deletes all messages stored in the database for that specific guild.
 
-### /info
+`/privacy opt-out [scope]` - Allows you to opt-out of message collection in that specific server or globally (in all servers you share with Quabos).
 
-Information about Quabos and the current guild.
+`/privacy opt-in [scope]` - Allows you to opt-in and allow Quabos to collect messages from you in that specific server or globally (in all servers you share with Quabos).
 
-#### /info bot
+`/generate` - Forces Quabos to send a message in the current chanel. May fail if there have not been enough messages collected.
 
-Shows information about Quabos.
+`/serverinfo` - Sends information about the current server.
 
-```
-/info bot
-```
+`/help` - Get information on any command. Uses autocompletion to only allow commands that exist.
 
-#### /info stats
+`/info bot` - Sends information about Quabos, such as uptime.
 
-Shows Quabos's stats for the current server.
+`/info stats` - Sends a breakdown of all the messages collected in the guild by channel.
 
-```
-/info stats
-```
+`/avatar [user]` - Will display the discord avatar of the selected user.
+
+## Locales
+
+Quabos currently only supports English, but future support for more locales is planned.
 
 ## Contributing
 
-We welcome contributions to the Quabos project! Here are some guidelines to help you get started:
-
-### Reporting Issues
-
-If you encounter any issues or bugs, please report them by creating a new issue on the [GitHub repository](https://github.com/ohmrr/quabos/issues). Provide as much detail as possible to help us understand and resolve the issue.
-
-### Submitting Pull Requests
-
-If you would like to contribute code to the project, follow these steps:
-
-1. Fork the repository on GitHub.
-2. Create a new branch for your feature or bug fix.
-3. Make your changes and commit them with clear and descriptive commit messages.
-4. Push your changes to your forked repository.
-5. Create a pull request on the main repository, describing your changes and the problem they solve.
-
-We will review your pull request and provide feedback. Once approved, your changes will be merged into the main repository.
-
-Thank you for contributing to Quabos!
+1. Fork the [repository](https://github.com/ohmrr/quabos) on GitHub
+2. Clone your fork: `git clone [repository]`
+3. Create a branch for your feature or fix: `git checkout -b feature/my-new-feature`
+4. Stage any changes: `git add .`
+5. Commit your changes: `git commit -m [message]`
+6. Push your changes to the forked repository.
+7. Back on GitHub, create a pull request and describe the changes you have made.

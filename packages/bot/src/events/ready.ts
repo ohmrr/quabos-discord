@@ -12,7 +12,7 @@ const ready = createEvent('ready', false, async client => {
 \\___\\_\\__,_/\\__,_/_.___/\\____/____/\n`;
 
   logger.info(`\n${wordArt}`);
-  logger.info(`Quabos ${client.version}`)
+  logger.info(`Quabos ${client.version}`);
   logger.info(`Logged in as ${client.user.tag} in ${client.guilds.cache.size} servers.`);
 
   client.user.setPresence({

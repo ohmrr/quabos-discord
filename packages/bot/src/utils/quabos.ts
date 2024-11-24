@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits, Partials, Collection } from "discord.js";
+import { Client, GatewayIntentBits, Partials, Collection } from 'discord.js';
 import { version } from '../../package.json';
 
 const client = new Client({

@@ -83,7 +83,7 @@ async function handleCooldown(interaction: ChatInputCommandInteraction, command:
     if (now < expiration) {
       const timeLeft = Math.round((expiration - now) / 1_000);
       await interaction.reply({
-        content: `${emojiMap.error.denied} Please wait, you are still on cooldown for ${timeLeft} ${timeLeft === 1 ? "second" : "seconds"}.`,
+        content: `${emojiMap.error.denied} Please wait, you are still on cooldown for ${timeLeft} ${timeLeft === 1 ? 'second' : 'seconds'}.`,
         ephemeral: true,
       });
       return true;
