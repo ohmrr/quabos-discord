@@ -58,10 +58,10 @@ importers:
         version: 2.2.1
       '@sveltejs/adapter-auto':
         specifier: ^3.3.1
-        version: 3.3.1(@sveltejs/kit@2.8.1(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0)))
+        version: 3.3.1(@sveltejs/kit@2.8.3(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0)))
       '@sveltejs/kit':
-        specifier: ^2.8.1
-        version: 2.8.1(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0))
+        specifier: ^2.8.3
+        version: 2.8.3(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^4.0.1
         version: 4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0))
@@ -148,6 +148,7 @@ packages:
   '@discordjs/voice@0.17.0':
     resolution: {integrity: sha512-hArn9FF5ZYi1IkxdJEVnJi+OxlwLV0NJYWpKXsmNOojtGtAZHxmsELA+MZlu2KW1F/K1/nt7lFOfcMXNYweq9w==}
     engines: {node: '>=16.11.0'}
+    deprecated: This version uses deprecated encryption modes. Please use a newer version.
 
   '@discordjs/ws@1.1.1':
     resolution: {integrity: sha512-PZ+vLpxGCRtmr2RMkqh8Zp+BenUaJqlS6xhgWKEZcgC/vfHLEzpHtKkB0sl3nZWpwtcKk6YWy+pU3okL2I97FA==}
@@ -523,8 +524,8 @@ packages:
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
 
-  '@sveltejs/kit@2.8.1':
-    resolution: {integrity: sha512-uuOfFwZ4xvnfPsiTB6a4H1ljjTUksGhWnYq5X/Y9z4x5+3uM2Md8q/YVeHL+7w+mygAwoEFdgKZ8YkUuk+VKww==}
+  '@sveltejs/kit@2.8.3':
+    resolution: {integrity: sha512-DVBVwugfzzn0SxKA+eAmKqcZ7aHZROCHxH7/pyrOi+HLtQ721eEsctGb9MkhEuqj6q/9S/OFYdn37vdxzFPdvw==}
     engines: {node: '>=18.13'}
     hasBin: true
     peerDependencies:
@@ -2111,12 +2112,12 @@ snapshots:
 
   '@sapphire/snowflake@3.5.3': {}
 
-  '@sveltejs/adapter-auto@3.3.1(@sveltejs/kit@2.8.1(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0)))':
+  '@sveltejs/adapter-auto@3.3.1(@sveltejs/kit@2.8.3(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0)))':
     dependencies:
-      '@sveltejs/kit': 2.8.1(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0))
+      '@sveltejs/kit': 2.8.3(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0))
       import-meta-resolve: 4.1.0
 
-  '@sveltejs/kit@2.8.1(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0))':
+  '@sveltejs/kit@2.8.3(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0))':
     dependencies:
       '@sveltejs/vite-plugin-svelte': 4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.9.0))
       '@types/cookie': 0.6.0
