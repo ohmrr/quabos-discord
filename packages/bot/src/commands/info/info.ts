@@ -3,6 +3,7 @@ import type Command from '../../interfaces/command';
 import emojiMap from '../../utils/emojiMap';
 import bot from './bot';
 import stats from './stats';
+import invite from './invite';
 
 export default {
   data: new SlashCommandBuilder()
@@ -10,7 +11,8 @@ export default {
     .setDescription('Information about Quabos and the current guild.')
     .setContexts(InteractionContextType.Guild)
     .addSubcommand(bot.data)
-    .addSubcommand(stats.data),
+    .addSubcommand(stats.data)
+    .addSubcommand(invite.data),
   usage: `${bot.usage}\n${stats.usage}`,
   cooldown: 5_000,
   execute: async interaction => {
@@ -32,6 +34,10 @@ export default {
 
       case 'stats':
         await stats.execute(interaction);
+        break;
+
+      case 'invite':
+        await invite.execute(interaction);
         break;
 
       default:
