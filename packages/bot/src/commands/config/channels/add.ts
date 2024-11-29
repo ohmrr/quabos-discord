@@ -28,7 +28,7 @@ export default {
     const selectedChannel = interaction.options.getChannel('channel', true);
     if (!(selectedChannel instanceof TextChannel)) {
       await interaction.reply({
-        content: `${emojiMap.error.cross} The selected channel is not a text channel.`,
+        content: `${emojiMap.error} The selected channel is not a text channel.`,
         ephemeral: true,
       });
       return;
@@ -38,7 +38,7 @@ export default {
     const clientPermissions = clientGuildMember?.permissionsIn(selectedChannel) || null;
     if (!clientPermissions || !clientPermissions.has(PermissionsBitField.Flags.ViewChannel)) {
       await interaction.reply(
-        `${emojiMap.error.cross} I don't have permission to read messages in the selected channel.`,
+        `${emojiMap.error} I don't have permission to read messages in the selected channel.`,
       );
       return;
     }
@@ -55,7 +55,7 @@ export default {
 
       if (isAlreadyTracked) {
         await interaction.reply({
-          content: `${emojiMap.error.cross} Channel <#${selectedChannel.id}> is already being read for new messages.`,
+          content: `${emojiMap.error} Channel <#${selectedChannel.id}> is already being read for new messages.`,
           ephemeral: true,
         });
         return;
@@ -74,7 +74,7 @@ export default {
         });
 
         await interaction.reply(
-          `${emojiMap.success.check} Channel <#${selectedChannel.id}> is now being read for new messages.`,
+          `${emojiMap.success} Channel <#${selectedChannel.id}> is now being read for new messages.`,
         );
         return;
       } catch (error) {
@@ -83,7 +83,7 @@ export default {
           'Error updating guild record.',
         );
         await interaction.reply({
-          content: `${emojiMap.error.cross} An error occurred while updating the channel record.`,
+          content: `${emojiMap.error} An error occurred while updating the channel record.`,
           ephemeral: true,
         });
       }
@@ -102,7 +102,7 @@ export default {
       });
 
       await interaction.reply(
-        `${emojiMap.success.check} Channel <#${selectedChannel.id}> is now being read for new messages.`,
+        `${emojiMap.success} Channel <#${selectedChannel.id}> is now being read for new messages.`,
       );
     } catch (error) {
       logger.error(
@@ -110,7 +110,7 @@ export default {
         'Error creating guild record.',
       );
       await interaction.reply({
-        content: `${emojiMap.error.cross} An error occurred while creating the guild record. Please try again later.`,
+        content: `${emojiMap.error} An error occurred while creating the guild record. Please try again later.`,
         ephemeral: true,
       });
     }

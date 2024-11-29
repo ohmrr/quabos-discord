@@ -45,7 +45,7 @@ export default {
     const subcommand = interaction.options.getSubcommand();
     if (!subcommand) {
       await interaction.reply({
-        content: `${emojiMap.error.cross} Error getting the subcommand.`,
+        content: `${emojiMap.error} Error getting the subcommand.`,
         ephemeral: true,
       });
       return;
@@ -72,7 +72,7 @@ export default {
         break;
       default:
         await interaction.reply({
-          content: `${emojiMap.error.denied} Subcommand not found.`,
+          content: `${emojiMap.error} Subcommand not found.`,
           ephemeral: true,
         });
         break;

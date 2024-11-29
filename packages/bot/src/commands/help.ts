@@ -51,7 +51,7 @@ export default {
     if (!command) {
       logger.error({ commandChoice }, 'Error providing help for command.');
       await interaction.reply({
-        content: `${emojiMap.error.cross} Error finding command.`,
+        content: `${emojiMap.error} Error finding command.`,
         ephemeral: true,
       });
       return;

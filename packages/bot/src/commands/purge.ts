@@ -36,7 +36,7 @@ export default {
       try {
         const allMessages = await channel.messages.fetch({ limit: amount });
         if (!allMessages) {
-          await interaction.reply(`${emojiMap.error.cross} No messages found.`);
+          await interaction.reply(`${emojiMap.error} No messages found.`);
           return;
         }
 
@@ -48,7 +48,7 @@ export default {
         );
         if (messages.size === 0) {
           await interaction.reply({
-            content: `${emojiMap.error.denied} Messages cannot be deleted after 14 days.`,
+            content: `${emojiMap.errorAlt} Messages cannot be deleted after 14 days.`,
             ephemeral: true,
           });
           return;
@@ -56,12 +56,12 @@ export default {
 
         channel.bulkDelete(messages);
         await interaction.reply(
-          `${emojiMap.success.check} Deleted ${messages.size} messages.`,
+          `${emojiMap.success} Deleted ${messages.size} messages.`,
         );
       } catch (error) {
         logger.error(error, 'Failed to purge messages.');
         await interaction.reply({
-          content: `${emojiMap.error.denied} Failed to purge the messages.`,
+          content: `${emojiMap.errorAlt} Failed to purge the messages.`,
           ephemeral: true,
         });
       }

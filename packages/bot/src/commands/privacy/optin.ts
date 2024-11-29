@@ -31,7 +31,7 @@ export default {
 
       if (!user) {
         await interaction.reply({
-          content: `${emojiMap.success.check} You are already opted-in globally!`,
+          content: `${emojiMap.success} You are already opted-in globally!`,
           ephemeral: true,
         });
         return;
@@ -43,12 +43,12 @@ export default {
           data: { ignored: false },
         });
         await interaction.reply({
-          content: `${emojiMap.success.check} You have successfully opted-in globally!`,
+          content: `${emojiMap.success} You have successfully opted-in globally!`,
           ephemeral: true,
         });
       } else {
         await interaction.reply({
-          content: `${emojiMap.error.cross} You are already opted-in globally!`,
+          content: `${emojiMap.error} You are already opted-in globally!`,
           ephemeral: true,
         });
       }
@@ -62,7 +62,7 @@ export default {
 
       if (!guildMember) {
         await interaction.reply({
-          content: `${emojiMap.success.check} You are already opted-in for this server!`,
+          content: `${emojiMap.success} You are already opted-in for this server!`,
           ephemeral: true,
         });
         return;
@@ -74,12 +74,12 @@ export default {
           data: { ignored: false },
         });
         await interaction.reply({
-          content: `${emojiMap.success.check} You have successfully opted-in for this server!`,
+          content: `${emojiMap.success} You have successfully opted-in for this server!`,
           ephemeral: true,
         });
       } else {
         await interaction.reply({
-          content: `${emojiMap.error.cross} You are already opted-in for this server!`,
+          content: `${emojiMap.error} You are already opted-in for this server!`,
           ephemeral: true,
         });
       }

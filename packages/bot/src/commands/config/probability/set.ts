@@ -30,7 +30,7 @@ export default {
 
     if (!guildRecord) {
       await interaction.reply({
-        content: `${emojiMap.error.cross} This guild is not currently being tracked.`,
+        content: `${emojiMap.error} This guild is not currently being tracked.`,
         ephemeral: true,
       });
       return;
@@ -38,14 +38,14 @@ export default {
 
     if (guildRecord.probability * 100 === newProbabilityValue) {
       await interaction.reply({
-        content: `${emojiMap.error.cross} The probability for your server is already set to **${newProbabilityValue}%**.`,
+        content: `${emojiMap.error} The probability for your server is already set to **${newProbabilityValue}%**.`,
         ephemeral: true,
       });
       return;
     }
 
     const probabilityUpdateEmbed = new EmbedBuilder().setDescription(
-      `${emojiMap.success.check} The server's probability has successfully been set to **${newProbabilityValue}%**.`,
+      `${emojiMap.success} The server's probability has successfully been set to **${newProbabilityValue}%**.`,
     );
 
     try {
@@ -61,7 +61,7 @@ export default {
         'Error updating the guild probability.',
       );
       await interaction.reply({
-        content: `${emojiMap.error.cross} There was an error updating the probability. Please try again.`,
+        content: `${emojiMap.error} There was an error updating the probability. Please try again.`,
         ephemeral: true,
       });
     }

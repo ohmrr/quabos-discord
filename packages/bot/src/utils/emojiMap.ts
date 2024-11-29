@@ -1,30 +1,21 @@
 const emojiMap = {
-  success: {
-    check: '✅',
-    checkAlt: '✔️',
-  },
-  error: {
-    cross: '❌',
-    denied: '🚫',
-  },
-  celestial: {
-    alien: '👽',
-    planet: '🪐',
-    moon: '🌙',
-    galaxy: '🌌',
-    comet: '☄️',
-    ufo: '🛸',
-    star: '✦',
-  },
-  sound: {
-    normal: '🔉',
-    loud: '🔊',
-    musicNote: '🎵',
-    musicNotes: '🎶',
-  },
-  etc: {
-    link: '🔗',
-  },
-};
+  success: '✅',
+  successAlt: '✔️',
+  error: '❌',
+  errorAlt: '🚫',
+  link: '🔗',
+  alien: '👽',
+  planet: '🪐',
+  moon: '🌙',
+  galaxy: '🌌',
+  comet: '☄️',
+  rocket: '🚀',
+  ufo: '🛸',
+  star: '✦',
+  audio: '🔉',
+  audioAlt: '🔊',
+  music: '🎵',
+  musicAlt: '🎶',
+}
 
 export default emojiMap;

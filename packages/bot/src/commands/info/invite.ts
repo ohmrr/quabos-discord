@@ -18,12 +18,12 @@ export default {
   usage: '/info invite',
   execute: async interaction => {
     const inviteButton = new ButtonBuilder()
-      .setLabel(`${emojiMap.celestial.alien} Invite Quabos to your Server`)
+      .setLabel(`${emojiMap.alien} Invite Quabos to your Server`)
       .setStyle(ButtonStyle.Link)
       .setURL('https://discord.com/oauth2/authorize?client_id=942251323741569024');
 
     const supportButton = new ButtonBuilder()
-      .setLabel(`${emojiMap.etc.link} Join Support Server`)
+      .setLabel(`${emojiMap.link} Join Support Server`)
       .setStyle(ButtonStyle.Link)
       .setURL('https://discord.gg/EfYdnVMK');
 

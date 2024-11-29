@@ -18,7 +18,7 @@ export default {
 
     if (!guildRecord) {
       await interaction.reply(
-        `${emojiMap.error.cross} There is no record stored for this guild.`,
+        `${emojiMap.error} There is no record stored for this guild.`,
       );
       return;
     }
@@ -44,7 +44,7 @@ export default {
       title: `Quabos Stats in ${interaction.guild.name}`,
       description:
         `**Messages Count**:\n` +
-        channelStatsList.map(text => `${emojiMap.celestial.star} ${text}`).join('\n'),
+        channelStatsList.map(text => `${emojiMap.star} ${text}`).join('\n'),
     });
 
     await interaction.reply({ embeds: [statsEmbed] });

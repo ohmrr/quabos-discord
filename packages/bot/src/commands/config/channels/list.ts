@@ -18,7 +18,7 @@ export default {
 
     if (!existingGuild || existingGuild.trackedChannels.length === 0) {
       await interaction.reply({
-        content: `${emojiMap.error.cross} There are no channels currently being read for messages.`,
+        content: `${emojiMap.error} There are no channels currently being read for messages.`,
         ephemeral: true,
       });
 
@@ -26,7 +26,7 @@ export default {
     }
 
     const channelList = existingGuild.trackedChannels
-      .map(channel => `${emojiMap.celestial.star} <#${channel.channelId}>`)
+      .map(channel => `${emojiMap.star} <#${channel.channelId}>`)
       .join('\n');
 
     const listEmbed = new EmbedBuilder({

@@ -23,7 +23,7 @@ const interactionCreate = createEvent('interactionCreate', false, async interact
         .join(', ');
 
       await interaction.reply({
-        content: `${emojiMap.error.denied} You are missing the following permissions: ${missingPermissionNames}`,
+        content: `${emojiMap.error} You are missing the following permissions: ${missingPermissionNames}`,
         ephemeral: true,
       });
       return;
@@ -37,7 +37,7 @@ const interactionCreate = createEvent('interactionCreate', false, async interact
         'Unable to execute slash command.',
       );
       await interaction.reply({
-        content: `${emojiMap.error.cross} There was an error executing the command. Please try again later.`,
+        content: `${emojiMap.error} There was an error executing the command. Please try again later.`,
         ephemeral: true,
       });
     }
@@ -83,7 +83,7 @@ async function handleCooldown(interaction: ChatInputCommandInteraction, command:
     if (now < expiration) {
       const timeLeft = Math.round((expiration - now) / 1_000);
       await interaction.reply({
-        content: `${emojiMap.error.denied} Please wait, you are still on cooldown for ${timeLeft} ${timeLeft === 1 ? 'second' : 'seconds'}.`,
+        content: `${emojiMap.error} Please wait, you are still on cooldown for ${timeLeft} ${timeLeft === 1 ? 'second' : 'seconds'}.`,
         ephemeral: true,
       });
       return true;

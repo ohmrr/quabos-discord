@@ -16,13 +16,13 @@ export default {
     const voiceConnection = getVoiceConnection(interaction.guild.id);
     if (!voiceConnection) {
       await interaction.reply({
-        content: `${emojiMap.error.cross} I am not in any voice channels.`,
+        content: `${emojiMap.error} I am not in any voice channels.`,
         ephemeral: true,
       });
       return;
     }
 
     voiceConnection.destroy();
-    await interaction.reply(`${emojiMap.success.check} Disconnected from the voice channel.`);
+    await interaction.reply(`${emojiMap.success} Disconnected from the voice channel.`);
   },
 } satisfies Command;

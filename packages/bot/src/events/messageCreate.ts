@@ -24,13 +24,13 @@ const messageCreate = createEvent('messageCreate', false, async message => {
   const response = await generateResponse(guildId);
   if (!response) return;
 
-  const emojiList = Array.from(Object.values(emojiMap.celestial));
-  const randomIndex = Math.floor(Math.random() * emojiList.length);
+  // const emojiList = Array.from(Object.values(emojiMap.celestial));
+  // const randomIndex = Math.floor(Math.random() * emojiList.length);
 
   try {
     await message.channel.sendTyping();
     await new Promise(resolve => setTimeout(resolve, 5000));
-    await message.channel.send(`${emojiList[randomIndex]} ${response}`);
+    await message.channel.send(`${response}`);
   } catch (error) {
     logger.error(error, 'Error sending randomly generated message');
   }

@@ -21,7 +21,7 @@ export default {
       });
 
       const notTrackedEmbed = new EmbedBuilder().setDescription(
-        `${emojiMap.error.cross} This guild is not currently being tracked.`,
+        `${emojiMap.error} This guild is not currently being tracked.`,
       );
 
       if (!guildRecord) {
@@ -37,7 +37,7 @@ export default {
     } catch (error) {
       logger.error(error, 'Unable to fetch guild probability.');
       await interaction.reply({
-        content: `${emojiMap.error.cross} There was an fetching the guild probability. Please try again.`,
+        content: `${emojiMap.error} There was an fetching the guild probability. Please try again.`,
         ephemeral: true,
       });
     }

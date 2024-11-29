@@ -14,7 +14,7 @@ export default {
     const reply = await interaction.fetchReply();
     const clientLatency = reply.createdTimestamp - interaction.createdTimestamp;
     await interaction.editReply(
-      `${emojiMap.celestial.alien} **Client**: ${clientLatency}ms | **Websocket**: ${interaction.client.ws.ping}ms`,
+      `${emojiMap.alien} **Client**: ${clientLatency}ms | **Websocket**: ${interaction.client.ws.ping}ms`,
     );
   },
 } satisfies Command;

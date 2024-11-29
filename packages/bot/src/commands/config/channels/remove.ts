@@ -31,7 +31,7 @@ export default {
       !existingGuild.trackedChannels.some(channel => channel.channelId === selectedChannel.id)
     ) {
       await interaction.reply(
-        `${emojiMap.error.cross} Channel <#${selectedChannel.id}> is not being read for new messages.`,
+        `${emojiMap.error} Channel <#${selectedChannel.id}> is not being read for new messages.`,
       );
       return;
     }
@@ -39,7 +39,7 @@ export default {
     try {
       await prisma.channel.delete({ where: { channelId: selectedChannel.id } });
       await interaction.reply(
-        `${emojiMap.success.check} Channel <#${selectedChannel.id}> is no longer being read for new messages.`,
+        `${emojiMap.success} Channel <#${selectedChannel.id}> is no longer being read for new messages.`,
       );
     } catch (error) {
       logger.error(
@@ -47,7 +47,7 @@ export default {
         'Error while deleting channel record',
       );
       await interaction.reply(
-        `${emojiMap.error.cross} An error occurred while removing the channel.`,
+        `${emojiMap.error} An error occurred while removing the channel.`,
       );
     }
   },

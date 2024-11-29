@@ -37,14 +37,14 @@ export default {
         });
 
         await interaction.reply({
-          content: `${emojiMap.success.check} You have successfully opted-out globally!`,
+          content: `${emojiMap.success} You have successfully opted-out globally!`,
           ephemeral: true,
         });
         return;
       }
 
       await interaction.reply({
-        content: `${emojiMap.error.cross} You have already opted-out globally!`,
+        content: `${emojiMap.error} You have already opted-out globally!`,
         ephemeral: true,
       });
       return;
@@ -63,14 +63,14 @@ export default {
         });
 
         await interaction.reply({
-          content: `${emojiMap.success.check} You have successfully opted-out for this server!`,
+          content: `${emojiMap.success} You have successfully opted-out for this server!`,
           ephemeral: true,
         });
         return;
       }
 
       await interaction.reply({
-        content: `${emojiMap.error.cross} You have already opted-out for this server!`,
+        content: `${emojiMap.error} You have already opted-out for this server!`,
         ephemeral: true,
       });
     }

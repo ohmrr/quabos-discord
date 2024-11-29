@@ -28,7 +28,7 @@ export default {
 
     if (!guildRecord || guildRecord.messages.length === 0) {
       await interaction.reply({
-        content: `${emojiMap.error.cross} There are currently no messages stored.`,
+        content: `${emojiMap.error} There are currently no messages stored.`,
         ephemeral: true,
       });
       return;
@@ -76,7 +76,7 @@ export default {
         await prisma.message.deleteMany({ where: { guildId } });
 
         const confirmEmbed = new EmbedBuilder().setDescription(
-          `${emojiMap.success.check} All the message logs have been deleted.`,
+          `${emojiMap.success} All the message logs have been deleted.`,
         );
         await i.update({ embeds: [confirmEmbed], components: [] });
       } else if (i.customId === 'cancel') {

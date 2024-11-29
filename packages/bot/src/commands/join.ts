@@ -18,7 +18,7 @@ export default {
 
     if (!voiceChannel) {
       await interaction.reply({
-        content: `${emojiMap.error.cross} You are not in a voice channel.`,
+        content: `${emojiMap.error} You are not in a voice channel.`,
         ephemeral: true,
       });
       return;
@@ -27,7 +27,7 @@ export default {
     const clientPermissions = clientGuildMember?.permissionsIn(voiceChannel) || null;
     if (!clientPermissions || !clientPermissions.has(PermissionsBitField.Flags.Connect)) {
       await interaction.reply(
-        `${emojiMap.error.cross} I do not the permission to join the voice channel.`,
+        `${emojiMap.error} I do not the permission to join the voice channel.`,
       );
       return;
     }
@@ -41,7 +41,7 @@ export default {
     });
 
     await interaction.reply(
-      `${emojiMap.sound.normal} Joined the voice channel ${voiceChannel.name}`,
+      `${emojiMap.audio} Joined the voice channel ${voiceChannel.name}`,
     );
   },
 } satisfies Command;
