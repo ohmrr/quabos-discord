@@ -22,6 +22,9 @@ const emojiMap = {
     musicNote: '🎵',
     musicNotes: '🎶',
   },
+  etc: {
+    link: '🔗',
+  },
 };
 
 export default emojiMap;
