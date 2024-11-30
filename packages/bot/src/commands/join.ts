@@ -40,8 +40,6 @@ export default {
       adapterCreator: interaction.guild.voiceAdapterCreator,
     });
 
-    await interaction.reply(
-      `${emojiMap.audio} Joined the voice channel ${voiceChannel.name}`,
-    );
+    await interaction.reply(`${emojiMap.audio} Joined the voice channel ${voiceChannel.name}`);
   },
 } satisfies Command;

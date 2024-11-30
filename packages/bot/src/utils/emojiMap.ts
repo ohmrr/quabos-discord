@@ -16,6 +16,13 @@ const emojiMap = {
   audioAlt: '🔊',
   music: '🎵',
   musicAlt: '🎶',
+};
+
+export function getRandomEmoji() {
+  const { alien, planet, moon, galaxy, comet, rocket, ufo } = emojiMap;
+  const emojiList = [alien, planet, moon, galaxy, comet, rocket, ufo];
+
+  return emojiList[Math.floor(Math.random() * emojiList.length)];
 }
 
 export default emojiMap;

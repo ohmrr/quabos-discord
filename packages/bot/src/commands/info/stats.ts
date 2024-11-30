@@ -17,9 +17,7 @@ export default {
     });
 
     if (!guildRecord) {
-      await interaction.reply(
-        `${emojiMap.error} There is no record stored for this guild.`,
-      );
+      await interaction.reply(`${emojiMap.error} There is no record stored for this guild.`);
       return;
     }
 

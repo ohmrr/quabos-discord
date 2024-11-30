@@ -1,7 +1,7 @@
 import { InteractionContextType, SlashCommandBuilder } from 'discord.js';
-import { generateResponse } from '../utils/markov';
 import Command from '../interfaces/command';
-import emojiMap from '../utils/emojiMap';
+import { generateResponse } from '../utils/markov';
+import { getRandomEmoji } from '../utils/emojiMap';
 
 export default {
   data: new SlashCommandBuilder()
@@ -18,15 +18,16 @@ export default {
     const guildId = interaction.guild.id;
     const response = await generateResponse(guildId);
 
-    // const spaceEmojiNames = ['alien', 'planet', 'moon', 'galaxy', 'comet', 'rocket', 'ufo', 'star'];
-    // const spaceEmojiList: string[];
-
+    const emoji = getRandomEmoji();
+    
     if (!response) {
       await interaction.editReply(
         'I was unable to generate a message. Make sure at least one channel is set to be tracked with `/config channels add [channel]` and try again later!',
       );
-    } else {
-      await interaction.editReply(`${response}`);
+
+      return;
     }
+
+    await interaction.editReply(`${emoji} ${response}`);
   },
 } satisfies Command;
