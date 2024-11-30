@@ -19,7 +19,7 @@ export default {
     const response = await generateResponse(guildId);
 
     const emoji = getRandomEmoji();
-    
+
     if (!response) {
       await interaction.editReply(
         'I was unable to generate a message. Make sure at least one channel is set to be tracked with `/config channels add [channel]` and try again later!',

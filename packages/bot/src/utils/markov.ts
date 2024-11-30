@@ -3,7 +3,7 @@ import Markov from 'markov-strings';
 import { prisma } from '../';
 import logger from './logger';
 
-export function isValidMessage(message: Message): boolean {
+function isValidMessage(message: Message): boolean {
   const startsWithCommandChar = /^[!\/?]/i;
   if (startsWithCommandChar.test(message.content) || message.content.split(' ').length < 2)
     return false;
@@ -16,7 +16,7 @@ export function isValidMessage(message: Message): boolean {
   return true;
 }
 
-export function normalizeString(content: string): string {
+function normalizeString(content: string): string {
   return content
     .replace(/[^a-zA-Z0-9@#<>&*_~`\s]/g, '')
     .replace(/\s{2,}/g, ' ')
@@ -61,7 +61,7 @@ export async function saveMessage(message: Message) {
   });
 }
 
-export async function getGuildMessages(guildId: string) {
+async function getGuildMessages(guildId: string) {
   try {
     const guild = await prisma.guild.findUnique({
       where: {
@@ -94,8 +94,8 @@ export async function generateResponse(guildId: string) {
     markov.addData(messages);
 
     const result = markov.generate({
-      maxTries: 100,
-      filter: result => result.string.split(' ').length >= 8,
+      maxTries: 50,
+      filter: result => result.string.split(' ').length >= 5,
     });
 
     return result.string;
