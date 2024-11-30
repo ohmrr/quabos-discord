@@ -89,17 +89,19 @@ export async function generateResponse(guildId: string) {
   const messages = await getGuildMessages(guildId);
   if (!messages || messages.length < 50) return null;
 
+  const markov = new Markov({ stateSize: 2 });
+
   try {
-    const markov = new Markov({ stateSize: 2 });
     markov.addData(messages);
 
     const result = markov.generate({
-      maxTries: 50,
+      maxTries: 25,
       filter: result => result.string.split(' ').length >= 5,
     });
 
     return result.string;
   } catch (error) {
+    logger.error(error, 'There was an error generating a markov result.');
     return null;
   }
 }
