@@ -1,6 +1,7 @@
 import { EmbedBuilder, SlashCommandSubcommandBuilder } from 'discord.js';
 import type Subcommand from '../../interfaces/subcommand';
 import { formatUnixTimestamp, FormatType } from '../../utils/date';
+import safeReply from '../../utils/safeReply';
 
 export default {
   data: new SlashCommandSubcommandBuilder()
@@ -28,6 +29,6 @@ export default {
       timestamp: Date.now(),
     });
 
-    await interaction.reply({ embeds: [botEmbed], ephemeral: true });
+    await safeReply(interaction, { embeds: [botEmbed], ephemeral: true });
   },
 } satisfies Subcommand;

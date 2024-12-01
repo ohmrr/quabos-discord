@@ -20,9 +20,10 @@ export default {
       );
     } catch (error) {
       logger.error(error, 'There was an error responding to the interaction');
-      interaction.reply(
-        `${emojiMap.error} There was an error getting the client ping. Please try again later.`,
-      );
+      interaction.reply({
+        content: `${emojiMap.error} There was an error getting the client ping. Please try again later.`,
+        ephemeral: true,
+      });
     }
   },
 } satisfies Command;

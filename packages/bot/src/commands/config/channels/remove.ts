@@ -46,9 +46,10 @@ export default {
         { guildId: interaction.guild.id, channelId: selectedChannel.id, error },
         'Error while deleting channel record',
       );
-      await interaction.reply(
-        `${emojiMap.error} An error occurred while removing the channel.`,
-      );
+      await interaction.reply({
+        content: `${emojiMap.error} An error occurred while removing the channel.`,
+        ephemeral: true,
+      });
     }
   },
 } satisfies Subcommand;

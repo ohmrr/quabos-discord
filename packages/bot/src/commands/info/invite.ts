@@ -40,9 +40,10 @@ export default {
       await interaction.reply({ embeds: [inviteEmbed], components: [buttonRow] });
     } catch (error) {
       logger.error(error, 'Error sending invite embed and button row.');
-      await interaction.reply(
-        `${emojiMap.error} There was an error sending the invite. Please try again later.`,
-      );
+      await interaction.reply({
+        content: `${emojiMap.error} There was an error sending the invite. Please try again later.`,
+        ephemeral: true,
+      });
     }
   },
 } satisfies Subcommand;

@@ -20,7 +20,7 @@ const channelDelete = createEvent('channelDelete', false, async channel => {
       where: { channelId: existingTrackedChannel.channelId },
     });
   } catch (error) {
-    logger.error({ channelId, error }, 'Error deleting channel record from database');
+    logger.error({ channelId, error }, 'Error deleting channel record from database.');
   }
 });
 

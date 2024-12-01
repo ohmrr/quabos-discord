@@ -1,5 +1,6 @@
 import { EmbedBuilder, InteractionContextType, SlashCommandBuilder } from 'discord.js';
 import type Command from '../interfaces/command';
+import safeReply from '../utils/safeReply';
 
 export default {
   data: new SlashCommandBuilder()
@@ -28,6 +29,6 @@ export default {
       timestamp: Date.now(),
     });
 
-    await interaction.reply({ embeds: [avatarEmbed] });
+    await safeReply(interaction, { embeds: [avatarEmbed] });
   },
 } satisfies Command;

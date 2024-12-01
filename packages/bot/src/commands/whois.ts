@@ -1,6 +1,7 @@
 import { EmbedBuilder, InteractionContextType, SlashCommandBuilder } from 'discord.js';
 import Command from '../interfaces/command';
-import { formatUnixTimestamp, FormatType } from '../utils/date';
+import { FormatType, formatUnixTimestamp } from '../utils/date';
+import safeReply from '../utils/safeReply';
 
 export default {
   data: new SlashCommandBuilder()
@@ -55,6 +56,6 @@ export default {
       timestamp: Date.now(),
     });
 
-    await interaction.reply({ embeds: [whoisEmbed] });
+    await safeReply(interaction, { embeds: [whoisEmbed] });
   },
 } satisfies Command;

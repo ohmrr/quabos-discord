@@ -36,7 +36,10 @@ export default {
       try {
         const allMessages = await channel.messages.fetch({ limit: amount });
         if (!allMessages) {
-          await interaction.reply(`${emojiMap.error} No messages found.`);
+          await interaction.reply({
+            content: `${emojiMap.error} No messages found.`,
+            ephemeral: true,
+          });
           return;
         }
 
