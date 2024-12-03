@@ -10,7 +10,7 @@
   "author": "Ohmrr",
   "license": "MIT",
   "dependencies": {
-    "@discordjs/voice": "^0.17.0",
+    "@discordjs/voice": "^0.18.0",
     "@prisma/client": "^5.22.0",
     "bufferutil": "^4.0.8",
     "discord.js": "^14.16.3",
@@ -20,7 +20,7 @@
     "pino-pretty": "^11.3.0"
   },
   "devDependencies": {
-    "discord-api-types": "0.37.100",
+    "discord-api-types": "^0.37.110",
     "prettier": "^3.4.1",
     "prisma": "^5.22.0",
     "typescript": "^5.7.2"

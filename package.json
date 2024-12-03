@@ -7,9 +7,6 @@
     "start": "pnpm --filter bot run start",
     "fmt": "pnpm -r run fmt"
   },
-  "resolutions": {
-    "discord-api-types": "0.37.100"
-  },
   "author": "Ohmrr",
   "license": "MIT"
 }
