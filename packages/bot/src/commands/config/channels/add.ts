@@ -25,6 +25,7 @@ export default {
   execute: async interaction => {
     if (!interaction.guild) return;
 
+    const guildId = interaction.guild.id;
     const selectedChannel = interaction.options.getChannel('channel', true);
     if (!(selectedChannel instanceof TextChannel)) {
       await interaction.reply({
@@ -44,13 +45,13 @@ export default {
     }
 
     const existingGuild = await prisma.guild.findUnique({
-      where: { guildId: interaction.guild.id },
+      where: { id: guildId },
       include: { trackedChannels: true },
     });
 
     if (existingGuild) {
       const isAlreadyTracked = existingGuild.trackedChannels.some(
-        channel => channel.channelId === selectedChannel.id,
+        channel => channel.id === selectedChannel.id,
       );
 
       if (isAlreadyTracked) {
@@ -63,11 +64,11 @@ export default {
 
       try {
         await prisma.guild.update({
-          where: { guildId: interaction.guild.id },
+          where: { id: guildId },
           data: {
             trackedChannels: {
               create: {
-                channelId: selectedChannel.id,
+                id: selectedChannel.id,
               },
             },
           },
@@ -92,10 +93,10 @@ export default {
     try {
       await prisma.guild.create({
         data: {
-          guildId: interaction.guild.id,
+          id: guildId,
           trackedChannels: {
             create: {
-              channelId: selectedChannel.id,
+              id: selectedChannel.id,
             },
           },
         },
@@ -105,10 +106,7 @@ export default {
         `${emojiMap.success} Channel <#${selectedChannel.id}> is now being read for new messages.`,
       );
     } catch (error) {
-      logger.error(
-        { guildId: interaction.guild.id, name: interaction.guild.id, error },
-        'Error creating guild record.',
-      );
+      logger.error({ guildId, error }, 'Error creating guild record.');
       await interaction.reply({
         content: `${emojiMap.error} An error occurred while creating the guild record. Please try again later.`,
         ephemeral: true,

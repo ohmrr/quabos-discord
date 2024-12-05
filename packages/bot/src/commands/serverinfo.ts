@@ -19,6 +19,7 @@ export default {
     if (!interaction.guild) return;
 
     const { guild } = interaction;
+    const { id } = interaction.guild;
     const guildIcon = guild.iconURL({ size: 4096 }) || '';
     const guildRoles = guild.roles.cache
       .filter(role => role.name !== '@everyone')
@@ -26,7 +27,7 @@ export default {
       .map(role => `<@&${role.id}>`);
 
     const guildRecord = await prisma.guild.findUnique({
-      where: { guildId: interaction.guild.id },
+      where: { id },
       include: { trackedChannels: { include: { messages: true } } },
     });
 
@@ -88,9 +89,7 @@ export default {
       serverInfoEmbed.addFields([
         {
           name: 'Tracked Channels',
-          value: guildRecord.trackedChannels
-            .map(channel => `<#${channel.channelId}>`)
-            .join(' '),
+          value: guildRecord.trackedChannels.map(channel => `<#${channel.id}>`).join(' '),
           inline: true,
         },
         { name: 'Messages Collected', value: `${totalMessages}`, inline: true },

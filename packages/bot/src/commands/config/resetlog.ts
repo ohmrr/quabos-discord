@@ -22,7 +22,7 @@ export default {
 
     const guildId = interaction.guild.id;
     const guildRecord = await prisma.guild.findUnique({
-      where: { guildId },
+      where: { id: guildId },
       include: { messages: true },
     });
 

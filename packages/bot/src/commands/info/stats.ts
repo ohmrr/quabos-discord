@@ -11,8 +11,10 @@ export default {
   execute: async interaction => {
     if (!interaction.guild) return;
 
+    const guildId = interaction.guild.id;
+
     const guildRecord = await prisma.guild.findUnique({
-      where: { guildId: interaction.guild.id },
+      where: { id: guildId },
       include: { trackedChannels: { include: { messages: true } } },
     });
 
@@ -25,7 +27,7 @@ export default {
     if (guildRecord.trackedChannels.length > 0) {
       for (let i = 0; i < guildRecord.trackedChannels.length; i++) {
         const channel = interaction.guild.channels.cache.get(
-          guildRecord.trackedChannels[i].channelId,
+          guildRecord.trackedChannels[i].id,
         );
         if (!channel) continue;
 

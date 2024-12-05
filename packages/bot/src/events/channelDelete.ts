@@ -7,20 +7,20 @@ const channelDelete = createEvent('channelDelete', false, async channel => {
   if (channel.type !== ChannelType.GuildText) return;
   if (!channel.guild) return;
 
-  const channelId = channel.id;
+  const { id } = channel;
 
   const existingTrackedChannel = await prisma.channel.findUnique({
-    where: { channelId },
+    where: { id },
   });
 
   if (!existingTrackedChannel) return;
 
   try {
     await prisma.channel.delete({
-      where: { channelId: existingTrackedChannel.channelId },
+      where: { id: existingTrackedChannel.id },
     });
   } catch (error) {
-    logger.error({ channelId, error }, 'Error deleting channel record from database.');
+    logger.error({ id, error }, 'Error deleting channel record from database.');
   }
 });
 

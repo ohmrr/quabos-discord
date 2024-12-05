@@ -14,9 +14,11 @@ export default {
   execute: async interaction => {
     if (!interaction.guild) return;
 
+    const guildId = interaction.guild.id;
+
     try {
       const guildRecord = await prisma.guild.findUnique({
-        where: { guildId: interaction.guild.id },
+        where: { id: guildId },
         select: { probability: true },
       });
 

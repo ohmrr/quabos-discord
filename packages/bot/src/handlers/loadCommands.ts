@@ -2,8 +2,8 @@ import { Collection } from 'discord.js';
 import { readdirSync, statSync } from 'fs';
 import path from 'path';
 import Command from '../interfaces/command';
+import { client } from '../utils/client';
 import logger from '../utils/logger';
-import { client } from '../utils/quabos';
 
 const commands = new Collection<string, Command>();
 

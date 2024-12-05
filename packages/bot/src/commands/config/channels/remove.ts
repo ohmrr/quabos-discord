@@ -20,15 +20,17 @@ export default {
   execute: async interaction => {
     if (!interaction.guild) return;
 
+    const guildId = interaction.guild.id;
+
     const selectedChannel = interaction.options.getChannel('channel', true);
     const existingGuild = await prisma.guild.findUnique({
-      where: { guildId: interaction.guild.id },
+      where: { id: guildId },
       include: { trackedChannels: true },
     });
 
     if (
       !existingGuild ||
-      !existingGuild.trackedChannels.some(channel => channel.channelId === selectedChannel.id)
+      !existingGuild.trackedChannels.some(channel => channel.id === selectedChannel.id)
     ) {
       await interaction.reply(
         `${emojiMap.error} Channel <#${selectedChannel.id}> is not being read for new messages.`,
@@ -37,13 +39,13 @@ export default {
     }
 
     try {
-      await prisma.channel.delete({ where: { channelId: selectedChannel.id } });
+      await prisma.channel.delete({ where: { id: selectedChannel.id } });
       await interaction.reply(
         `${emojiMap.success} Channel <#${selectedChannel.id}> is no longer being read for new messages.`,
       );
     } catch (error) {
       logger.error(
-        { guildId: interaction.guild.id, channelId: selectedChannel.id, error },
+        { guildId, channelId: selectedChannel.id, error },
         'Error while deleting channel record',
       );
       await interaction.reply({

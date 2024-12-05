@@ -22,9 +22,10 @@ export default {
   execute: async interaction => {
     if (!interaction.guild) return;
 
+    const guildId = interaction.guild.id;
     const newProbabilityValue = interaction.options.getNumber('probability', true);
     const guildRecord = await prisma.guild.findUnique({
-      where: { guildId: interaction.guild.id },
+      where: { id: guildId },
       select: { probability: true },
     });
 
@@ -50,7 +51,7 @@ export default {
 
     try {
       await prisma.guild.update({
-        where: { guildId: interaction.guild.id },
+        where: { id: guildId },
         data: { probability: newProbabilityValue / 100 },
       });
 

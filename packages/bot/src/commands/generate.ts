@@ -1,7 +1,7 @@
 import { InteractionContextType, SlashCommandBuilder } from 'discord.js';
 import Command from '../interfaces/command';
-import { generateResponse } from '../utils/markov';
 import { getRandomEmoji } from '../utils/emojiMap';
+import { generateResponse } from '../utils/markov';
 
 export default {
   data: new SlashCommandBuilder()
@@ -15,8 +15,8 @@ export default {
 
     await interaction.deferReply();
 
-    const guildId = interaction.guild.id;
-    const response = await generateResponse(guildId);
+    const { id } = interaction.guild;
+    const response = await generateResponse(id);
 
     const emoji = getRandomEmoji();
 

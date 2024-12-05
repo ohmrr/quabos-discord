@@ -3,12 +3,12 @@ import { createEvent } from '../interfaces/applicationEvent';
 import logger from '../utils/logger';
 
 const guildDelete = createEvent('guildDelete', false, async guild => {
-  const guildId = guild.id;
+  const { id } = guild;
 
   try {
-    await prisma.guild.delete({ where: { guildId } });
+    await prisma.guild.delete({ where: { id } });
   } catch (error) {
-    logger.error({ guildId, error }, 'Error deleting guild record from database.');
+    logger.error({ id, error }, 'Error deleting guild record from database.');
   }
 });
 

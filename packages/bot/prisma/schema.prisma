@@ -8,11 +8,11 @@ datasource db {
 }
 
 model Guild {
-  guildId String @id @map("_id")
+  id String @id @map("_id")
 
-  probability Float @default(0.05)
+  probability         Float     @default(0.05)
   inactivityThreshold Int?
-  lastActivity DateTime?
+  lastActivity        DateTime?
 
   trackedChannels Channel[] @relation("GuildChannels")
 
@@ -22,36 +22,46 @@ model Guild {
 }
 
 model Channel {
-  channelId String @id @map("_id")
+  id String @id @map("_id")
 
   messages Message[] @relation("ChannelMessages")
 
-  guild   Guild?  @relation("GuildChannels", fields: [guildId], references: [guildId])
+  guild   Guild?  @relation("GuildChannels", fields: [guildId], references: [id])
   guildId String?
 }
 
 model Message {
-  messageId String @id @map("_id")
-  content   String
+  id      String @id @map("_id")
+  content String
 
-  channel   Channel? @relation("ChannelMessages", fields: [channelId], references: [channelId])
+  channel   Channel? @relation("ChannelMessages", fields: [channelId], references: [id])
   channelId String?
 
-  guild Guild? @relation("GuildMessages", fields: [guildId], references: [guildId])
+  Attachments Attachment[] @relation("MessageAttachments")
+
+  guild   Guild?  @relation("GuildMessages", fields: [guildId], references: [id])
   guildId String?
 }
 
+model Attachment {
+  id  String @id @default(auto()) @map("_id") @db.ObjectId
+  url String
+
+  messageId String
+  message   Message @relation("MessageAttachments", fields: [messageId], references: [id])
+}
+
 model User {
-  userId String @id @map("_id")
+  id  String  @id @map("_id")
   ignored Boolean @default(false)
 }
 
 model GuildMember {
-  userId String @id @map("_id")
+  id      String  @id @map("_id")
   guildId String
   ignored Boolean @default(false)
 
-  guild Guild @relation("GuildMembers", fields: [guildId], references: [guildId])
+  guild Guild @relation("GuildMembers", fields: [guildId], references: [id])
 
-  @@unique([userId, guildId])
+  @@unique([id, guildId])
 }

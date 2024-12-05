@@ -5,7 +5,7 @@ import {
   EmbedBuilder,
   SlashCommandSubcommandBuilder,
 } from 'discord.js';
-import Subcommand from '../../interfaces/subcommand';
+import type Subcommand from '../../interfaces/subcommand';
 import emojiMap from '../../utils/emojiMap';
 import logger from '../../utils/logger';
 

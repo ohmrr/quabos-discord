@@ -2,8 +2,8 @@ import { PrismaClient } from '@prisma/client';
 import 'dotenv/config';
 import loadCommands from './handlers/loadCommands';
 import loadEvents from './handlers/loadEvents';
+import { client } from './utils/client';
 import logger from './utils/logger';
-import { client } from './utils/quabos';
 
 const prisma = new PrismaClient();
 

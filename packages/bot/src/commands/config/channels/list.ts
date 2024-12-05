@@ -11,8 +11,10 @@ export default {
   execute: async interaction => {
     if (!interaction.guild) return;
 
+    const guildId = interaction.guild.id;
+
     const existingGuild = await prisma.guild.findUnique({
-      where: { guildId: interaction.guild.id },
+      where: { id: guildId },
       include: { trackedChannels: true },
     });
 
@@ -26,7 +28,7 @@ export default {
     }
 
     const channelList = existingGuild.trackedChannels
-      .map(channel => `${emojiMap.star} <#${channel.channelId}>`)
+      .map(channel => `${emojiMap.star} <#${channel.id}>`)
       .join('\n');
 
     const listEmbed = new EmbedBuilder({

@@ -1,8 +1,8 @@
 import { readdirSync } from 'fs';
 import path from 'path';
 import { createEvent } from '../interfaces/applicationEvent';
+import { client } from '../utils/client';
 import logger from '../utils/logger';
-import { client } from '../utils/quabos';
 
 async function loadEventFromFile(filePath: string) {
   try {

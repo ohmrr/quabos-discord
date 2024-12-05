@@ -1,6 +1,6 @@
-import { Client, REST, Routes } from 'discord.js';
+import { REST, Routes } from 'discord.js';
+import { client } from '../utils/client';
 import logger from '../utils/logger';
-import { client } from '../utils/quabos';
 
 async function deployCommands() {
   if (!client.user) {
