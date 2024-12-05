@@ -137,3 +137,6 @@ messages.*
 logs.*
 corpus.*
 data.*
+
+# Etc
+todo.*

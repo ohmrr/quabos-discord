@@ -26,7 +26,7 @@ export default {
 
     if (scope === 'global') {
       const user = await prisma.user.findUnique({
-        where: { userId },
+        where: { id: userId },
       });
 
       if (!user) {
@@ -39,7 +39,7 @@ export default {
 
       if (user.ignored) {
         await prisma.user.update({
-          where: { userId },
+          where: { id: userId },
           data: { ignored: false },
         });
         await interaction.reply({
@@ -57,7 +57,7 @@ export default {
 
     if (scope === 'server') {
       const guildMember = await prisma.guildMember.findUnique({
-        where: { userId_guildId: { userId, guildId } },
+        where: { id_guildId: { id: userId, guildId } },
       });
 
       if (!guildMember) {
@@ -70,7 +70,7 @@ export default {
 
       if (guildMember.ignored) {
         await prisma.guildMember.update({
-          where: { userId_guildId: { userId, guildId } },
+          where: { id_guildId: { id: userId, guildId } },
           data: { ignored: false },
         });
         await interaction.reply({

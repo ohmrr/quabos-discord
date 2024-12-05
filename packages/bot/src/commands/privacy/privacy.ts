@@ -14,8 +14,8 @@ export default {
     .addSubcommand(optin.data)
     .addSubcommand(optout.data),
   subcommands: {
-    optin,
-    optout,
+    'opt-in': optin,
+    'opt-out': optout,
   },
   usage: `${optin.usage}\n${optout.usage}`,
   execute: async interaction => {
