@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction, PermissionsBitField, TextChannel } from 'discord.js';
-import Command from '../interfaces/command';
+import type Command from '../interfaces/command';
 
 interface PermissionResult {
   canExecute: boolean;

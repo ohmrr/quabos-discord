@@ -1,4 +1,4 @@
-import { Client, Collection, Message, Snowflake, TextChannel } from 'discord.js';
+import { Client, Collection, Message, type Snowflake, TextChannel } from 'discord.js';
 import Markov from 'markov-strings';
 import { prisma } from '../';
 import logger from './logger';
