@@ -6,22 +6,19 @@ import { generateResponse, saveMessage } from '../utils/markov';
 
 const messageCreate = createEvent('messageCreate', false, async message => {
   if (!message.guild || !message.channel) return;
+  if (message.author.bot || message.author.system) return;
 
   await saveMessage(message);
 
-  if (message.author.bot || message.author.system) return;
-  const guildId = message.guild.id;
-  const guildRecord = await prisma.guild.findUnique({
-    where: { guildId },
-    select: { probability: true },
-  });
+  const { id } = message.guild;
+  const guildRecord = await prisma.guild.findUnique({ where: { id } });
 
   if (!guildRecord) return;
 
   const shouldRespond = Math.random() < guildRecord.probability;
   if (!shouldRespond) return;
 
-  const response = await generateResponse(guildId);
+  const response = await generateResponse(id);
   if (!response) return;
 
   const emoji = getRandomEmoji();

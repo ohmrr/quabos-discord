@@ -8,11 +8,6 @@ function isValidMessage(message: Message): boolean {
   if (startsWithCommandChar.test(message.content) || message.content.split(' ').length < 2)
     return false;
 
-  // For when using gatherMessagesFromGuild development function
-  if (process.env.NODE_ENV === 'development') {
-    if (message.author.bot || message.author.system) return false;
-  }
-
   return true;
 }
 
@@ -26,19 +21,24 @@ function normalizeString(content: string): string {
 export async function saveMessage(message: Message) {
   if (!isValidMessage(message) || !message.guild) return;
 
+  const channelId = message.channel.id;
+  const userId = message.author.id;
+
   const isTrackedChannel = await prisma.channel.findUnique({
-    where: { channelId: message.channel.id },
+    where: { id: channelId },
   });
   if (!isTrackedChannel) return;
 
   const isOptedOutGlobally = await prisma.user.findUnique({
-    where: { userId: message.author.id },
+    where: { id: userId },
   });
+
   const isOptedOutLocally = await prisma.guildMember.findUnique({
     where: {
-      userId_guildId: { userId: message.author.id, guildId: message.guild.id },
+      id_guildId: { id: userId, guildId: message.guild.id },
     },
   });
+
   if (isOptedOutGlobally?.ignored || isOptedOutLocally?.ignored) return;
 
   const content = normalizeString(message.content);
@@ -46,15 +46,15 @@ export async function saveMessage(message: Message) {
   await prisma.message.create({
     data: {
       content: content,
-      messageId: message.id,
+      id: message.id,
       channel: {
         connect: {
-          channelId: isTrackedChannel.channelId,
+          id: isTrackedChannel.id,
         },
       },
       guild: {
         connect: {
-          guildId: message.guild.id,
+          id: message.guild.id,
         },
       },
     },
@@ -65,7 +65,7 @@ async function getGuildMessages(guildId: string) {
   try {
     const guild = await prisma.guild.findUnique({
       where: {
-        guildId: guildId,
+        id: guildId,
       },
       include: { trackedChannels: { include: { messages: true } } },
     });
@@ -109,7 +109,7 @@ export async function generateResponse(guildId: string) {
 // For testing purposes only, use with development guild.
 export async function gatherMessagesFromGuild(guildId: string, client: Client) {
   const devGuild = await prisma.guild.findUnique({
-    where: { guildId },
+    where: { id: guildId },
     include: { trackedChannels: true },
   });
 
@@ -120,8 +120,8 @@ export async function gatherMessagesFromGuild(guildId: string, client: Client) {
 
   logger.debug(guildId, 'Starting message collection for the specified development guild.');
   for (const trackedChannel of devGuild.trackedChannels) {
-    const channel = client.channels.cache.get(trackedChannel.channelId);
-    const channelId = trackedChannel.channelId;
+    const channel = client.channels.cache.get(trackedChannel.id);
+    const channelId = trackedChannel.id;
     if (!channel || !(channel instanceof TextChannel)) {
       logger.warn(channelId, 'Channel is not a text channel or is unavailable.');
       continue;
@@ -141,7 +141,7 @@ export async function gatherMessagesFromGuild(guildId: string, client: Client) {
         await saveMessage(message);
       }
     } catch (error) {
-      logger.error(error, `Error fetching messages from channel ${trackedChannel.channelId}`);
+      logger.error(error, `Error fetching messages from channel ${trackedChannel.id}`);
     }
   }
 }
