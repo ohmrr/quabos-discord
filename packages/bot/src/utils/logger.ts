@@ -4,7 +4,7 @@ import path from 'path';
 const subfolder = process.env.NODE_ENV === 'development' ? 'dev' : 'prod';
 const logPath = path.join('..', '..', 'logs', subfolder, 'output.log');
 
-const timeFormat = 'mm-dd-yyyy HH:MM:ss';
+const timeFormat = 'hh:MM:ss TT Z';
 
 const transport = pino.transport({
   targets: [

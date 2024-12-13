@@ -16,7 +16,10 @@ const guildMemberRemove = createEvent('guildMemberRemove', false, async member =
       },
     });
   } catch (error) {
-    logger.error(error, 'Error fetching guild member for guildMemberRemove event or member did not exist.');
+    logger.error(
+      error,
+      'Error fetching guild member for guildMemberRemove event or member did not exist.',
+    );
   }
 });
 

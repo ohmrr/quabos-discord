@@ -11,8 +11,8 @@ Quabos is an entertainment Discord bot built with TypeScript, Discord.js v14 and
 ## 🛸 Installation
 
 ```sh
-git clone https://github.com/ohmrr/quabos.git
-cd quabos
+git clone https://github.com/ohmrr/quabos-discord.git
+cd quabos-discord
 pnpm install
 ```
 
@@ -79,7 +79,7 @@ Quabos currently only supports English, but future support for more locales is p
 
 ## Contributing
 
-1. Fork the [repository](https://github.com/ohmrr/quabos/fork) on GitHub
+1. Fork the [repository](https://github.com/ohmrr/quabos-discord/fork) on GitHub
 2. Clone your fork: `git clone [repository]`
 3. Create a branch for your feature or fix: `git checkout -b feature/my-new-feature`
 4. Stage any changes: `git add .`

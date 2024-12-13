@@ -58,7 +58,10 @@ export default {
         }
 
         await channel.bulkDelete(messages);
-        await interaction.reply({ content: `${emojiMap.success} Deleted ${messages.size} messages.`, ephemeral: true });
+        await interaction.reply({
+          content: `${emojiMap.success} Deleted ${messages.size} messages.`,
+          ephemeral: true,
+        });
       } catch (error) {
         logger.error(error, 'Failed to purge messages.');
         await interaction.reply({
