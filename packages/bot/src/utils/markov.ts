@@ -31,7 +31,10 @@ export async function saveMessage(message: Message) {
   if (!isTrackedChannel) return;
 
   const messageAuthor = await prisma.user.findUnique({ where: { id: userId } });
-  if (messageAuthor && (messageAuthor.globalIgnored || messageAuthor.guildIgnoredIds.includes(guildId))) {
+  if (
+    messageAuthor &&
+    (messageAuthor.globalIgnored || messageAuthor.guildIgnoredIds.includes(guildId))
+  ) {
     return;
   }
 

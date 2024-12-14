@@ -28,7 +28,7 @@ export default {
     const user = await prisma.user.findUnique({ where: { id: userId } });
     if (!user) {
       await interaction.reply({
-        content: `${emojiMap.error} You have already opted-in ${scope === 'global' ? 'globally' : 'for this server.' }!`,
+        content: `${emojiMap.error} You have already opted-in ${scope === 'global' ? 'globally' : 'for this server.'}!`,
         ephemeral: true,
       });
 
@@ -38,7 +38,7 @@ export default {
     if (scope === 'global') {
       if (!user.globalIgnored) {
         await interaction.reply({
-          content: `${emojiMap.error} You have already opted-in globally!`,
+          content: `${emojiMap.error} You have already opted-in globally.`,
           ephemeral: true,
         });
 
@@ -52,7 +52,7 @@ export default {
           ephemeral: true,
         });
       } catch (error) {
-        logger.error(error, 'There was an error opting a user in globally.')
+        logger.error(error, 'There was an error opting a user in globally.');
         await interaction.reply({
           content: `${emojiMap.error} There was an error opting you in globally. Please try again later or report this error to the developers.`,
           ephemeral: true,
@@ -63,15 +63,27 @@ export default {
     }
 
     if (!user.guildIgnoredIds.includes(guildId)) {
-      await interaction.reply({ content: `${emojiMap.error} You have already opted-in for this server.`, ephemeral: true });
+      await interaction.reply({
+        content: `${emojiMap.error} You have already opted-in for this server.`,
+        ephemeral: true,
+      });
+
       return;
     }
 
     try {
-      const updatedGuildList = user.guildIgnoredIds.filter((id) => id !== guildId);
-      await prisma.user.update({ where: { id: userId }, data: { guildIgnoredIds: updatedGuildList }})
+      const updatedGuildList = user.guildIgnoredIds.filter(id => id !== guildId);
+      await prisma.user.update({
+        where: { id: userId },
+        data: { guildIgnoredIds: updatedGuildList },
+      });
+
+      await interaction.reply({
+        content: `${emojiMap.success} You have successfully opted-in for this server!`,
+        ephemeral: true,
+      });
     } catch (error) {
-      logger.error(error, 'There was an error opting a user in for a server.')
+      logger.error(error, 'There was an error opting a user in for a server.');
       await interaction.reply({
         content: `${emojiMap.error} There was an error opting you in for this server. Please try again later or report this error to the developers.`,
         ephemeral: true,

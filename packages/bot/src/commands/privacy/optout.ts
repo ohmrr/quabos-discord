@@ -25,42 +25,58 @@ export default {
     const userId = interaction.user.id;
     const guildId = interaction.guild.id;
 
-    const user = await prisma.user.findUnique({ where: { id: userId } });
+    try {
+      const user = await prisma.user.findUnique({ where: { id: userId } });
 
-    if (scope === 'global') {
-      if (!user || !user.globalIgnored) {
-        try {
-          await prisma.user.upsert({ where: { id: guildId }, update: { globalIgnored: true }, create: { id: userId, globalIgnored: true } });
-          await interaction.reply({ content: `${emojiMap.success} You have successfully opted-out globally.`, ephemeral: true })
-        } catch (error) {
-          logger.error(error, 'There was an error opting a user out globally. Please try again later or report this error to the developers.');
-          await interaction.reply({ content: `${emojiMap.error} There was an error opting you out globally. Please try again later or report this error to the developers.`, ephemeral: true })
+      if (scope === 'global') {
+        if (user?.globalIgnored) {
+          await interaction.reply({
+            content: `${emojiMap.error} You have already opted-out globally.`,
+            ephemeral: true,
+          });
+
+          return;
         }
 
-        return;
-      }
+        await prisma.user.upsert({
+          where: { id: userId },
+          update: { globalIgnored: true },
+          create: { id: userId, globalIgnored: true },
+        });
 
-      await interaction.reply({ content: `${emojiMap.error} You have already opted-out globally!`, ephemeral: true })
-      return;
-    }
-
-    if (user) {
-      if (user.guildIgnoredIds.includes(guildId)) {
-        await interaction.reply({ content: `${emojiMap.error} You have already opted-out for this server.`, ephemeral: true });
-        return;
-      }
-
-      try {
-        const updatedGuildList = [...user.guildIgnoredIds, guildId];
-        await prisma.user.upsert({ where: { id: userId }, update: { guildIgnoredIds: updatedGuildList }, create: { id: userId, guildIgnoredIds: updatedGuildList } });
-      } catch (error) {
-        logger.error(error, 'There was an error opting a user out for a server.')
         await interaction.reply({
-          content: `${emojiMap.error} There was an error opting you out for this server. Please try again later or report this error to the developers.`,
+          content: `${emojiMap.success} You have successfully opted-out globally!`,
           ephemeral: true,
         });
-      }
-    }
 
+        return;
+      }
+
+      if (user?.guildIgnoredIds.includes(guildId)) {
+        await interaction.reply({
+          content: `${emojiMap.error} You have already opted-out for this server.`,
+          ephemeral: true,
+        });
+
+        return;
+      }
+
+      await prisma.user.upsert({
+        where: { id: userId },
+        update: { guildIgnoredIds: { push: guildId } },
+        create: { id: userId, guildIgnoredIds: [guildId] },
+      });
+
+      await interaction.reply({
+        content: `${emojiMap.success} You have successfully opted-out for this server!`,
+        ephemeral: true,
+      });
+    } catch (error) {
+      logger.error(error, 'Error during opt-out');
+      await interaction.reply({
+        content: `${emojiMap.error} An error occurred while processing your opt-out request. Please try again later or report this error to the developers.`,
+        ephemeral: true,
+      });
+    }
   },
 } satisfies Subcommand;
