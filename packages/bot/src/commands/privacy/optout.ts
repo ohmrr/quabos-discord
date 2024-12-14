@@ -2,6 +2,7 @@ import { SlashCommandSubcommandBuilder } from 'discord.js';
 import { prisma } from '../..';
 import type Subcommand from '../../interfaces/subcommand';
 import emojiMap from '../../utils/emojiMap';
+import logger from '../../utils/logger';
 
 export default {
   data: new SlashCommandSubcommandBuilder()
@@ -24,53 +25,56 @@ export default {
     const userId = interaction.user.id;
     const guildId = interaction.guild.id;
 
-    if (scope === 'global') {
-      const user = await prisma.user.findUnique({
-        where: { id: userId },
-      });
+    try {
+      const user = await prisma.user.findUnique({ where: { id: userId } });
 
-      if (!user || !user.ignored) {
+      if (scope === 'global') {
+        if (user?.globalIgnored) {
+          await interaction.reply({
+            content: `${emojiMap.error} You have already opted-out globally.`,
+            ephemeral: true,
+          });
+
+          return;
+        }
+
         await prisma.user.upsert({
           where: { id: userId },
-          update: { ignored: true },
-          create: { id: userId, ignored: true },
+          update: { globalIgnored: true },
+          create: { id: userId, globalIgnored: true },
         });
 
         await interaction.reply({
           content: `${emojiMap.success} You have successfully opted-out globally!`,
           ephemeral: true,
         });
+
         return;
       }
 
-      await interaction.reply({
-        content: `${emojiMap.error} You have already opted-out globally!`,
-        ephemeral: true,
-      });
-      return;
-    }
-
-    if (scope === 'server') {
-      const guildMember = await prisma.guildMember.findUnique({
-        where: { id_guildId: { id: userId, guildId } },
-      });
-
-      if (!guildMember || !guildMember.ignored) {
-        await prisma.guildMember.upsert({
-          where: { id_guildId: { id: userId, guildId } },
-          update: { ignored: true },
-          create: { id: userId, guildId, ignored: true },
-        });
-
+      if (user?.guildIgnoredIds.includes(guildId)) {
         await interaction.reply({
-          content: `${emojiMap.success} You have successfully opted-out for this server!`,
+          content: `${emojiMap.error} You have already opted-out for this server.`,
           ephemeral: true,
         });
+
         return;
       }
 
+      await prisma.user.upsert({
+        where: { id: userId },
+        update: { guildIgnoredIds: { push: guildId } },
+        create: { id: userId, guildIgnoredIds: [guildId] },
+      });
+
       await interaction.reply({
-        content: `${emojiMap.error} You have already opted-out for this server!`,
+        content: `${emojiMap.success} You have successfully opted-out for this server!`,
+        ephemeral: true,
+      });
+    } catch (error) {
+      logger.error(error, 'Error during opt-out');
+      await interaction.reply({
+        content: `${emojiMap.error} An error occurred while processing your opt-out request. Please try again later or report this error to the developers.`,
         ephemeral: true,
       });
     }

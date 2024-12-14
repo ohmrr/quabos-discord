@@ -22,6 +22,7 @@ export async function saveMessage(message: Message) {
   if (!isValidMessage(message) || !message.guild) return;
 
   const channelId = message.channel.id;
+  const guildId = message.guild.id;
   const userId = message.author.id;
 
   const isTrackedChannel = await prisma.channel.findUnique({
@@ -29,17 +30,13 @@ export async function saveMessage(message: Message) {
   });
   if (!isTrackedChannel) return;
 
-  const isOptedOutGlobally = await prisma.user.findUnique({
-    where: { id: userId },
-  });
-
-  const isOptedOutLocally = await prisma.guildMember.findUnique({
-    where: {
-      id_guildId: { id: userId, guildId: message.guild.id },
-    },
-  });
-
-  if (isOptedOutGlobally?.ignored || isOptedOutLocally?.ignored) return;
+  const messageAuthor = await prisma.user.findUnique({ where: { id: userId } });
+  if (
+    messageAuthor &&
+    (messageAuthor.globalIgnored || messageAuthor.guildIgnoredIds.includes(guildId))
+  ) {
+    return;
+  }
 
   const content = normalizeString(message.content);
 
@@ -54,7 +51,7 @@ export async function saveMessage(message: Message) {
       },
       guild: {
         connect: {
-          id: message.guild.id,
+          id: guildId,
         },
       },
     },

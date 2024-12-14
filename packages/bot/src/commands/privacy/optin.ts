@@ -2,6 +2,7 @@ import { SlashCommandSubcommandBuilder } from 'discord.js';
 import { prisma } from '../..';
 import type Subcommand from '../../interfaces/subcommand';
 import emojiMap from '../../utils/emojiMap';
+import logger from '../../utils/logger';
 
 export default {
   data: new SlashCommandSubcommandBuilder()
@@ -24,65 +25,69 @@ export default {
     const userId = interaction.user.id;
     const guildId = interaction.guild.id;
 
-    if (scope === 'global') {
-      const user = await prisma.user.findUnique({
-        where: { id: userId },
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+    if (!user) {
+      await interaction.reply({
+        content: `${emojiMap.error} You have already opted-in ${scope === 'global' ? 'globally' : 'for this server.'}!`,
+        ephemeral: true,
       });
 
-      if (!user) {
+      return;
+    }
+
+    if (scope === 'global') {
+      if (!user.globalIgnored) {
         await interaction.reply({
-          content: `${emojiMap.success} You are already opted-in globally!`,
+          content: `${emojiMap.error} You have already opted-in globally.`,
           ephemeral: true,
         });
+
         return;
       }
 
-      if (user.ignored) {
-        await prisma.user.update({
-          where: { id: userId },
-          data: { ignored: false },
-        });
+      try {
+        await prisma.user.update({ where: { id: userId }, data: { globalIgnored: false } });
         await interaction.reply({
           content: `${emojiMap.success} You have successfully opted-in globally!`,
           ephemeral: true,
         });
-      } else {
+      } catch (error) {
+        logger.error(error, 'There was an error opting a user in globally.');
         await interaction.reply({
-          content: `${emojiMap.error} You are already opted-in globally!`,
+          content: `${emojiMap.error} There was an error opting you in globally. Please try again later or report this error to the developers.`,
           ephemeral: true,
         });
       }
+
       return;
     }
 
-    if (scope === 'server') {
-      const guildMember = await prisma.guildMember.findUnique({
-        where: { id_guildId: { id: userId, guildId } },
+    if (!user.guildIgnoredIds.includes(guildId)) {
+      await interaction.reply({
+        content: `${emojiMap.error} You have already opted-in for this server.`,
+        ephemeral: true,
       });
 
-      if (!guildMember) {
-        await interaction.reply({
-          content: `${emojiMap.success} You are already opted-in for this server!`,
-          ephemeral: true,
-        });
-        return;
-      }
+      return;
+    }
 
-      if (guildMember.ignored) {
-        await prisma.guildMember.update({
-          where: { id_guildId: { id: userId, guildId } },
-          data: { ignored: false },
-        });
-        await interaction.reply({
-          content: `${emojiMap.success} You have successfully opted-in for this server!`,
-          ephemeral: true,
-        });
-      } else {
-        await interaction.reply({
-          content: `${emojiMap.error} You are already opted-in for this server!`,
-          ephemeral: true,
-        });
-      }
+    try {
+      const updatedGuildList = user.guildIgnoredIds.filter(id => id !== guildId);
+      await prisma.user.update({
+        where: { id: userId },
+        data: { guildIgnoredIds: updatedGuildList },
+      });
+
+      await interaction.reply({
+        content: `${emojiMap.success} You have successfully opted-in for this server!`,
+        ephemeral: true,
+      });
+    } catch (error) {
+      logger.error(error, 'There was an error opting a user in for a server.');
+      await interaction.reply({
+        content: `${emojiMap.error} There was an error opting you in for this server. Please try again later or report this error to the developers.`,
+        ephemeral: true,
+      });
     }
   },
 } satisfies Subcommand;

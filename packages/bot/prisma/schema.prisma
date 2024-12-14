@@ -17,8 +17,6 @@ model Guild {
   trackedChannels Channel[] @relation("GuildChannels")
 
   messages Message[] @relation("GuildMessages")
-
-  members GuildMember[] @relation("GuildMembers")
 }
 
 model Channel {
@@ -52,16 +50,7 @@ model Attachment {
 }
 
 model User {
-  id  String  @id @map("_id")
-  ignored Boolean @default(false)
-}
-
-model GuildMember {
-  id      String  @id @map("_id")
-  guildId String
-  ignored Boolean @default(false)
-
-  guild Guild @relation("GuildMembers", fields: [guildId], references: [id])
-
-  @@unique([id, guildId])
+  id              String   @id @map("_id")
+  globalIgnored   Boolean  @default(false)
+  guildIgnoredIds String[]
 }
