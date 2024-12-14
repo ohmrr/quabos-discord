@@ -36,8 +36,8 @@ importers:
         version: 11.3.0
     devDependencies:
       discord-api-types:
-        specifier: ^0.37.110
-        version: 0.37.110
+        specifier: ^0.37.111
+        version: 0.37.111
       prettier:
         specifier: ^3.4.2
         version: 3.4.2
@@ -58,13 +58,13 @@ importers:
         version: 2.2.1
       '@sveltejs/adapter-auto':
         specifier: ^3.3.1
-        version: 3.3.1(@sveltejs/kit@2.8.3(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1)))
+        version: 3.3.1(@sveltejs/kit@2.8.3(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2)))
       '@sveltejs/kit':
         specifier: ^2.8.3
-        version: 2.8.3(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1))
+        version: 2.8.3(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^4.0.1
-        version: 4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1))
+        version: 4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2))
       '@types/eslint':
         specifier: ^9.6.1
         version: 9.6.1
@@ -109,7 +109,7 @@ importers:
         version: 8.14.0(eslint@9.15.0(jiti@1.21.6))(typescript@5.6.3)
       vite:
         specifier: ^5.4.11
-        version: 5.4.11(@types/node@22.10.1)
+        version: 5.4.11(@types/node@22.10.2)
 
 packages:
 
@@ -559,8 +559,8 @@ packages:
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
-  '@types/node@22.10.1':
-    resolution: {integrity: sha512-qKgsUwfHZV2WCWLAnVP1JqnpE6Im6h3Y0+fYgMTasNQ7V++CBX5OT1as0g0f+OyubbFqhf6XVNIsmN4IIhEgGQ==}
+  '@types/node@22.10.2':
+    resolution: {integrity: sha512-Xxr6BBRCAOQixvonOye19wnzyDiUtTeqldOOmj3CkeblonbccA12PFwlufvRdrpjXxqnmUaeiU5EOA+7s5diUQ==}
 
   '@types/ws@8.5.13':
     resolution: {integrity: sha512-osM/gWBTPKgHV8XkTunnegTRIsvF6owmf5w+JtAfOw472dptdm0dlGv4xCt6GwQRcC2XVOvvRE/0bAoQcL2QkA==}
@@ -809,8 +809,8 @@ packages:
   discord-api-types@0.37.100:
     resolution: {integrity: sha512-a8zvUI0GYYwDtScfRd/TtaNBDTXwP5DiDVX7K5OmE+DRT57gBqKnwtOC5Ol8z0mRW8KQfETIgiB8U0YZ9NXiCA==}
 
-  discord-api-types@0.37.110:
-    resolution: {integrity: sha512-wVaAJkrSgNRo8nd523qKYPqkClTNHhjKOk/g6265rzHuc7TNS6Ivz06DPW4iZvnhFobbH95hKlgsRf6jcAbtlA==}
+  discord-api-types@0.37.111:
+    resolution: {integrity: sha512-22O4/mjfcLaQ8bbJorGpzFThnjhd8/exQxFscP3fnyJPo9Fk9O5GkWDIremYbvuw4YiwMfssWFniIb/iAwRqTg==}
 
   discord-api-types@0.37.83:
     resolution: {integrity: sha512-urGGYeWtWNYMKnYlZnOnDHm8fVRffQs3U0SpE8RHeiuLKb/u92APS8HoQnPTFbnXmY1vVnXjXO4dOxcAn3J+DA==}
@@ -1855,7 +1855,7 @@ snapshots:
   '@discordjs/voice@0.18.0(bufferutil@4.0.8)':
     dependencies:
       '@types/ws': 8.5.13
-      discord-api-types: 0.37.110
+      discord-api-types: 0.37.111
       prism-media: 1.3.5
       tslib: 2.8.1
       ws: 8.18.0(bufferutil@4.0.8)
@@ -2138,14 +2138,14 @@ snapshots:
 
   '@sapphire/snowflake@3.5.3': {}
 
-  '@sveltejs/adapter-auto@3.3.1(@sveltejs/kit@2.8.3(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1)))':
+  '@sveltejs/adapter-auto@3.3.1(@sveltejs/kit@2.8.3(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2)))':
     dependencies:
-      '@sveltejs/kit': 2.8.3(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1))
+      '@sveltejs/kit': 2.8.3(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2))
       import-meta-resolve: 4.1.0
 
-  '@sveltejs/kit@2.8.3(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1))':
+  '@sveltejs/kit@2.8.3(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1))
+      '@sveltejs/vite-plugin-svelte': 4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2))
       '@types/cookie': 0.6.0
       cookie: 0.6.0
       devalue: 5.1.1
@@ -2159,27 +2159,27 @@ snapshots:
       sirv: 3.0.0
       svelte: 5.2.1
       tiny-glob: 0.2.9
-      vite: 5.4.11(@types/node@22.10.1)
+      vite: 5.4.11(@types/node@22.10.2)
 
-  '@sveltejs/vite-plugin-svelte-inspector@3.0.1(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1))':
+  '@sveltejs/vite-plugin-svelte-inspector@3.0.1(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1))
+      '@sveltejs/vite-plugin-svelte': 4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2))
       debug: 4.3.7
       svelte: 5.2.1
-      vite: 5.4.11(@types/node@22.10.1)
+      vite: 5.4.11(@types/node@22.10.2)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1))':
+  '@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 3.0.1(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.1))
+      '@sveltejs/vite-plugin-svelte-inspector': 3.0.1(@sveltejs/vite-plugin-svelte@4.0.1(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2)))(svelte@5.2.1)(vite@5.4.11(@types/node@22.10.2))
       debug: 4.3.7
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.12
       svelte: 5.2.1
-      vite: 5.4.11(@types/node@22.10.1)
-      vitefu: 1.0.3(vite@5.4.11(@types/node@22.10.1))
+      vite: 5.4.11(@types/node@22.10.2)
+      vitefu: 1.0.3(vite@5.4.11(@types/node@22.10.2))
     transitivePeerDependencies:
       - supports-color
 
@@ -2194,13 +2194,13 @@ snapshots:
 
   '@types/json-schema@7.0.15': {}
 
-  '@types/node@22.10.1':
+  '@types/node@22.10.2':
     dependencies:
       undici-types: 6.20.0
 
   '@types/ws@8.5.13':
     dependencies:
-      '@types/node': 22.10.1
+      '@types/node': 22.10.2
 
   '@typescript-eslint/eslint-plugin@8.14.0(@typescript-eslint/parser@8.14.0(eslint@9.15.0(jiti@1.21.6))(typescript@5.6.3))(eslint@9.15.0(jiti@1.21.6))(typescript@5.6.3)':
     dependencies:
@@ -2443,7 +2443,7 @@ snapshots:
 
   discord-api-types@0.37.100: {}
 
-  discord-api-types@0.37.110: {}
+  discord-api-types@0.37.111: {}
 
   discord-api-types@0.37.83: {}
 
@@ -3317,18 +3317,18 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
-  vite@5.4.11(@types/node@22.10.1):
+  vite@5.4.11(@types/node@22.10.2):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.4.49
       rollup: 4.27.2
     optionalDependencies:
-      '@types/node': 22.10.1
+      '@types/node': 22.10.2
       fsevents: 2.3.3
 
-  vitefu@1.0.3(vite@5.4.11(@types/node@22.10.1)):
+  vitefu@1.0.3(vite@5.4.11(@types/node@22.10.2)):
     optionalDependencies:
-      vite: 5.4.11(@types/node@22.10.1)
+      vite: 5.4.11(@types/node@22.10.2)
 
   which@2.0.2:
     dependencies:

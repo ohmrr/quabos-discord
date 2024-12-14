@@ -20,7 +20,7 @@
     "pino-pretty": "^11.3.0"
   },
   "devDependencies": {
-    "discord-api-types": "^0.37.110",
+    "discord-api-types": "^0.37.111",
     "prettier": "^3.4.2",
     "prisma": "^6.0.1",
     "typescript": "^5.7.2"
