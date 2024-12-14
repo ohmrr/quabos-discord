@@ -26,18 +26,27 @@ export default {
     const guildId = interaction.guild.id;
 
     const user = await prisma.user.findUnique({ where: { id: userId } });
+    if (!user) {
+      await interaction.reply({
+        content: `${emojiMap.error} You have already opted-in ${scope === 'global' ? 'globally' : 'for this server.' }!`,
+        ephemeral: true,
+      });
+
+      return;
+    }
 
     if (scope === 'global') {
-      if (!user || !user.globalIgnored) {
+      if (!user.globalIgnored) {
         await interaction.reply({
           content: `${emojiMap.error} You have already opted-in globally!`,
           ephemeral: true,
         });
+
         return;
       }
 
       try {
-        await prisma.user.update({ where: { id: userId }, data: { globalIgnored: true } });
+        await prisma.user.update({ where: { id: userId }, data: { globalIgnored: false } });
         await interaction.reply({
           content: `${emojiMap.success} You have successfully opted-in globally!`,
           ephemeral: true,
@@ -53,7 +62,7 @@ export default {
       return;
     }
 
-    if (!user || !user.guildIgnoredIds.includes(guildId)) {
+    if (!user.guildIgnoredIds.includes(guildId)) {
       await interaction.reply({ content: `${emojiMap.error} You have already opted-in for this server.`, ephemeral: true });
       return;
     }
