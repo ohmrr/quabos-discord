@@ -11,7 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "@discordjs/voice": "^0.18.0",
-    "@prisma/client": "^6.0.1",
+    "@prisma/client": "^6.1.0",
     "bufferutil": "^4.0.8",
     "discord.js": "^14.16.3",
     "dotenv": "^16.4.7",
@@ -20,9 +20,9 @@
     "pino-pretty": "^11.3.0"
   },
   "devDependencies": {
-    "discord-api-types": "^0.37.111",
+    "discord-api-types": "^0.37.112",
     "prettier": "^3.4.2",
-    "prisma": "^6.0.1",
+    "prisma": "^6.1.0",
     "typescript": "^5.7.2"
   }
 }
