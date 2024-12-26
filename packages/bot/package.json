@@ -3,9 +3,13 @@
   "version": "0.3.3",
   "private": true,
   "scripts": {
-    "build": "tsc",
+    "dev": "NODE_ENV=development nodemon dist/index.js",
+    "prod": "NODE_ENV=production node dist/index.js",
     "start": "node dist/index.js",
-    "fmt": "prettier . --write"
+    "watch": "tsc --watch",
+    "build": "tsc",
+    "format": "prettier . --write",
+    "generate": "prisma generate"
   },
   "author": "Ohmrr",
   "license": "MIT",
@@ -16,11 +20,12 @@
     "discord.js": "^14.16.3",
     "dotenv": "^16.4.7",
     "markov-strings": "^3.0.1",
-    "pino": "^9.5.0",
+    "pino": "^9.6.0",
     "pino-pretty": "^11.3.0"
   },
   "devDependencies": {
-    "discord-api-types": "^0.37.112",
+    "discord-api-types": "^0.37.114",
+    "nodemon": "^3.1.9",
     "prettier": "^3.4.2",
     "prisma": "^6.1.0",
     "typescript": "^5.7.2"

@@ -2,10 +2,16 @@
   "name": "quabos",
   "private": true,
   "scripts": {
-    "build": "pnpm -r run build",
-    "build:bot": "pnpm --filter bot run build",
-    "start": "pnpm --filter bot run start",
-    "fmt": "pnpm -r run fmt"
+    "watch": "pnpm --filter bot watch",
+    "dev:bot": "pnpm --filter bot dev",
+    "dev:web": "pnpm --filter website dev",
+    "prod": "pnpm --filter bot prod",
+    "build": "pnpm -r build",
+    "build:bot": "pnpm --filter bot build",
+    "build:web": "pnpm --filter website build",
+    "start": "pnpm --filter bot start",
+    "format": "pnpm -r format",
+    "fmt": "pnpm format"
   },
   "author": "Ohmrr",
   "license": "MIT"
