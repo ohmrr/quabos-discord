@@ -45,22 +45,34 @@ export default {
 
       const { inactivityThreshold } = guildRecord;
       const defaultThresholdMinutes = 120;
-      const thresholdAmountMinutes = inactivityThreshold ? inactivityThreshold : defaultThresholdMinutes;
+      const thresholdAmountMinutes = inactivityThreshold
+        ? inactivityThreshold
+        : defaultThresholdMinutes;
 
       await prisma.guild.update({
         where: { id: guildId },
-        data: { inactivityTrigger: { set: state }, inactivityThreshold: { set: thresholdAmountMinutes } },
+        data: {
+          inactivityTrigger: { set: state },
+          inactivityThreshold: { set: thresholdAmountMinutes },
+        },
       });
 
       if (state) {
-        await interaction.reply(`${emojiMap.success} The inactivity trigger was successfully enabled. The current inactivity threshold in minutes is set to ${thresholdAmountMinutes}.`);
+        await interaction.reply(
+          `${emojiMap.success} The inactivity trigger was successfully enabled. The current inactivity threshold in minutes is set to ${thresholdAmountMinutes}.`,
+        );
         return;
       }
 
-      await interaction.reply(`${emojiMap.success} The inactivity trigger was successfully disabled.`);
+      await interaction.reply(
+        `${emojiMap.success} The inactivity trigger was successfully disabled.`,
+      );
     } catch (error) {
-      logger.error(error, "Error setting guild inactivity trigger.");
-      interaction.reply({ content: `${emojiMap.error} There was an error setting the guild inactivity trigger. Please try again later.`, ephemeral: true })
+      logger.error(error, 'Error setting guild inactivity trigger.');
+      interaction.reply({
+        content: `${emojiMap.error} There was an error setting the guild inactivity trigger. Please try again later.`,
+        ephemeral: true,
+      });
     }
   },
 } satisfies Subcommand;
