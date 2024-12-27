@@ -6,5 +6,6 @@ declare module 'discord.js' {
     version: string;
     commands: Collection<string, Command>;
     cooldowns: Collection<string, Collection<string, number>>;
+    inactivityTriggers: Collection<string, number>;
   }
 }

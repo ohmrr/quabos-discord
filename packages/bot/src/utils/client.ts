@@ -17,5 +17,6 @@ const client = new Client({
 
 client.version = `v${version}`;
 client.cooldowns = new Collection();
+client.inactivityTriggers = new Collection();
 
 export { client };
