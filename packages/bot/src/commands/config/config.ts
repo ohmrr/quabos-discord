@@ -4,6 +4,8 @@ import emojiMap from '../../utils/emojiMap';
 import add from './channels/add';
 import list from './channels/list';
 import remove from './channels/remove';
+import timeset from './inactivity/timeset';
+import triggerenabled from './inactivity/triggerenabled';
 import set from './probability/set';
 import view from './probability/view';
 import resetlog from './resetlog';
@@ -28,16 +30,25 @@ export default {
         .addSubcommand(set.data)
         .addSubcommand(view.data),
     )
+    .addSubcommandGroup(inactivity =>
+      inactivity
+        .setName('inactivity')
+        .setDescription('Manage inactivity trigger settings for Quabos.')
+        .addSubcommand(timeset.data)
+        .addSubcommand(triggerenabled.data),
+    )
     .addSubcommand(resetlog.data),
   subcommands: {
     add,
-    list,
     remove,
+    list,
     set,
     view,
+    timeset,
+    triggerenabled,
     resetlog,
   },
-  usage: `${add.usage}\n${remove.usage}\n${list.usage}\n${resetlog.usage}`,
+  usage: `${add.usage}\n${remove.usage}\n${list.usage}\n${timeset.usage}\n${triggerenabled.usage}\n${resetlog.usage}`,
   cooldown: 10_000,
   execute: async interaction => {
     if (!interaction.guild) return;
@@ -66,6 +77,12 @@ export default {
         break;
       case 'view':
         await view.execute(interaction);
+        break;
+      case 'triggerenabled':
+        await triggerenabled.execute(interaction);
+        break;
+      case 'timeset':
+        await timeset.execute(interaction);
         break;
       case 'resetlog':
         await resetlog.execute(interaction);

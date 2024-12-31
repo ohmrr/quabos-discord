@@ -6,9 +6,9 @@ import logger from '../../../utils/logger';
 
 export default {
   data: new SlashCommandSubcommandBuilder()
-    .setName('timeSet')
+    .setName('timeset')
     .setDescription(
-      'The amount of time that needs to pass before Quabos attempts to send a message after having no activity in the server.',
+      'Set the amount of time needed for the inactivity trigger.',
     )
     .addIntegerOption(time =>
       time
@@ -19,7 +19,7 @@ export default {
         .setRequired(true),
     ),
   permissions: new PermissionsBitField(PermissionsBitField.Flags.ManageGuild),
-  usage: '/config inactivity timeSet [minutes]',
+  usage: '/config inactivity timeset [minutes]',
   execute: async interaction => {
     if (!interaction.guild) return;
 
@@ -38,15 +38,26 @@ export default {
       }
 
       if (guildRecord.inactivityThreshold === newThresholdAmountMinutes) {
-        await interaction.reply({ content: `${emojiMap.error} The current inactivity threshold is already set to ${newThresholdAmountMinutes} minutes.`, ephemeral: true });
+        await interaction.reply({
+          content: `${emojiMap.error} The current inactivity threshold is already set to ${newThresholdAmountMinutes} minutes.`,
+          ephemeral: true,
+        });
         return;
       }
 
-      await prisma.guild.update({ where: { id: guildId }, data: { inactivityThreshold: newThresholdAmountMinutes } });
-      await interaction.reply(`${emojiMap.success} Successfully updated the inactivity threshold to ${newThresholdAmountMinutes} minutes.`);
+      await prisma.guild.update({
+        where: { id: guildId },
+        data: { inactivityThreshold: newThresholdAmountMinutes },
+      });
+      await interaction.reply(
+        `${emojiMap.success} Successfully updated the inactivity threshold to ${newThresholdAmountMinutes} minutes.`,
+      );
     } catch (error) {
       logger.error(error, 'Error setting guild inactivity threshold.');
-      interaction.reply({ content: `${emojiMap.error} There was an error setting the inactivity threshold. Please try again later.`, ephemeral: true });
+      interaction.reply({
+        content: `${emojiMap.error} There was an error setting the inactivity threshold. Please try again later.`,
+        ephemeral: true,
+      });
     }
-  }
+  },
 } satisfies Subcommand;

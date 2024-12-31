@@ -13,7 +13,7 @@ export default {
   data: new SlashCommandSubcommandBuilder()
     .setName('invite')
     .setDescription(
-      'Below are links to invite Quabos to your server and to join the support server.',
+      'Links to invite Quabos to your server and to join the support server.',
     ),
   usage: '/info invite',
   execute: async interaction => {

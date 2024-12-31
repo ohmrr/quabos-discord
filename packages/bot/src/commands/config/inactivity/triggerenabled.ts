@@ -6,9 +6,9 @@ import logger from '../../../utils/logger';
 
 export default {
   data: new SlashCommandSubcommandBuilder()
-    .setName('triggerEnabled')
+    .setName('triggerenabled')
     .setDescription(
-      'Set the inactivity trigger on or off. This will make it so that after a certain amount of time where no messages have been sent, Quabos will try to start up a conversation.',
+      'Set the inactivity trigger to be on or off.',
     )
     .addBooleanOption(state =>
       state
@@ -17,7 +17,7 @@ export default {
         .setRequired(true),
     ),
   permissions: new PermissionsBitField(PermissionsBitField.Flags.ManageGuild),
-  usage: '/config inactitivity triggerEnabled [state]',
+  usage: '/config inactitivity triggerenabled [state]',
   execute: async interaction => {
     if (!interaction.guild) return;
 
