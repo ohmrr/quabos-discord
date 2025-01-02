@@ -4,7 +4,7 @@ import {
   InteractionContextType,
   SlashCommandBuilder,
 } from 'discord.js';
-import { prisma } from '..';
+import { prisma } from '../utils/client';
 import type Command from '../interfaces/command';
 import { FormatType, formatUnixTimestamp } from '../utils/date';
 

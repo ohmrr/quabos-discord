@@ -7,7 +7,7 @@ import {
   PermissionsBitField,
   SlashCommandSubcommandBuilder,
 } from 'discord.js';
-import { prisma } from '../..';
+import { prisma } from '../../utils/client';
 import type Subcommand from '../../interfaces/subcommand';
 import emojiMap from '../../utils/emojiMap';
 

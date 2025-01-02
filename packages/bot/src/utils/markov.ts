@@ -1,6 +1,6 @@
 import { Client, Collection, Message, type Snowflake, TextChannel } from 'discord.js';
 import Markov from 'markov-strings';
-import { prisma } from '../';
+import { prisma } from './client';
 import logger from './logger';
 
 function isValidMessage(message: Message): boolean {

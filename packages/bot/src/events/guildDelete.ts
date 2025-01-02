@@ -1,4 +1,4 @@
-import { prisma } from '..';
+import { prisma } from '../utils/client';
 import { createEvent } from '../interfaces/applicationEvent';
 import logger from '../utils/logger';
 
