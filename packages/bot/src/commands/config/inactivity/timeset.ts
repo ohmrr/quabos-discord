@@ -7,9 +7,7 @@ import logger from '../../../utils/logger';
 export default {
   data: new SlashCommandSubcommandBuilder()
     .setName('timeset')
-    .setDescription(
-      'Set the amount of time needed for the inactivity trigger.',
-    )
+    .setDescription('Set the amount of time needed for the inactivity trigger.')
     .addIntegerOption(time =>
       time
         .setName('time')

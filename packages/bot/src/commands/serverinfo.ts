@@ -14,7 +14,7 @@ export default {
     .setDescription('Get information on the current guild.')
     .setContexts(InteractionContextType.Guild),
   usage: '/serverinfo',
-  cooldown: 10_000,
+  cooldown: 5_000,
   execute: async interaction => {
     if (!interaction.guild) return;
 

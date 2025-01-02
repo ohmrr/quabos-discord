@@ -40,22 +40,26 @@ export async function saveMessage(message: Message) {
 
   const content = normalizeString(message.content);
 
-  await prisma.message.create({
-    data: {
-      content: content,
-      id: message.id,
-      channel: {
-        connect: {
-          id: isTrackedChannel.id,
+  try {
+    await prisma.message.create({
+      data: {
+        content: content,
+        id: message.id,
+        channel: {
+          connect: {
+            id: isTrackedChannel.id,
+          },
+        },
+        guild: {
+          connect: {
+            id: guildId,
+          },
         },
       },
-      guild: {
-        connect: {
-          id: guildId,
-        },
-      },
-    },
-  });
+    });
+  } catch (error) {
+    logger.error(error, 'Unable to save message to database.');
+  }
 }
 
 async function getGuildMessages(guildId: string) {

@@ -7,9 +7,7 @@ import logger from '../../../utils/logger';
 export default {
   data: new SlashCommandSubcommandBuilder()
     .setName('triggerenabled')
-    .setDescription(
-      'Set the inactivity trigger to be on or off.',
-    )
+    .setDescription('Set the inactivity trigger to be on or off.')
     .addBooleanOption(state =>
       state
         .setName('state')
