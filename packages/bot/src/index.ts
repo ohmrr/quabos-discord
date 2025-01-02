@@ -1,11 +1,8 @@
-import { PrismaClient } from '@prisma/client';
 import 'dotenv/config';
 import loadCommands from './handlers/loadCommands';
 import loadEvents from './handlers/loadEvents';
-import { client } from './utils/client';
+import { client, prisma } from './utils/client';
 import logger from './utils/logger';
-
-const prisma = new PrismaClient();
 
 async function init() {
   await prisma.$connect();
@@ -22,5 +19,3 @@ init()
   .finally(async () => {
     await prisma.$disconnect();
   });
-
-export { prisma };
