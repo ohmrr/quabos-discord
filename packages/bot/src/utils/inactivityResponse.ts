@@ -4,7 +4,7 @@ import { getRandomEmoji } from './emojiMap';
 import { generateResponse } from './markov';
 
 export default async function inactivityResponse(
-  message: OmitPartialGroupDMChannel<Message<boolean>>
+  message: OmitPartialGroupDMChannel<Message<boolean>>,
 ) {
   if (!message.guild) return;
 

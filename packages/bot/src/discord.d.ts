@@ -4,7 +4,7 @@ import Command from './interfaces/command';
 type TriggerData = {
   timeoutId: NodeJS.Timeout;
   timestamp: number;
-}
+};
 
 declare module 'discord.js' {
   interface Client {
