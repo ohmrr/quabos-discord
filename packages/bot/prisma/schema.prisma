@@ -11,8 +11,8 @@ model Guild {
   id String @id @map("_id")
 
   probability         Float     @default(0.05)
+  inactivityTrigger   Boolean   @default(false)
   inactivityThreshold Int?
-  lastActivity        DateTime?
 
   trackedChannels Channel[] @relation("GuildChannels")
 

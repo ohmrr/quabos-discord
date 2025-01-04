@@ -1,4 +1,5 @@
 import { Client, GatewayIntentBits, Partials, Collection } from 'discord.js';
+import { PrismaClient } from '@prisma/client';
 import { version } from '../../package.json';
 
 const client = new Client({
@@ -15,7 +16,10 @@ const client = new Client({
   },
 });
 
+const prisma = new PrismaClient();
+
 client.version = `v${version}`;
 client.cooldowns = new Collection();
+client.inactivityTriggers = new Collection();
 
-export { client };
+export { client, prisma };

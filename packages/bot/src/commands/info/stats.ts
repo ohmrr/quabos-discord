@@ -1,7 +1,7 @@
 import { SlashCommandSubcommandBuilder, EmbedBuilder } from 'discord.js';
 import type Subcommand from '../../interfaces/subcommand';
 import emojiMap from '../../utils/emojiMap';
-import { prisma } from '../..';
+import { prisma } from '../../utils/client';
 
 export default {
   data: new SlashCommandSubcommandBuilder()

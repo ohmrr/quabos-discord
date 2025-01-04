@@ -12,9 +12,7 @@ import logger from '../../utils/logger';
 export default {
   data: new SlashCommandSubcommandBuilder()
     .setName('invite')
-    .setDescription(
-      'Below are links to invite Quabos to your server and to join the support server.',
-    ),
+    .setDescription('Links to invite Quabos to your server and to join the support server.'),
   usage: '/info invite',
   execute: async interaction => {
     const inviteButton = new ButtonBuilder()

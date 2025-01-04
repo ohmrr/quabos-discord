@@ -1,6 +1,7 @@
-import { prisma } from '..';
 import { createEvent } from '../interfaces/applicationEvent';
+import { prisma } from '../utils/client';
 import { getRandomEmoji } from '../utils/emojiMap';
+import inactivityResponse from '../utils/inactivityResponse';
 import logger from '../utils/logger';
 import { generateResponse, saveMessage } from '../utils/markov';
 
@@ -10,18 +11,32 @@ const messageCreate = createEvent('messageCreate', false, async message => {
 
   await saveMessage(message);
 
-  const { id } = message.guild;
-  const guildRecord = await prisma.guild.findUnique({ where: { id } });
+  const client = message.client;
+  const guildId = message.guild.id;
+  const guildRecord = await prisma.guild.findUnique({ where: { id: guildId } });
 
   if (!guildRecord) return;
+
+  const { inactivityTriggers } = client;
+  const existingTrigger = inactivityTriggers.get(guildId);
+  if (existingTrigger) clearTimeout(existingTrigger.timeoutId);
+
+  if (guildRecord.inactivityTrigger && guildRecord.inactivityThreshold) {
+    const thresholdMilliseconds = guildRecord.inactivityThreshold * 60 * 1000;
+    const timeoutId = setTimeout(async () => {
+      await inactivityResponse(message);
+      inactivityTriggers.delete(guildId);
+    }, thresholdMilliseconds);
+
+    inactivityTriggers.set(guildId, { timeoutId, timestamp: Date.now() });
+  }
 
   const shouldRespond = Math.random() < guildRecord.probability;
   if (!shouldRespond) return;
 
-  const response = await generateResponse(id);
-  if (!response) return;
-
   const emoji = getRandomEmoji();
+  const response = await generateResponse(guildId);
+  if (!response) return;
 
   try {
     await message.channel.sendTyping();

@@ -4,7 +4,7 @@ import {
   InteractionContextType,
   SlashCommandBuilder,
 } from 'discord.js';
-import { prisma } from '..';
+import { prisma } from '../utils/client';
 import type Command from '../interfaces/command';
 import { FormatType, formatUnixTimestamp } from '../utils/date';
 
@@ -14,7 +14,7 @@ export default {
     .setDescription('Get information on the current guild.')
     .setContexts(InteractionContextType.Guild),
   usage: '/serverinfo',
-  cooldown: 10_000,
+  cooldown: 5_000,
   execute: async interaction => {
     if (!interaction.guild) return;
 

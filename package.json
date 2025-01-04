@@ -11,7 +11,8 @@
     "build:web": "pnpm --filter website build",
     "start": "pnpm --filter bot start",
     "format": "pnpm -r format",
-    "fmt": "pnpm format"
+    "fmt": "pnpm format",
+    "clear": "echo '' > logs/dev/output.log && echo '' > logs/prod/output.log" 
   },
   "author": "Ohmrr",
   "license": "MIT"
