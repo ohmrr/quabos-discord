@@ -11,30 +11,32 @@ const messageCreate = createEvent('messageCreate', false, async message => {
 
   await saveMessage(message);
 
+  const client = message.client;
   const guildId = message.guild.id;
   const guildRecord = await prisma.guild.findUnique({ where: { id: guildId } });
 
   if (!guildRecord) return;
 
+  const { inactivityTriggers } = client;
+  const existingTrigger = inactivityTriggers.get(guildId);
+  if (existingTrigger) clearTimeout(existingTrigger.timeoutId);
+
   if (guildRecord.inactivityTrigger && guildRecord.inactivityThreshold) {
-    const { inactivityTriggers } = message.client;
-    inactivityTriggers.set(guildId, Date.now());
-
     const thresholdMilliseconds = guildRecord.inactivityThreshold * 60 * 1000;
-
-    setTimeout(async () => {
-      await inactivityResponse(message, thresholdMilliseconds);
+    const timeoutId = setTimeout(async () => {
+      await inactivityResponse(message);
       inactivityTriggers.delete(guildId);
     }, thresholdMilliseconds);
+
+    inactivityTriggers.set(guildId, { timeoutId, timestamp: Date.now() });
   }
 
   const shouldRespond = Math.random() < guildRecord.probability;
   if (!shouldRespond) return;
 
+  const emoji = getRandomEmoji();
   const response = await generateResponse(guildId);
   if (!response) return;
-
-  const emoji = getRandomEmoji();
 
   try {
     await message.channel.sendTyping();
