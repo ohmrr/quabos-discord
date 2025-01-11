@@ -3,8 +3,8 @@ import { createEvent } from '../interfaces/applicationEvent';
 import Command from '../interfaces/command';
 import emojiMap from '../utils/emojiMap';
 import handleCooldown from '../utils/handleCooldown';
-import hasPermissions from '../utils/hasPermissions';
 import logger from '../utils/logger';
+import { userPermissions } from '../utils/permissions';
 
 const interactionCreate = createEvent('interactionCreate', false, async interaction => {
   let command: Command | undefined;
@@ -16,7 +16,7 @@ const interactionCreate = createEvent('interactionCreate', false, async interact
     const hasCooldown = await handleCooldown(interaction, command);
     if (hasCooldown) return;
 
-    const { canExecute, missingPermissions } = hasPermissions(interaction, command);
+    const { canExecute, missingPermissions } = userPermissions(interaction, command);
     if (!canExecute && missingPermissions) {
       const missingPermissionNames = missingPermissions
         .map(permission => new PermissionsBitField(permission).toArray())

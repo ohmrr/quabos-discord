@@ -6,7 +6,7 @@ interface PermissionResult {
   missingPermissions?: PermissionsBitField[];
 }
 
-export default function hasPermissions(
+export function userPermissions(
   interaction: ChatInputCommandInteraction,
   command: Command,
 ): PermissionResult {
@@ -15,7 +15,7 @@ export default function hasPermissions(
 
   const guildMember = interaction.guild.members.cache.get(interaction.user.id);
   const memberPermissions = guildMember?.permissionsIn(interaction.channel);
-  if (!guildMember || !memberPermissions) return { canExecute: false };
+  if (!memberPermissions) return { canExecute: false };
 
   const subcommandName = interaction.options.getSubcommand(false);
   let requiredPermissions: PermissionsBitField[] = [];
