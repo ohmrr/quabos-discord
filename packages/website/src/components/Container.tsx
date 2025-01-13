@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export interface ContainerProps {
+interface ContainerProps {
   bgColorClass?: string;
   padding?: number;
   maxWidth?: number;
