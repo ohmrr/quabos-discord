@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
 // https://github.com/yarnpkg/berry/blob/master/packages/docusaurus/src/components/StarrySky.tsx
-const r = 900;
+const r = 1000;
 const FACTOR = 4;
 const SPEED = 0.2;
 
@@ -92,12 +92,12 @@ function installBackground(canvas: HTMLCanvasElement) {
 
   const materials = [
     new THREE.PointsMaterial({
-      map: loader.load("./ star1.png"),
+      map: loader.load("./star1.png"),
       alphaTest: 0.5,
       sizeAttenuation: true,
     }),
     new THREE.PointsMaterial({
-      size: 1,
+      size: 2,
       map: loader.load("./star2.png"),
       alphaTest: 0.5,
       sizeAttenuation: true,
