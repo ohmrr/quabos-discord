@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import * as THREE from "three";
+import { useEffect, useRef, useState } from 'react';
+import * as THREE from 'three';
 
 // https://github.com/yarnpkg/berry/blob/master/packages/docusaurus/src/components/StarrySky.tsx
 const r = 1000;
@@ -80,25 +80,25 @@ function installBackground(canvas: HTMLCanvasElement) {
 
   geometrys[0].setAttribute(
     `position`,
-    new THREE.BufferAttribute(getRandomParticlePos(350 * FACTOR), 3)
+    new THREE.BufferAttribute(getRandomParticlePos(350 * FACTOR), 3),
   );
 
   geometrys[1].setAttribute(
     `position`,
-    new THREE.BufferAttribute(getRandomParticlePos(1500 * FACTOR), 3)
+    new THREE.BufferAttribute(getRandomParticlePos(1500 * FACTOR), 3),
   );
 
   const loader = new THREE.TextureLoader();
 
   const materials = [
     new THREE.PointsMaterial({
-      map: loader.load("./star1.png"),
+      map: loader.load('./star1.png'),
       alphaTest: 0.5,
       sizeAttenuation: true,
     }),
     new THREE.PointsMaterial({
       size: 2,
-      map: loader.load("./star2.png"),
+      map: loader.load('./star2.png'),
       alphaTest: 0.5,
       sizeAttenuation: true,
     }),
@@ -155,5 +155,5 @@ export default function StarBackground() {
 
   if (isCrashed) return null;
 
-  return <canvas className="w-full h-full" ref={canvasRef} />;
+  return <canvas className='w-full h-full' ref={canvasRef} />;
 }

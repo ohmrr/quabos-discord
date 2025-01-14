@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 interface ContainerProps {
   bgColorClass?: string;
@@ -14,8 +14,8 @@ export default function Container({
   children,
 }: ContainerProps) {
   return (
-    <div className={`h-full ${bgColorClass}`} style={{ padding: `0 ${padding}px`}}>
-      <div className="mx-auto h-full" style={{ maxWidth: `${maxWidth}px` }}>
+    <div className={`h-full ${bgColorClass}`} style={{ padding: `0 ${padding}px` }}>
+      <div className='mx-auto h-full' style={{ maxWidth: `${maxWidth}px` }}>
         {children}
       </div>
     </div>
