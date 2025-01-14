@@ -49,7 +49,7 @@ function resizeRendererToDisplaySize(renderer: THREE.WebGLRenderer) {
   const { clientWidth, clientHeight } = canvas;
 
   if (canvas.width !== clientWidth || canvas.height !== clientHeight) {
-    renderer.setSize(clientWidth, clientHeight);
+    renderer.setSize(clientWidth, clientHeight, false);
     return true;
   }
 
