@@ -11,7 +11,7 @@ interface ContainerProps {
 export default function Container({
   bgColorClass = '',
   className = '',
-  padding = 0,
+  padding = 20,
   maxWidth = 1200,
   children,
 }: ContainerProps) {

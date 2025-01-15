@@ -155,5 +155,5 @@ export default function StarBackground() {
 
   if (isCrashed) return null;
 
-  return <canvas className='w-full h-full' ref={canvasRef} />;
+  return <canvas className='h-full w-full' ref={canvasRef} />;
 }
