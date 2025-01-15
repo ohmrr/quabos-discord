@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Outfit:wght@100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,5 +19,19 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }
+
+h1,
+h2,
+h3 {
+  font-family: theme('fontFamily.header');
+}
+
+p,
+code,
+blockquote,
+button
+a {
+  font-family: theme('fontFamily.sans');
+}
+

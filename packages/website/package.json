@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
+    "@iconify/react": "^5.2.0",
     "@types/node": "^20.17.12",
     "@types/react": "^19.0.4",
     "@types/react-dom": "^19.0.2",
@@ -24,6 +25,7 @@
     "eslint-config-next": "15.1.4",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.9",
     "tailwindcss": "^3.4.17",
     "three": "^0.172.0",
     "typescript": "^5.7.3"

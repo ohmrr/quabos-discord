@@ -12,6 +12,10 @@ export default {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
       },
+      fontFamily: {
+        header: ['Josefin Sans', 'serif'],
+        sans: ['Outfit', 'sans-serif']
+      }
     },
   },
   plugins: [],
