@@ -35,3 +35,7 @@ a {
   font-family: theme('fontFamily.sans');
 }
 
+.main {
+  background-image: url('/bg.png');
+  background-size: cover;
+}
