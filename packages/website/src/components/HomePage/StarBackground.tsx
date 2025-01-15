@@ -6,7 +6,7 @@ import * as THREE from 'three';
 // https://github.com/yarnpkg/berry/blob/master/packages/docusaurus/src/components/StarrySky.tsx
 const r = 1000;
 const FACTOR = 4;
-const SPEED = 0.2;
+const SPEED = 0.3;
 
 // https://karthikkaranth.me/blog/generating-random-points-in-a-sphere/
 function getPoint() {
