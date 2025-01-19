@@ -97,7 +97,7 @@ function installBackground(canvas: HTMLCanvasElement) {
       sizeAttenuation: true,
     }),
     new THREE.PointsMaterial({
-      size: 2,
+      size: 1,
       map: loader.load('./star2.png'),
       alphaTest: 0.5,
       sizeAttenuation: true,
