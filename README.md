@@ -43,7 +43,7 @@ This will transpile the TypeScript code to JavaScript, and then start your own i
 
 ## 🌌 Features & Commands
 
-Quabos is still a work in progress, but below are many of the commands that Quabos currently supports.
+Quabos is still a work in progress, but below are many of the commands that are currently supported.
 
 `/config channels add [channel]` - Adds a new channel for Quabos to read messages from.
 

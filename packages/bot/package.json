@@ -1,7 +1,6 @@
 {
   "name": "bot",
   "version": "0.4.0",
-  "private": true,
   "scripts": {
     "dev": "NODE_ENV=development nodemon dist/index.js",
     "prod": "NODE_ENV=production node dist/index.js",
@@ -9,25 +8,23 @@
     "watch": "tsc --watch",
     "build": "tsc",
     "format": "prettier . --write",
+    "fmt": "pnpm format",
     "generate": "prisma generate"
   },
-  "author": "Ohmrr",
-  "license": "MIT",
   "dependencies": {
-    "@discordjs/voice": "^0.18.0",
-    "@prisma/client": "^6.1.0",
-    "bufferutil": "^4.0.8",
-    "discord.js": "^14.16.3",
-    "dotenv": "^16.4.7",
-    "markov-strings": "^3.0.1",
-    "pino": "^9.6.0",
-    "pino-pretty": "^11.3.0"
+    "@prisma/client": "^6.3.0",
+    "bufferutil": "^4.0.9",
+    "discord.js": "^14.17.3",
+    "dotenv": "^16.4.7"
   },
   "devDependencies": {
-    "discord-api-types": "^0.37.114",
-    "nodemon": "^3.1.9",
     "prettier": "^3.4.2",
-    "prisma": "^6.1.0",
-    "typescript": "^5.7.2"
-  }
+    "prisma": "^6.3.0",
+    "typescript": "^5.7.3"
+  },
+  "author": {
+    "name": "ohmrr",
+    "url": "https://github.com/ohmrr"
+  },
+  "license": "MIT"
 }

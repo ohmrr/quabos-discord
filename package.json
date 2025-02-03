@@ -1,19 +1,16 @@
 {
-  "name": "quabos",
+  "name": "quabos-discord",
   "private": true,
   "scripts": {
-    "watch": "pnpm --filter bot watch",
-    "dev:bot": "pnpm --filter bot dev",
-    "dev:web": "pnpm --filter website dev",
-    "prod": "pnpm --filter bot prod",
-    "build": "pnpm -r build",
-    "build:bot": "pnpm --filter bot build",
-    "build:web": "pnpm --filter website build",
-    "start": "pnpm --filter bot start",
     "format": "pnpm -r format",
     "fmt": "pnpm format",
-    "clear": "echo '' > logs/dev/output.log && echo '' > logs/prod/output.log" 
+    "start": "pnpm --filter bot start",
+    "dev": "pnpm --filter bot dev",
+    "prod": "pnpm --filter bot prod"
   },
-  "author": "Ohmrr",
+  "author": {
+    "name": "ohmrr",
+    "url": "https://github.com/ohmrr"
+  },
   "license": "MIT"
 }
