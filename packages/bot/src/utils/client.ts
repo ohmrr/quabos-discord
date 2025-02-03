@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { Client, Collection, GatewayIntentBits, Partials } from 'discord.js';
-import packageJson from '../../package.json' assert { type: 'json' };
+import packageJson from '../../package.json' with { type: 'json' };
 
 export const client = new Client({
   intents: [

@@ -2,8 +2,10 @@ import moment from 'moment-timezone';
 import path from 'path';
 import pino from 'pino';
 
+const TZ = process.env.TZ ? process.env.TZ : "America/Los_Angeles";
+
 const currentDate = new Intl.DateTimeFormat('en-CA', {
-  timeZone: 'America/Los_Angeles',
+  timeZone: TZ,
   year: 'numeric',
   month: '2-digit',
   day: '2-digit'
@@ -13,7 +15,7 @@ const logFileName = `output-${currentDate}.log`;
 const logPath = path.join('..', '..', 'logs', logFileName);
 
 function customTimestamp() {
-  const date = moment().tz('America/Los_Angeles').format('MM/DD/YY hh:mm:ss A');
+  const date = moment().tz(TZ).format('MM/DD/YY hh:mm:ss A');
 
   return `,"time":"${date}"`;
 }

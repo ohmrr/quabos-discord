@@ -5,6 +5,7 @@ declare global {
       DISCORD_TOKEN: string;
       NODE_ENV: 'production' | 'development';
       DEV_GUILD_ID: string;
+      TZ: string;
       [key: string]: string;
     }
   }
