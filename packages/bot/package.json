@@ -18,13 +18,19 @@
     "bufferutil": "^4.0.9",
     "discord.js": "^14.17.3",
     "dotenv": "^16.4.7",
+    "moment-timezone": "^0.5.47",
     "pino": "^9.6.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "eslint": "^9.19.0",
+    "globals": "^15.14.0",
+    "nodemon": "^3.1.9",
     "pino-pretty": "^13.0.0",
     "prettier": "^3.4.2",
     "prisma": "^6.3.0",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.22.0"
   },
   "author": {
     "name": "ohmrr",

@@ -1,9 +1,9 @@
 import { readdirSync } from 'fs';
 import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
-import logger from '../utils/logger.js';
 import createEvent from '../interfaces/event.js';
 import { client } from '../utils/client.js';
+import logger from '../utils/logger.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

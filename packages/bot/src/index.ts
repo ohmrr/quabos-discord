@@ -1,7 +1,7 @@
-import { client, prisma } from './utils/client.js';
 import 'dotenv/config';
-import logger from './utils/logger.js';
 import loadEvents from './handlers/loadEvents.js';
+import { client, prisma } from './utils/client.js';
+import logger from './utils/logger.js';
 
 async function init() {
   try {

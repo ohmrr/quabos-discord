@@ -1,6 +1,6 @@
+import { ActivityType } from 'discord.js';
 import createEvent from '../interfaces/event.js';
 import logger from '../utils/logger.js';
-import { ActivityType } from 'discord.js';
 
 export default createEvent('ready', false, async client => {
   const guildSize = client.guilds.cache.size;

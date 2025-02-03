@@ -1,17 +1,17 @@
 import type {
+  AutocompleteInteraction,
+  ChatInputCommandInteraction,
+  PermissionsBitField,
+  SlashCommandBuilder,
   SlashCommandOptionsOnlyBuilder,
   SlashCommandSubcommandBuilder,
-  SlashCommandBuilder,
-  PermissionsBitField,
-  ChatInputCommandInteraction,
-  AutocompleteInteraction,
 } from 'discord.js';
 
 export default interface Command {
   data:
-    | SlashCommandBuilder
-    | SlashCommandSubcommandBuilder
-    | SlashCommandOptionsOnlyBuilder;
+  | SlashCommandBuilder
+  | SlashCommandSubcommandBuilder
+  | SlashCommandOptionsOnlyBuilder;
   permissions?: PermissionsBitField;
   usage: string;
   cooldown?: number;
