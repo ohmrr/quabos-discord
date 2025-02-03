@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
-import { Client, Collection, GatewayIntentBits, Partials } from "discord.js";
-import packageJson from "../../package.json" assert { type: "json" };
+import { PrismaClient } from '@prisma/client';
+import { Client, Collection, GatewayIntentBits, Partials } from 'discord.js';
+import packageJson from '../../package.json' assert { type: 'json' };
 
 export const client = new Client({
   intents: [
@@ -11,7 +11,7 @@ export const client = new Client({
   ],
   allowedMentions: {
     repliedUser: true,
-    parse: ["roles", "users"],
+    parse: ['roles', 'users'],
   },
   partials: [Partials.Message, Partials.GuildMember, Partials.Channel],
   failIfNotExists: false,

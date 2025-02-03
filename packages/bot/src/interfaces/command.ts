@@ -5,7 +5,7 @@ import type {
   PermissionsBitField,
   ChatInputCommandInteraction,
   AutocompleteInteraction,
-} from "discord.js";
+} from 'discord.js';
 
 export default interface Command {
   data:
