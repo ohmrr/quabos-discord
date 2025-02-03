@@ -1,6 +1,7 @@
 {
   "name": "quabos-discord",
   "private": true,
+  "type": "module",
   "scripts": {
     "format": "pnpm -r format",
     "fmt": "pnpm format",
