@@ -19,6 +19,6 @@ export const client = new Client({
 
 client.version = `v${packageJson.version}`;
 client.cooldowns = new Collection();
-client.inactivityTriggers = new Collection();
+client.guildInactivityTimers = new Collection();
 
 export const prisma = new PrismaClient();

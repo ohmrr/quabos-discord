@@ -14,7 +14,7 @@ const currentDate = new Intl.DateTimeFormat('en-CA', {
 const logFileName = `output-${currentDate}.log`;
 const logPath = path.join('..', '..', 'logs', logFileName);
 
-function customTimestamp() {
+function customTimestamp(): string {
   const date = moment().tz(TZ).format('MM/DD/YY hh:mm:ss A');
 
   return `,"time":"${date}"`;

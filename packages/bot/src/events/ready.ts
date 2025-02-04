@@ -1,6 +1,7 @@
 import { ActivityType } from 'discord.js';
 import createEvent from '../interfaces/event.js';
 import logger from '../utils/logger.js';
+import { utilEmojis } from '../utils/emoji.js';
 
 export default createEvent('ready', false, async client => {
   const guildSize = client.guilds.cache.size;
@@ -13,7 +14,7 @@ export default createEvent('ready', false, async client => {
   logger.info(`\n${wordArt}`);
   logger.info(`Quabos ${client.version}`);
   logger.info(
-    `Logged in as ${client.user.tag} in ${client.guilds.cache.size} servers.`,
+    `${utilEmojis.success} Logged in as ${client.user.tag} in ${client.guilds.cache.size} servers.`,
   );
 
   client.user.setPresence({

@@ -1,7 +1,7 @@
 import { Collection } from 'discord.js';
 import Command from './interfaces/command';
 
-type TriggerData = {
+type InactivityTriggerData = {
   timeoutId: NodeJS.Timeout;
   timestamp: number;
 };
@@ -11,6 +11,6 @@ declare module 'discord.js' {
     version: string;
     commands: Collection<string, Command>;
     cooldowns: Collection<string, Collection<string, number>>;
-    inactivityTriggers: Collection<string, TriggerData>;
+    guildInactivityTimers: Collection<string, InactivityTriggerData>;
   }
 }

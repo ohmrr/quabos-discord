@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import createEvent from '../interfaces/event.js';
 import { client } from '../utils/client.js';
+import { utilEmojis } from '../utils/emoji.js';
 import logger from '../utils/logger.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -26,7 +27,7 @@ async function loadEventFromFile(filePath: string) {
     if (!eventModule.name || !eventModule.execute) {
       logger.warn(
         { filePath },
-        'Event is missing properties. Skipping onto the next file...',
+        `${utilEmojis.error} Event is missing properties. Skipping onto the next file...`,
       );
       return;
     }
@@ -42,7 +43,7 @@ async function loadEventFromFile(filePath: string) {
   } catch (error) {
     logger.error(
       { filePath, error },
-      'There was an error initializing an event listener.',
+      `${utilEmojis.error} There was an error initializing an event listener.`,
     );
   }
 }
