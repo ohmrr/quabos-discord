@@ -9,16 +9,6 @@ import logger from '../utils/logger.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export default async function loadEvents() {
-  const eventDir = path.join(__dirname, '..', 'events');
-  const eventFiles = readdirSync(eventDir).filter(file => file.endsWith('.js'));
-
-  for (const file of eventFiles) {
-    const eventFilePath = path.join(eventDir, file);
-    await loadEventFromFile(eventFilePath);
-  }
-}
-
 async function loadEventFromFile(filePath: string) {
   try {
     const moduleUrl = pathToFileURL(filePath).href;
@@ -43,7 +33,17 @@ async function loadEventFromFile(filePath: string) {
   } catch (error) {
     logger.error(
       { filePath, error },
-      `${utilEmojis.error} There was an error initializing an event listener.`,
+      `${utilEmojis.error} Error initializing an event listener.`,
     );
+  }
+}
+
+export default async function loadEvents() {
+  const eventDir = path.join(__dirname, '..', 'events');
+  const eventFiles = readdirSync(eventDir).filter(file => file.endsWith('.js'));
+
+  for (const file of eventFiles) {
+    const eventFilePath = path.join(eventDir, file);
+    await loadEventFromFile(eventFilePath);
   }
 }

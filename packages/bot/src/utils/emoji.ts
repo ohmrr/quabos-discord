@@ -8,7 +8,7 @@ export const celestialEmojis = {
   galaxy: '🌌',
   ufo: '🛸',
   salute: '🖖',
-  sparkles: '✨'
+  sparkles: '✨',
 };
 
 export const utilEmojis = {
@@ -19,12 +19,12 @@ export const utilEmojis = {
   link: '🔗',
   audio: '🔉',
   volumeUp: '🔊',
-  music: '🎵'
-}
+  music: '🎵',
+};
 
 export function randomCelestialEmoji(): string {
   const emojiList = Object.values(celestialEmojis);
   const randIndex = Math.floor(Math.random() * emojiList.length);
-  
+
   return emojiList[randIndex];
 }

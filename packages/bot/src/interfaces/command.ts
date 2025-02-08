@@ -9,9 +9,9 @@ import type {
 
 export default interface Command {
   data:
-  | SlashCommandBuilder
-  | SlashCommandSubcommandBuilder
-  | SlashCommandOptionsOnlyBuilder;
+    | SlashCommandBuilder
+    | SlashCommandSubcommandBuilder
+    | SlashCommandOptionsOnlyBuilder;
   permissions?: PermissionsBitField;
   usage: string;
   cooldown?: number;

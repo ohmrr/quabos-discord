@@ -18,6 +18,7 @@ export const client = new Client({
 });
 
 client.version = `v${packageJson.version}`;
+client.commands = new Collection();
 client.cooldowns = new Collection();
 client.guildInactivityTimers = new Collection();
 
