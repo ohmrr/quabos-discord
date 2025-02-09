@@ -19,7 +19,8 @@
     "discord.js": "^14.17.3",
     "dotenv": "^16.4.7",
     "moment-timezone": "^0.5.47",
-    "pino": "^9.6.0"
+    "pino": "^9.6.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",

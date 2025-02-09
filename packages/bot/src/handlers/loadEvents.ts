@@ -1,4 +1,4 @@
-import { readdirSync } from 'fs';
+import { readdir } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import createEvent from '../interfaces/event.js';
@@ -9,7 +9,7 @@ import logger from '../utils/logger.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-async function loadEventFromFile(filePath: string) {
+async function loadEventFromFile(filePath: string): Promise<void> {
   try {
     const moduleUrl = pathToFileURL(filePath).href;
     const { default: eventModule } = await import(moduleUrl);
@@ -38,12 +38,16 @@ async function loadEventFromFile(filePath: string) {
   }
 }
 
-export default async function loadEvents() {
+export default async function loadEvents(): Promise<void> {
   const eventDir = path.join(__dirname, '..', 'events');
-  const eventFiles = readdirSync(eventDir).filter(file => file.endsWith('.js'));
+  const eventFiles = (await readdir(eventDir)).filter(file =>
+    file.endsWith('.js'),
+  );
 
-  for (const file of eventFiles) {
-    const eventFilePath = path.join(eventDir, file);
-    await loadEventFromFile(eventFilePath);
-  }
+  await Promise.all(
+    eventFiles.map(file => {
+      const filePath = path.join(eventDir, file);
+      return loadEventFromFile(filePath);
+    }),
+  );
 }

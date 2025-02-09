@@ -1,15 +1,14 @@
-import 'dotenv/config';
 import loadCommands from './handlers/loadCommands.js';
 import loadEvents from './handlers/loadEvents.js';
 import { client, prisma } from './utils/client.js';
+import config from './utils/config.js';
 import logger from './utils/logger.js';
 
 async function init() {
   try {
     await prisma.$connect();
-    await loadEvents();
-    await loadCommands();
-    await client.login(process.env.DISCORD_TOKEN);
+    await Promise.all([loadEvents(), loadCommands()]);
+    await client.login(config.discordToken);
   } catch (error) {
     logger.error(
       error,

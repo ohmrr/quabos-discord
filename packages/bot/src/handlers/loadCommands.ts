@@ -1,33 +1,43 @@
-import { readdirSync, statSync } from 'fs';
+import { readdir, stat } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import type Command from '../interfaces/command.js';
-import logger from '../utils/logger.js';
-import { utilEmojis } from '../utils/emoji.js';
 import { client } from '../utils/client.js';
+import { utilEmojis } from '../utils/emoji.js';
+import logger from '../utils/logger.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-function getCommandFiles(directory: string) {
-  const directoryItems = readdirSync(directory);
-  const fileList = [];
+/**
+ * Returns an array of command files. Commands with subcommands
+ * or subcommand groups should have a directory named after the
+ * main command, as well as a corresponding file.
+ *
+ * i.e. /config/config.ts
+ */
+async function getCommandFiles(directory: string): Promise<string[]> {
+  const directoryItems = await readdir(directory);
 
-  for (const item of directoryItems) {
-    const itemPath = path.join(directory, item);
+  const fileList = await Promise.all(
+    directoryItems.map(async item => {
+      const itemPath = path.join(directory, item);
+      const itemStat = await stat(itemPath);
 
-    if (statSync(itemPath).isDirectory()) {
-      const mainCommandFile = path.join(itemPath, `${item}.js`);
-      fileList.push(mainCommandFile);
-    } else if (itemPath.endsWith('.js')) {
-      fileList.push(itemPath);
-    }
-  }
+      if (itemStat.isDirectory()) {
+        return path.join(itemPath, `${item}.js`);
+      } else if (itemPath.endsWith('.js')) {
+        return itemPath;
+      }
 
-  return fileList;
+      return null;
+    }),
+  );
+
+  return fileList.filter((file): file is string => file !== null);
 }
 
-async function loadCommandFromFile(filePath: string) {
+async function loadCommandFromFile(filePath: string): Promise<void> {
   try {
     const commandUrl = pathToFileURL(filePath).href;
     const { default: commandModule } = await import(commandUrl);
@@ -46,11 +56,9 @@ async function loadCommandFromFile(filePath: string) {
   }
 }
 
-export default async function loadCommands() {
+export default async function loadCommands(): Promise<void> {
   const commandDir = path.join(__dirname, '..', 'commands');
-  const fileList = getCommandFiles(commandDir);
+  const commandFiles = await getCommandFiles(commandDir);
 
-  for (const file of fileList) {
-    await loadCommandFromFile(file);
-  }
+  await Promise.all(commandFiles.map(file => loadCommandFromFile(file)));
 }

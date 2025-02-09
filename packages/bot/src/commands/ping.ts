@@ -11,8 +11,8 @@ export default {
   execute: async interaction => {
     try {
       await interaction.deferReply();
-
       const reply = await interaction.fetchReply();
+
       const clientLatency =
         reply.createdTimestamp - interaction.createdTimestamp;
       await interaction.editReply(

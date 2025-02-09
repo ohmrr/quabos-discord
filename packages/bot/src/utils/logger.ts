@@ -1,8 +1,9 @@
 import moment from 'moment-timezone';
 import path from 'path';
 import pino from 'pino';
+import config from './config.js';
 
-const TZ = process.env.TZ || 'America/Los_Angeles';
+const TZ = config.tz;
 
 const currentDate = new Intl.DateTimeFormat('en-CA', {
   timeZone: TZ,
